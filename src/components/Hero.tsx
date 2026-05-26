@@ -26,8 +26,24 @@ export default function Hero({ isDark, language }: HeroProps) {
 
   const t = translations[language].hero;
 
+  const titlesPublishedText = 
+    language === "pt" ? "116 Títulos Técnicos Publicados" :
+    language === "es" ? "116 Títulos Técnicos Publicados" :
+    language === "fr" ? "116 Titres Techniques Publiés" :
+    language === "it" ? "116 Titoli Tecnici Pubblicati" :
+    language === "ja" ? "116件の技術書を出版" :
+    "116 Technical Titles Published";
+
+  const engineersUpgradedText = 
+    language === "pt" ? "3.600+ Engenheiros Capacitados" :
+    language === "es" ? "3.600+ Ingenieros Capacitados" :
+    language === "fr" ? "3 600+ Ingénieurs Formés" :
+    language === "it" ? "3.600+ Ingegneri Qualificati" :
+    language === "ja" ? "3,600人以上のエンジニアを育成" :
+    "3,600+ Engineers Upgraded";
+
   const stats = [
-    { value: "104+", label: t.published, desc: "Amazon KDP", icon: BookOpen },
+    { value: "116", label: t.published, desc: "Amazon KDP", icon: BookOpen },
     { value: "1.867", label: t.newsletter, desc: "Medium", icon: Sparkles },
     { value: "55+", label: t.publishedArticles, desc: "Jusbrasil", icon: FileText },
     { value: "4", label: t.workingLanguages, desc: "PT, EN, ES, DE", icon: ShieldCheck },
@@ -58,19 +74,45 @@ export default function Hero({ isDark, language }: HeroProps) {
         >
           {/* Main Headline content with Light weight serif combo */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
-            {/* Tagline / Indicator with precision border */}
-            <motion.div
-              variants={itemVariants}
-              id="hero-eyebrow"
-              className={`flex items-center gap-2 px-3 py-1 text-[9px] uppercase tracking-widest mb-6 border rounded-sm ${
-                isDark
-                  ? "bg-[#0F0F0F] text-[#F27D26] border-[#F27D26]/40"
-                  : "bg-white text-[#F27D26] border-[#F27D26]/60"
-              }`}
-            >
-              <MapPin className="w-3 h-3" />
-              {t.tagline}
-            </motion.div>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              {/* Tagline / Indicator with precision border */}
+              <motion.div
+                variants={itemVariants}
+                id="hero-eyebrow"
+                className={`flex items-center gap-2 px-3 py-1 text-[9px] uppercase tracking-widest border rounded-sm ${
+                  isDark
+                    ? "bg-[#0F0F0F] text-[#F27D26] border-[#F27D26]/40"
+                    : "bg-white text-[#F27D26] border-[#F27D26]/60"
+                }`}
+              >
+                <MapPin className="w-3 h-3" />
+                {t.tagline}
+              </motion.div>
+
+              {/* Branded LC Impact Badge */}
+              <motion.div
+                variants={itemVariants}
+                id="hero-impact-badge"
+                className={`flex items-center gap-2 px-3 py-0.5 border rounded-sm font-mono ${
+                  isDark
+                    ? "bg-[#0F0F0F] border-[#F27D26]/30 text-[#e8e6e1]"
+                    : "bg-white border-[#F27D26]/40 text-[#0A0A0A]"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="w-4 h-4 flex items-center justify-center font-bold text-[8px] border border-[#F27D26] text-[#F27D26] bg-[#F27D26]/10 rounded-sm">
+                    LC
+                  </span>
+                  <span className="font-semibold text-xs text-[#F27D26] tracking-tight">
+                    {titlesPublishedText}
+                  </span>
+                  <span className="text-gray-400 opacity-60 text-[10px]">|</span>
+                  <span className="text-[10px] text-gray-400 font-medium">
+                    {engineersUpgradedText}
+                  </span>
+                </div>
+              </motion.div>
+            </div>
 
             {/* Rich Georgia-styled display light italic headline */}
             <motion.h1

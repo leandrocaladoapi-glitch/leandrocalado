@@ -401,7 +401,7 @@ export const timelineData: TimelineItem[] = [
     period: "2024 – 2026",
     role: "Autor Técnico Internacional",
     organization: "Amazon KDP",
-    description: "Construção de uma biblioteca técnica imensa com 104+ títulos estruturados em quatro idiomas (PT, EN, ES, DE) cobrindo IA de ponta, engenharia de dados, compliance regulatório e nuvem pública.",
+    description: "Construção de uma biblioteca técnica imensa com 116 títulos estruturados em quatro idiomas (PT, EN, ES, DE) cobrindo IA de ponta, engenharia de dados, compliance regulatório e nuvem pública.",
     type: "professional"
   },
   {
@@ -472,7 +472,7 @@ export const themeDomains: ThemeDomain[] = [
   {
     id: "prod-escala",
     title: "Produção Intelectual em Escala",
-    desc: "Valores factuais comprovados em mais de 104 títulos publicados em 4 idiomas na Amazon KDP, complementados com dezenas de ensaios e artigos de altíssimo tráfego no Jusbrasil e Medium."
+    desc: "Valores factuais comprovados em mais de 116 títulos publicados em 4 idiomas na Amazon KDP, complementados com dezenas de ensaios e artigos de altíssimo tráfego no Jusbrasil e Medium."
   },
   {
     id: "geopolitica",

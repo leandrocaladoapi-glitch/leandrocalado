@@ -58,12 +58,12 @@ export default function Timeline({ isDark, language }: TimelineProps) {
               language === "it" ? "Autore Tecnico Internazionale" :
               "インターナショナル技術著者",
         organization: "Amazon KDP",
-        description: language === "pt" ? "Construção de uma biblioteca técnica imensa com 104+ títulos estruturados em quatro idiomas (PT, EN, ES, DE) cobrindo IA de ponta, engenharia de dados, compliance regulatório e nuvem pública." :
-                     language === "en" ? "Authored an immense technical library consisting of 104+ books across 4 languages (PT, EN, ES, DE) covering state-of-the-art AI, data engineering, public cloud, and regulatory compliance." :
-                     language === "es" ? "Publicación de una colección técnica exhaustiva con más de 104 manuales prácticos en 4 idiomas, centrados en IA, ingeniería de datos, compliance y cloud computing." :
-                     language === "fr" ? "Création d'une bibliothèque technique majeure de plus de 104 ouvrages en 4 langues (PT, EN, ES, DE), détaillant l'IA, l'ingénierie des données et la conformité." :
-                     language === "it" ? "Sviluppo di un catalogo tecnico composto da ben 104+ volumi pubblicati in 4 lingue su intelligenza artificiale, infrastrutture dati e regolamentazione." :
-                     "最先端のAI、クラウドエンジニアリング、規制コンプライアンスに関するマニュアルを、4つの言語（PT、EN、ES、DE）にて、Amazon KDPストアへ104冊以上出版。",
+        description: language === "pt" ? "Construção de uma biblioteca técnica imensa com 116 títulos estruturados em quatro idiomas (PT, EN, ES, DE) cobrindo IA de ponta, engenharia de dados, compliance regulatório e nuvem pública." :
+                     language === "en" ? "Authored an immense technical library consisting of 116 books across 4 languages (PT, EN, ES, DE) covering state-of-the-art AI, data engineering, public cloud, and regulatory compliance." :
+                     language === "es" ? "Publicación de una colección técnica exhaustiva con más de 116 manuales prácticos en 4 idiomas, centrados en IA, ingeniería de datos, compliance y cloud computing." :
+                     language === "fr" ? "Création d'une bibliothèque technique majeure de plus de 116 ouvrages en 4 langues (PT, EN, ES, DE), détaillant l'IA, l'ingénierie des données et la conformité." :
+                     language === "it" ? "Sviluppo di un catalogo tecnico composto da ben 116 volumi pubblicati in 4 lingue su intelligenza artificiale, infrastrutture dati e regolamentazione." :
+                     "最先端のAI、クラウドエンジニアリング、規制コンプライアンスに関するマニュアルを、4つの言語（PT、EN、ES、DE）にて、Amazon KDPストアへ116冊以上出版。",
       };
     }
     if (item.period === "2022 – Atualmente") {

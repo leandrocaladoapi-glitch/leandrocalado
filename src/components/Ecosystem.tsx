@@ -78,12 +78,12 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
              language === "fr" ? "Production Intellectuelle à l'Échelle" :
              language === "it" ? "Produzione Intellettuale su Scala" :
              "知見の大規模生産",
-      desc: language === "pt" ? "Valores factuais comprovados em mais de 104 títulos publicados em 4 idiomas na Amazon KDP, complementados com dezenas de ensaios e artigos de altíssimo tráfego no Jusbrasil e Medium." :
-            language === "en" ? "Fact-based results proven by over 104 published books in 4 languages on Amazon KDP, complemented by high-traffic essays and reviews on Jusbrasil and Medium." :
-            language === "es" ? "Resultados comprobados por más de 104 libros publicados en cuatro idiomas en Amazon KDP, complementados por artículos virales en Jusbrasil y Medium." :
-            language === "fr" ? "Résultats prouvés par plus de 104 manuels publiés en 4 langues sur Amazon KDP, enrichis de publications de référence sur Jusbrasil et Medium." :
-            language === "it" ? "Dimostrata operosità descritta in oltre 104 titoli in 4 lingue su Amazon KDP, integrati da articoli tecnici di successo su Jusbrasil e Medium." :
-            "Amazon KDPにおける4つの言語で出版された104冊以上の専門書、Jusbrasil・Mediumにおける数十本もの高度アクセス論考に裏打ちされた無比の知的生産能力。",
+      desc: language === "pt" ? "Valores factuais comprovados em mais de 116 títulos publicados em 4 idiomas na Amazon KDP, complementados com dezenas de ensaios e artigos de altíssimo tráfego no Jusbrasil e Medium." :
+            language === "en" ? "Fact-based results proven by over 116 published books in 4 languages on Amazon KDP, complemented by high-traffic essays and reviews on Jusbrasil and Medium." :
+            language === "es" ? "Resultados comprobados por más de 116 libros publicados en cuatro idiomas en Amazon KDP, complementados por artículos virales en Jusbrasil y Medium." :
+            language === "fr" ? "Résultats prouvés par plus de 116 manuels publiés en 4 langues sur Amazon KDP, enrichis de publications de référence sur Jusbrasil et Medium." :
+            language === "it" ? "Dimostrata operosità descritta in oltre 116 titoli in 4 lingue su Amazon KDP, integrati da articoli tecnici di successo su Jusbrasil e Medium." :
+            "Amazon KDPにおける4つの言語で出版された116冊以上の専門書、Jusbrasil・Mediumにおける数十本もの高度アクセス論考に裏打ちされた無比 of 知的生産能力。",
     },
     {
       id: "geopolitica",

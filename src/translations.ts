@@ -147,7 +147,7 @@ export const translations: Record<Language, TranslationDict> = {
     },
     books: {
       badge: "Biblioteca Técnica KDP",
-      title: "104 Títulos Publicados na Amazon",
+      title: "116 Títulos Publicados na Amazon",
       desc: "Material prático focado em resolver problemas estruturados de engenharia de dados e sistemas inteligentes em produção, organizados em trilhas temáticas de conversão.",
       searchPlaceholder: "Buscar livro...",
       all: "Todos",
@@ -245,7 +245,7 @@ export const translations: Record<Language, TranslationDict> = {
     },
     books: {
       badge: "KDP Technical Library",
-      title: "104 Titles Published on Amazon",
+      title: "116 Titles Published on Amazon",
       desc: "Hands-on material focused on solving structured data engineering problems and intelligent systems in production, organized in conversion-driven themes.",
       searchPlaceholder: "Search book...",
       all: "All",
@@ -343,7 +343,7 @@ export const translations: Record<Language, TranslationDict> = {
     },
     books: {
       badge: "Biblioteca Técnica KDP",
-      title: "104 Títulos Publicados en Amazon",
+      title: "116 Títulos Publicados en Amazon",
       desc: "Material práctico enfocado en resolver problemas estructurados de ingeniería de datos y sistemas inteligentes con implementación de vanguardia.",
       searchPlaceholder: "Buscar libro...",
       all: "Todos",
@@ -441,7 +441,7 @@ export const translations: Record<Language, TranslationDict> = {
     },
     books: {
       badge: "Bibliothèque Technique KDP",
-      title: "104 Titres Publiés sur Amazon",
+      title: "116 Titres Publiés sur Amazon",
       desc: "Guides pragmatiques pour ingénieurs de données et intégrateurs de solutions logicielles orientées IA, conçus pour le déploiement en production.",
       searchPlaceholder: "Rechercher...",
       all: "Tous",
@@ -539,7 +539,7 @@ export const translations: Record<Language, TranslationDict> = {
     },
     books: {
       badge: "Biblioteca Tecnica KDP",
-      title: "104 Libri Pubblicati su Amazon",
+      title: "116 Libri Pubblicati su Amazon",
       desc: "Manuali pratici per ingegneri dei dati e progettisti di sistemi intelligenti focalizzati sull'efficienza e sulla governance delle applicazioni.",
       searchPlaceholder: "Cerca nel catalogo...",
       all: "Tutti",
@@ -637,7 +637,7 @@ export const translations: Record<Language, TranslationDict> = {
     },
     books: {
       badge: "Amazon KDP テクニカルガイド",
-      title: "Amazonにて104冊以上の専門書を出版",
+      title: "Amazonにて116冊以上の専門書を出版",
       desc: "データパイプライン工学および本番環境のインテリジェントシステムに関わるプロフェッショナルが実地で抱える問題を解決するための実戦的ライブラリ。",
       searchPlaceholder: "本を探す...",
       all: "すべて",
