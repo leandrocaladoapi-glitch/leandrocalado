@@ -1,0 +1,165 @@
+import { useState, useEffect } from "react";
+import { Moon, Sun, Linkedin, Github } from "lucide-react";
+import { motion } from "motion/react";
+import { Language, translations } from "../translations";
+
+interface NavbarProps {
+  isDark: boolean;
+  toggleTheme: () => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+}
+
+export default function Navbar({ isDark, toggleTheme, language, setLanguage }: NavbarProps) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const t = translations[language].navbar;
+
+  const navLinks = [
+    { label: t.about, href: "#sobre" },
+    { label: t.ecosystem, href: "#ecossistema" },
+    { label: t.books, href: "#livros" },
+    { label: t.articles, href: "#artigos" },
+    { label: t.trajectory, href: "#trajetoria" },
+  ];
+
+  return (
+    <motion.header
+      id="main-navbar"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? isDark
+            ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#2A2A2A]"
+            : "bg-[#F5F5F0]/90 backdrop-blur-xl border-b border-[#E5E5DF]"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo / Name styling matched to premium Elena style */}
+        <a
+          href="#main-navbar"
+          id="logo-brand"
+          className="flex items-center gap-3 group focus:outline-none"
+        >
+          <div className={`w-8 h-8 border flex items-center justify-center font-bold text-xs transition-colors rounded-sm ${
+            isDark ? "border-[#F5F5F0] text-[#F5F5F0] group-hover:border-[#F27D26]" : "border-[#0A0A0A] text-[#0A0A0A] group-hover:border-[#F27D26]"
+          }`}>
+            LC
+          </div>
+          <span className="text-xs tracking-[0.25em] uppercase font-semibold hidden sm:inline-block">
+            Leandro Calado <span className="opacity-50 text-[10px] font-light">Ferreira</span>
+          </span>
+        </a>
+
+        {/* Desktop Navigation inline with custom font styling */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+              className={`text-[10px] tracking-[0.2em] uppercase transition-colors ${
+                isDark
+                  ? "text-[#8E8E8E] hover:text-[#F5F5F0]"
+                  : "text-[#555] hover:text-[#0A0A0A]"
+              } font-medium`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Action Controls */}
+        <div className="flex items-center gap-3">
+          {/* Language Selector dropdown with border layout */}
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as Language)}
+            id="language-select"
+            className={`px-2 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider rounded-sm border cursor-pointer focus:outline-none focus:border-[#F27D26] transition-colors ${
+              isDark
+                ? "bg-[#151515] border-[#2A2A2A] text-[#F5F5F0] hover:bg-[#202020]"
+                : "bg-white border-[#E5E5DF] text-[#0A0A0A] hover:bg-slate-50"
+            }`}
+            aria-label="Selecionar Idioma"
+          >
+            <option value="pt" className={isDark ? "bg-[#151515] text-[#F5F5F0]" : "bg-white text-[#0A0A0A]"}>PT</option>
+            <option value="en" className={isDark ? "bg-[#151515] text-[#F5F5F0]" : "bg-white text-[#0A0A0A]"}>EN</option>
+            <option value="es" className={isDark ? "bg-[#151515] text-[#F5F5F0]" : "bg-white text-[#0A0A0A]"}>ES</option>
+            <option value="fr" className={isDark ? "bg-[#151515] text-[#F5F5F0]" : "bg-white text-[#0A0A0A]"}>FR</option>
+            <option value="it" className={isDark ? "bg-[#151515] text-[#F5F5F0]" : "bg-white text-[#0A0A0A]"}>IT</option>
+            <option value="ja" className={isDark ? "bg-[#151515] text-[#F5F5F0]" : "bg-white text-[#0A0A0A]"}>JA</option>
+          </select>
+
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            id="theme-toggle-btn"
+            className={`p-2 rounded transition-colors border ${
+              isDark
+                ? "bg-[#151515] border-[#2A2A2A] text-[#F5F5F0] hover:bg-[#202020]"
+                : "bg-white border-[#E5E5DF] text-[#0A0A0A] hover:bg-[#E5E5DF]"
+            }`}
+            aria-label="Alternar tema"
+          >
+            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+
+          {/* Social Links */}
+          <a
+            href="https://www.linkedin.com/in/lcaladoferreira/"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="nav-linkedin-cta"
+            className={`p-2 rounded border transition-colors hidden xs:flex ${
+              isDark
+                ? "bg-[#151515] border-[#2A2A2A] text-[#8E8E8E] hover:text-white"
+                : "bg-white border-[#E5E5DF] text-[#555] hover:text-black"
+            }`}
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="https://github.com/lcaladoferreira"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="nav-github-cta"
+            className={`p-2 rounded border transition-colors hidden xs:flex ${
+              isDark
+                ? "bg-[#151515] border-[#2A2A2A] text-[#8E8E8E] hover:text-white"
+                : "bg-white border-[#E5E5DF] text-[#555] hover:text-black"
+            }`}
+            aria-label="GitHub"
+          >
+            <Github className="w-3.5 h-3.5" />
+          </a>
+
+          {/* Premium Elena style CTA Button */}
+          <a
+            href="#contato"
+            id="nav-consult-cta"
+            className={`px-5 py-2.5 text-[10px] tracking-widest uppercase transition-all duration-300 rounded font-semibold border ${
+              isDark
+                ? "border-[#F5F5F0] text-[#F5F5F0] hover:bg-white hover:text-black"
+                : "border-[#0A0A0A] text-[#0A0A0A] hover:bg-black hover:text-white"
+            }`}
+          >
+            {t.cta}
+          </a>
+        </div>
+      </div>
+    </motion.header>
+  );
+}
