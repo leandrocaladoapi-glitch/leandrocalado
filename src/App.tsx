@@ -6,6 +6,7 @@ import Ecosystem from "./components/Ecosystem";
 import Books from "./components/Books";
 import Articles from "./components/Articles";
 import Timeline from "./components/Timeline";
+import Honors from "./components/Honors";
 import Contact from "./components/Contact";
 import { Language, translations } from "./translations";
 import { Linkedin, Github, FileText, BookOpen, ExternalLink } from "lucide-react";
@@ -26,12 +27,12 @@ export default function App() {
 
   const navTranslations = translations[language].navbar;
 
-  const footerTagline = language === "pt" ? "Engenheiro de Dados • Bacharel em Direito • Autor Técnico Internacional" :
-                        language === "en" ? "Data Engineer • Bachelor of Laws (LL.B.) • International Technical Author" :
-                        language === "es" ? "Ingeniero de Datos • Licenciado en Derecho • Autor Técnico Internacional" :
-                        language === "fr" ? "Ingénieur de Données • Licence en Droit • Auteur Technique International" :
-                        language === "it" ? "Data Engineer • Laurea in Giurisprudenza • Autore Tecnico Internazionale" :
-                        "データエンジニア • 法学士 • インターナショナル技術著者";
+  const footerTagline = language === "pt" ? "Engenheiro de Dados • Autor Técnico Internacional" :
+                        language === "en" ? "Data Engineer • International Technical Author" :
+                        language === "es" ? "Ingeniero de Datos • Autor Técnico Internacional" :
+                        language === "fr" ? "Ingénieur de Données • Auteur Technique International" :
+                        language === "it" ? "Data Engineer • Autore Tecnico Internazionale" :
+                        "データエンジニア • インターナショナル技術著者";
 
   const footerRights = language === "pt" ? "Todos os direitos reservados." :
                        language === "en" ? "All rights reserved." :
@@ -57,6 +58,7 @@ export default function App() {
         <Books isDark={isDark} language={language} />
         <Articles isDark={isDark} language={language} />
         <Timeline isDark={isDark} language={language} />
+        <Honors isDark={isDark} language={language} />
         <Contact isDark={isDark} language={language} />
       </main>
 
@@ -97,6 +99,9 @@ export default function App() {
               <a href="#trajetoria" className="hover:text-[#F27D26] transition-colors">
                 {navTranslations.trajectory}
               </a>
+              <a href="#honrarias" className="hover:text-[#F27D26] transition-colors">
+                {language === "pt" ? "Honrarias" : "Honors"}
+              </a>
             </nav>
           </div>
 
@@ -105,6 +110,22 @@ export default function App() {
               © {new Date().getFullYear()} Leandro Calado Ferreira. {footerRights}
             </span>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <a
+                href="https://github.com/lcaladoferreira"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F27D26] transition-colors inline-flex items-center gap-1 font-bold uppercase tracking-wider"
+              >
+                GitHub <ExternalLink className="w-3 h-3 text-[#F27D26]" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/lcaladoferreira/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F27D26] transition-colors inline-flex items-center gap-1 font-bold uppercase tracking-wider"
+              >
+                LinkedIn <ExternalLink className="w-3 h-3 text-[#F27D26]" />
+              </a>
               <a
                 href="https://leandrocalado.jusbrasil.com.br/"
                 target="_blank"
@@ -120,14 +141,6 @@ export default function App() {
                 className="hover:text-[#F27D26] transition-colors inline-flex items-center gap-1 font-bold uppercase tracking-wider"
               >
                 Medium <ExternalLink className="w-3 h-3 text-[#F27D26]" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/lcaladoferreira/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#F27D26] transition-colors inline-flex items-center gap-1 font-bold uppercase tracking-wider"
-              >
-                LinkedIn <ExternalLink className="w-3 h-3 text-[#F27D26]" />
               </a>
               <a
                 href="http://lattes.cnpq.br/0050162670485497"

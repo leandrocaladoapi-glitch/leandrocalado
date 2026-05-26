@@ -7,6 +7,7 @@ export interface Book {
   description: string;
   lang: "Português" | "Inglês" | "Espanhol" | "Alemão";
   coverEmoji: string;
+  link: string;
 }
 
 export interface Article {
@@ -25,6 +26,11 @@ export interface TimelineItem {
   organization: string;
   description: string;
   type: "academic" | "professional";
+  location?: string;
+  skills?: string[];
+  bullets?: string[];
+  logoText?: string;
+  subType?: string;
 }
 
 export interface AuthorityProof {

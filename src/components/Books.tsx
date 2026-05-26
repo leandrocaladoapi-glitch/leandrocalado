@@ -188,7 +188,7 @@ export default function Books({ isDark, language }: BooksProps) {
                     </span>
 
                     <a
-                      href="https://www.amazon.com/stores/author/B0DCTM3LGP/allbooks"
+                      href={book.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[10px] uppercase tracking-wider font-bold text-[#F27D26] flex items-center gap-1 hover:opacity-80 font-mono transition-opacity"
