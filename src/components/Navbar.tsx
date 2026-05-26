@@ -8,9 +8,11 @@ interface NavbarProps {
   toggleTheme: () => void;
   language: Language;
   setLanguage: (lang: Language) => void;
+  currentPath: string;
+  onNavigate: (path: string) => void;
 }
 
-export default function Navbar({ isDark, toggleTheme, language, setLanguage }: NavbarProps) {
+export default function Navbar({ isDark, toggleTheme, language, setLanguage, currentPath, onNavigate }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -24,11 +26,11 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage }: N
   const t = translations[language].navbar;
 
   const navLinks = [
-    { label: t.about, href: "#sobre" },
-    { label: t.ecosystem, href: "#ecossistema" },
-    { label: t.books, href: "#livros" },
-    { label: t.articles, href: "#artigos" },
-    { label: t.trajectory, href: "#trajetoria" },
+    { label: t.about, href: "/about", path: "/about" },
+    { label: t.ecosystem, href: "/start-here", path: "/start-here" },
+    { label: t.books, href: "/books", path: "/books" },
+    { label: t.articles, href: "/articles", path: "/articles" },
+    { label: language === "pt" ? "Consultoria" : "Consulting", href: "/consulting", path: "/consulting" },
   ];
 
   return (
@@ -40,16 +42,20 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage }: N
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? isDark
-            ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#2A2A2A]"
-            : "bg-[#F5F5F0]/90 backdrop-blur-xl border-b border-[#E5E5DF]"
+              ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#2A2A2A]"
+              : "bg-[#F5F5F0]/90 backdrop-blur-xl border-b border-[#E5E5DF]"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo / Name styling matched to premium Elena style */}
         <a
-          href="#main-navbar"
+          href="/"
           id="logo-brand"
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigate("/");
+          }}
           className="flex items-center gap-3 group focus:outline-none"
         >
           <div className={`w-8 h-8 border flex items-center justify-center font-bold text-xs transition-colors rounded-sm ${
@@ -69,11 +75,15 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage }: N
               key={link.href}
               href={link.href}
               id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(link.path);
+              }}
               className={`text-[10px] tracking-[0.2em] uppercase transition-colors ${
                 isDark
                   ? "text-[#8E8E8E] hover:text-[#F5F5F0]"
                   : "text-[#555] hover:text-[#0A0A0A]"
-              } font-medium`}
+              } font-medium ${currentPath === link.path ? "text-[#F27D26] font-bold" : ""}`}
             >
               {link.label}
             </a>
@@ -148,15 +158,19 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage }: N
 
           {/* Premium Elena style CTA Button */}
           <a
-            href="#contato"
+            href="/consulting"
             id="nav-consult-cta"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("/consulting");
+            }}
             className={`px-5 py-2.5 text-[10px] tracking-widest uppercase transition-all duration-300 rounded font-semibold border ${
               isDark
                 ? "border-[#F5F5F0] text-[#F5F5F0] hover:bg-white hover:text-black"
                 : "border-[#0A0A0A] text-[#0A0A0A] hover:bg-black hover:text-white"
             }`}
           >
-            {t.cta}
+            {language === "pt" ? "Consultoria" : "Consulting"}
           </a>
         </div>
       </div>

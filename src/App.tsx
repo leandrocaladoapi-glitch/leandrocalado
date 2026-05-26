@@ -8,21 +8,41 @@ import Articles from "./components/Articles";
 import Timeline from "./components/Timeline";
 import Honors from "./components/Honors";
 import Contact from "./components/Contact";
+import Hubs from "./components/Hubs";
 import { Language, translations } from "./translations";
-import { Linkedin, Github, FileText, BookOpen, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export default function App() {
   const [isDark, setIsDark] = useState<boolean>(true);
   const [language, setLanguage] = useState<Language>("pt");
+  const [currentPath, setCurrentPath] = useState<string>("/");
 
-  // Monitor prefers-color-scheme on mount
+  // Monitor prefers-color-scheme on mount and listen to window path
   useEffect(() => {
     const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     setIsDark(isSystemDark);
+
+    // Sync path status
+    const updatePath = () => {
+      setCurrentPath(window.location.pathname);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    updatePath();
+
+    // Attach dynamic state listener for back/forward buttons
+    window.addEventListener("popstate", updatePath);
+    return () => window.removeEventListener("popstate", updatePath);
   }, []);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
+  };
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, "", path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const navTranslations = translations[language].navbar;
@@ -47,19 +67,37 @@ export default function App() {
         isDark ? "bg-[#0A0A0A] text-[#F5F5F0]" : "bg-[#F5F5F0] text-[#0A0A0A]"
       }`}
     >
-      {/* Navbar with smooth scroll capabilities */}
-      <Navbar isDark={isDark} toggleTheme={toggleTheme} language={language} setLanguage={setLanguage} />
+      {/* Navbar with smooth routing capabilities */}
+      <Navbar 
+        isDark={isDark} 
+        toggleTheme={toggleTheme} 
+        language={language} 
+        setLanguage={setLanguage} 
+        currentPath={currentPath}
+        onNavigate={navigate}
+      />
 
       {/* Main Layout contents */}
-      <main className="relative">
-        <Hero isDark={isDark} language={language} />
-        <About isDark={isDark} language={language} />
-        <Ecosystem isDark={isDark} language={language} />
-        <Books isDark={isDark} language={language} />
-        <Articles isDark={isDark} language={language} />
-        <Timeline isDark={isDark} language={language} />
-        <Honors isDark={isDark} language={language} />
-        <Contact isDark={isDark} language={language} />
+      <main className="relative pt-20">
+        {currentPath === "/" || currentPath === "" ? (
+          <>
+            <Hero isDark={isDark} language={language} />
+            <About isDark={isDark} language={language} />
+            <Ecosystem isDark={isDark} language={language} onNavigate={navigate} />
+            <Books isDark={isDark} language={language} />
+            <Articles isDark={isDark} language={language} />
+            <Timeline isDark={isDark} language={language} />
+            <Honors isDark={isDark} language={language} />
+            <Contact isDark={isDark} language={language} />
+          </>
+        ) : (
+          <Hubs 
+            isDark={isDark} 
+            language={language} 
+            currentPath={currentPath} 
+            onNavigate={navigate} 
+          />
+        )}
       </main>
 
       {/* Structured Footer element */}
@@ -82,26 +120,44 @@ export default function App() {
               </p>
             </div>
 
-            {/* Nav Footer Links shortcut */}
+            {/* Nav Footer Links shortcuts using client routing */}
             <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] uppercase tracking-widest font-mono font-bold">
-              <a href="#sobre" className="hover:text-[#F27D26] transition-colors">
+              <button 
+                onClick={() => navigate("/about")} 
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
                 {navTranslations.about}
-              </a>
-              <a href="#ecossistema" className="hover:text-[#F27D26] transition-colors">
+              </button>
+              <button 
+                onClick={() => navigate("/start-here")} 
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
                 {navTranslations.ecosystem}
-              </a>
-              <a href="#livros" className="hover:text-[#F27D26] transition-colors">
+              </button>
+              <button 
+                onClick={() => navigate("/books")} 
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
                 {navTranslations.books}
-              </a>
-              <a href="#artigos" className="hover:text-[#F27D26] transition-colors">
+              </button>
+              <button 
+                onClick={() => navigate("/articles")} 
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
                 {navTranslations.articles}
-              </a>
-              <a href="#trajetoria" className="hover:text-[#F27D26] transition-colors">
-                {navTranslations.trajectory}
-              </a>
-              <a href="#honrarias" className="hover:text-[#F27D26] transition-colors">
-                {language === "pt" ? "Honrarias" : "Honors"}
-              </a>
+              </button>
+              <button 
+                onClick={() => navigate("/consulting")} 
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
+                {language === "pt" ? "Consultoria" : "Consulting"}
+              </button>
+              <button 
+                onClick={() => navigate("/start-here")} 
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
+                {language === "pt" ? "Comece Por Aqui" : "Start Here"}
+              </button>
             </nav>
           </div>
 

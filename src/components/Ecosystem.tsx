@@ -4,14 +4,16 @@ import { Language, translations } from "../translations";
 interface EcosystemProps {
   isDark: boolean;
   language: Language;
+  onNavigate: (path: string) => void;
 }
 
-export default function Ecosystem({ isDark, language }: EcosystemProps) {
+export default function Ecosystem({ isDark, language, onNavigate }: EcosystemProps) {
   const t = translations[language].ecosystem;
 
   const localizedDomains = [
     {
       id: "ia-prod",
+      path: "/ai-agents",
       title: language === "pt" ? "IA Aplicada em Produção" : 
              language === "en" ? "Applied AI in Production" :
              language === "es" ? "IA Aplicada en Producción" :
@@ -27,21 +29,23 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
     },
     {
       id: "dados-cloud",
+      path: "/data-engineering",
       title: language === "pt" ? "Engenharia de Dados em Nuvem" : 
              language === "en" ? "Cloud Data Engineering" :
-             language === "es" ? "Ingeniería de Datos en la Nube" :
+             language === "es" ? "Ingeniería de Dados en la Nube" :
              language === "fr" ? "Ingénierie de Données Cloud" :
              language === "it" ? "Data Engineering in Cloud" :
              "クラウドデータエンジニアリング",
       desc: language === "pt" ? "Arquitetura e implementação de pipelines ETL/ELT eficientes usando AWS Glue, Databricks, Spark, Athena e governança de dados governamentais ou biográficos na Azure." :
             language === "en" ? "Architecture and implementation of efficient ETL/ELT pipelines using AWS Glue, Databricks, Spark, Athena, and governance of regulated databases on Azure." :
             language === "es" ? "Arquitectura e implementación de flujos ETL/ELT eficientes utilizando AWS Glue, Databricks, Spark, Athena y gobernanza regulada de datos en Azure." :
-            language === "fr" ? "Conception de pipelines ETL/ELT performants via AWS Glue, Databricks, Spark, Athena et structures de gouvernance cloud sur Azure." :
-            language === "it" ? "Architettura e sviluppo di flussi ETL/ELT complessi con AWS Glue, Databricks, Spark, Athena e protocolli di governance sicuri in Microsoft Azure." :
+            language === "fr" ? "Conception de pipelines ETL/ELT performants via AWS Glue, Databricks, Spark, Athena e estruturas de gouvernance cloud sur Azure." :
+            language === "it" ? "Architettura e desenvolvimento di flussi ETL/ELT complessi con AWS Glue, Databricks, Spark, Athena e protocolli di governance sicuri in Microsoft Azure." :
             "AWS Glue、Databricks、Spark、Athenaを用いた高性能なETL基盤設計、およびAzure環境下での厳格なガバナンス構築。",
     },
     {
       id: "seguranca-ia",
+      path: "/safe-ai",
       title: language === "pt" ? "Segurança de Sistemas com IA" : 
              language === "en" ? "AI Systems Security" :
              language === "es" ? "Seguridad de Sistemas con IA" :
@@ -57,6 +61,7 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
     },
     {
       id: "legaltech",
+      path: "/legaltech",
       title: language === "pt" ? "Legaltech, LGPD & Compliance" : 
              language === "en" ? "Legaltech, LGPD & Compliance" :
              language === "es" ? "Legaltech, LGPD & Compliance" :
@@ -67,11 +72,12 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
             language === "en" ? "The strategic alignment of formal legal expertise with Data Engineering to audit algorithm compliance, cookies consent policies, biometric safety, and data privacy." :
             language === "es" ? "Sinergia entre experiencia legal formal e Ingeniería de Datos para auditar algoritmos, consentimiento de cookies, biometría y políticas de privacidad." :
             language === "fr" ? "Alliance de l'expertise juridique et de l'Ingénierie de Données pour auditer la conformité algorithmique, les consentements cookies, la biométrie et la vie privée." :
-            language === "it" ? "La perfetta unione tra giurisprudenza teorica e ingegneria dei dati per analizzare la rispondenza algoritmica, l'uso dei cookie e la tutela della privacy corporativa." :
+            language === "it" ? "La perfeita unione tra giurisprudenza teorica e ingegneria dei dati per analizzare la rispondenza algoritmica, l'uso dei cookie e la tutela da privacidade corporativa." :
             "高度なデータパイプライン技術 e 法学解釈を高度に融合し、アルゴリズム判定監査、クッキーポリシー、生物測定処理、個人情報保護法、GDPR適合監査を実施。",
     },
     {
       id: "prod-escala",
+      path: "/books",
       title: language === "pt" ? "Produção Intelectual em Escala" : 
              language === "en" ? "Intellectual Production at Scale" :
              language === "es" ? "Producción Intelectual a Escala" :
@@ -82,11 +88,12 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
             language === "en" ? "Fact-based results proven by over 116 published books in 4 languages on Amazon KDP, complemented by high-traffic essays and reviews on Jusbrasil and Medium." :
             language === "es" ? "Resultados comprobados por más de 116 libros publicados en cuatro idiomas en Amazon KDP, complementados por artículos virales en Jusbrasil y Medium." :
             language === "fr" ? "Résultats prouvés par plus de 116 manuels publiés en 4 langues sur Amazon KDP, enrichis de publications de référence sur Jusbrasil et Medium." :
-            language === "it" ? "Dimostrata operosità descritta in oltre 116 titoli in 4 lingue su Amazon KDP, integrati da articoli tecnici di successo su Jusbrasil e Medium." :
+            language === "it" ? "Dimostrata operosità descritta in oltre 116 titoli in 4 lingue su Amazon KDP, integrati da artigos técnicos di successo su Jusbrasil e Medium." :
             "Amazon KDPにおける4つの言語で出版された116冊以上の専門書、Jusbrasil・Mediumにおける数十本もの高度アクセス論考に裏打ちされた無比 of 知的生産能力。",
     },
     {
       id: "geopolitica",
+      path: "/about",
       title: language === "pt" ? "Geopolítica, Gestão Pública & Economia" : 
              language === "en" ? "Geopolitics, Public Management & Economics" :
              language === "es" ? "Geopolítica, Gestión Pública y Economía" :
@@ -97,7 +104,7 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
             language === "en" ? "Dense analytical framework from Law and International Relations to understand public safety, aerospace transport regulations, and solid evidence-based policies." :
             language === "es" ? "Sólida base analítica forjada en Derecho y Relaciones Internacionales para comprender seguridad pública, transporte aeroespacial y políticas con base empírica." :
             language === "fr" ? "Cadre analytique issu du Droit et des Relations Internationales pour décrypter la sécurité publique, le transport aérospatial et les politiques publiques objectives." :
-            language === "it" ? "Profondo bagaglio di analisi ricavato da Giurisprudenza e Relazioni Internazionali per studiare sicurezza pubblica, mobilità aerea ed economia politica." :
+            language === "it" ? "Profondo bagaglio di analisi ricavato da Giurisprudenza e Relazioni Internazionali per studiare segurança pública, mobilità aerea ed economia politica." :
             "法学および国際関係学のバックグラウンド。治安政策、宇宙航空産業コンプライアンス、統計と証拠に基づく現代の政策評価にアプローチ。",
     },
   ];
@@ -147,7 +154,8 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
           {localizedDomains.map((domain, i) => (
             <div
               key={domain.id}
-              className={`p-8 rounded-sm border text-left flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group ${
+              onClick={() => onNavigate(domain.path)}
+              className={`p-8 rounded-sm border text-left flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group cursor-pointer ${
                 isDark
                   ? "bg-[#0F0F0F] border-[#2A2A2A] hover:border-[#F27D26]/40"
                   : "bg-white border-[#E5E5DF] hover:border-[#F27D26]/40"
@@ -178,8 +186,8 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
 
               {/* Bottom detail action links or dynamic marker */}
               <div className="mt-6 pt-4 border-t border-gray-500/5 flex items-center justify-between">
-                <span className="text-[9px] uppercase font-mono tracking-widest opacity-60">
-                  {t.verifiedDomain}
+                <span className="text-[9px] uppercase font-mono tracking-widest text-[#F27D26] font-bold group-hover:underline flex items-center gap-1">
+                  {language === "pt" ? "Ver Hub Semântico" : "View Semantic Hub"}
                 </span>
                 <div className="w-1.5 h-1.5 rounded-full bg-[#F27D26] opacity-65" />
               </div>
@@ -206,16 +214,16 @@ export default function Ecosystem({ isDark, language }: EcosystemProps) {
               {t.intersectionDesc}
             </p>
           </div>
-          <a
-            href="#livros"
-            className={`px-6 py-3 text-[10px] uppercase font-bold tracking-widest transition-all duration-300 border rounded-sm self-start sm:self-center shrink-0 ${
+          <button
+            onClick={() => onNavigate("/books")}
+            className={`px-6 py-3 text-[10px] uppercase font-bold tracking-widest transition-all duration-300 border rounded-sm self-start sm:self-center shrink-0 cursor-pointer ${
               isDark
                 ? "border-[#F5F5F0] text-[#F5F5F0] hover:bg-white hover:text-black"
                 : "border-[#0A0A0A] text-[#0A0A0A] hover:bg-black hover:text-white"
             }`}
           >
             {t.ctaLibrary}
-          </a>
+          </button>
         </div>
 
       </div>
