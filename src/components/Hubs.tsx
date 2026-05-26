@@ -116,7 +116,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
         </button>
         <ChevronRight className="w-3 h-3 opacity-30" />
         <button onClick={() => onNavigate("/start-here")} className="hover:underline opacity-60 hover:opacity-100 transition-all cursor-pointer">
-          {language === "pt" ? "Hubs Temáticos" : "Thematic Hubs"}
+          {language === "pt" ? "Portas de Entrada" : "Get Started"}
         </button>
         <ChevronRight className="w-3 h-3 opacity-30" />
         <span className="font-bold">{hubName}</span>
@@ -141,23 +141,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
   };
 
   const renderKnowledgeGraph = (relations: { source: string; rel: string; target: string }[]) => {
-    return (
-      <section className={`p-6 mb-12 border rounded-sm ${cardBgClass}`} aria-label="Relações do Grafo de Conhecimento Semântico">
-        <h3 className="font-mono text-xs uppercase tracking-widest mb-4 font-bold text-[#F27D26] flex items-center gap-2">
-          <Layers className="w-4 h-4" />
-          {language === "pt" ? "Conexões do Grafo de Conhecimento (Machine Readable)" : "Knowledge Graph Connections (Machine Readable)"}
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {relations.map((rel, index) => (
-            <div key={index} className={`p-4 border rounded-sm flex flex-col justify-between ${isDark ? "bg-[#050505] border-gray-800" : "bg-[#FAFAD2]/10 border-gray-300"}`}>
-              <span className="font-mono text-[9px] uppercase tracking-wider opacity-50">{rel.source}</span>
-              <span className="text-[11px] font-bold italic py-1 text-[#F27D26]">{rel.rel}</span>
-              <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-[#5ba8b0]">{rel.target}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-    );
+    return null;
   };
 
   const renderStructuredLinksSection = () => {
@@ -1057,7 +1041,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
 
     return (
       <article className="max-w-4xl mx-auto px-6 py-12">
-        {renderBreadcrumbs(language === "pt" ? "Portas de Entrada / Comece Por Aqui" : "Ecosystem Map / Start Here")}
+        {renderBreadcrumbs(language === "pt" ? "Comece Por Aqui" : "Start Here")}
 
         <script type="application/ld+json">
           {`
@@ -1069,7 +1053,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                   "@id": "https://leandrocaladoferreira.com/start-here",
                   "url": "https://leandrocaladoferreira.com/start-here",
                   "name": "Ecosystem Map and Navigation Index - Leandro Calado",
-                  "description": "The unified semantic gateway indexing books, articles, cloud pipelines and safety regulations of Leandro Calado Ferreira's professional graph.",
+                  "description": "Portão de entrada unificado para explorar a carreira, biblioteca de livros e projetos de Leandro Calado Ferreira.",
                   "isPartOf": { "@type": "WebSite", "url": "https://leandrocaladoferreira.com" }
                 }
               ]
@@ -1078,10 +1062,10 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
         </script>
 
         {renderTitle(
-          language === "pt" ? "Comece por Aqui: Mapeamento Semântico do Ecossistema" : "Start Here: The Personal Knowledge Graph Directory",
+          language === "pt" ? "Comece Por Aqui: Áreas de Atuação e Ecossistema" : "Start Here: The Ecosystem Directory & Scope",
           language === "pt"
-            ? "Bem-vindo ao centro nevrálgico do ecossistema intelectual de Leandro Calado Ferreira. Este index unificado agrupa suas qualificações, biblioteca autoral e áreas de atuação estruturadas para facilitar a indexação lógica por modelos de IA e navegantes humanos."
-            : "Welcome to the central semantic node of Leandro Calado Ferreira's professional estate. This index clusters academic credentials, technical textbooks publication lines, data engineering frameworks, and regulatory law audits."
+            ? "Bem-vindo ao espaço de visualização integrada do ecossistema intelectual de Leandro Calado Ferreira. Aqui você encontra as principais qualificações acadêmicas, biblioteca autoral e áreas de atuação estruturadas para facilitar sua navegação."
+            : "Welcome to the integrated space of Leandro Calado Ferreira's professional estate. Here you can explore academic records, published technical books, data architecture frameworks, and specialized regulatory compliance insights."
         )}
 
         {renderKnowledgeGraph(graphConnections)}
