@@ -277,6 +277,14 @@ export const articlesData: Article[] = [
 
   // MEDIUM ARTICLES (AI, AUTOMATION, DATA ENGINEERING & TECH)
   {
+    title: "Harness Engineering in an Agentic World",
+    platform: "Medium",
+    category: "IA & Automação",
+    claps: "242",
+    link: "https://medium.com/@leandrocaladoferreira/harness-engineering-in-an-agentic-world-47aec1b21ab8",
+    excerpt: "How to design high‑trust AI software systems where agents, tools, and tests ship production code from your intent."
+  },
+  {
     title: "How I Set Up MCPs in Cursor to Automate My Entire Dev Workflow (No Coding Needed)",
     platform: "Medium",
     category: "IA & Automação",
