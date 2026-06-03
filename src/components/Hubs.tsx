@@ -18,6 +18,7 @@ import {
 import { Language } from "../translations";
 import { booksData } from "../data";
 import { articlesData } from "../articlesData";
+import HarnessEngineeringBook from "./HarnessEngineeringBook";
 
 interface HubsProps {
   isDark: boolean;
@@ -1075,7 +1076,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
             className="text-xl font-light italic mb-6 text-[#F27D26]"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            {language === "pt" ? "Explore Nossos Hubs de Autoridade" : "Pillars of the Professional Node"}
+            {language === "pt" ? "Explore os Hubs de Autoridade" : "Pillars of the Professional Node"}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {hubs.map((hub, idx) => (
@@ -1262,9 +1263,18 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                 </div>
                 <div className="mt-6 pt-4 border-t border-gray-500/5 flex items-center justify-between">
                   <span className="font-mono text-[8px] uppercase tracking-wider opacity-40">ASIN: {book.asin}</span>
-                  <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider flex items-center gap-1 hover:underline">
-                    {language === "pt" ? "Ver na Amazon" : "Buy on Amazon"} <ExternalLink className="w-3 h-3" />
-                  </a>
+                  {book.link.startsWith("/") ? (
+                    <button 
+                      onClick={() => onNavigate(book.link)} 
+                      className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider flex items-center gap-1 hover:underline cursor-pointer bg-transparent border-0 focus:outline-none"
+                    >
+                      {language === "pt" ? "Ver Detalhes" : "View Details"} <ExternalLink className="w-3 h-3" />
+                    </button>
+                  ) : (
+                    <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider flex items-center gap-1 hover:underline">
+                      {language === "pt" ? "Ver na Amazon" : "Buy on Amazon"} <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -1440,6 +1450,14 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
       case "/books":
       case "/livros":
         return renderBooksHub();
+      case "/books/harness-engineering-ai-coding-agents":
+        return (
+          <HarnessEngineeringBook 
+            isDark={isDark} 
+            language={language} 
+            onNavigate={onNavigate} 
+          />
+        );
       case "/articles":
       case "/artigos":
         return renderArticlesHub();

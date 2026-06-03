@@ -4,6 +4,16 @@ import { articlesData } from "./articlesData";
 export const booksData: Book[] = [
   // IA & Agentes
   {
+    id: "harness-engineering-ai-coding-agents",
+    title: "Harness Engineering for AI Coding Agents",
+    category: "ia",
+    asin: "B0GYG3WG4Q",
+    description: "Build production-safe Claude Code, Codex, and Python agent workflows with guardrails, tests, CI gates, and controls that refuse to ship bad AI-generated code.",
+    lang: "Inglês",
+    coverEmoji: "⚙️",
+    link: "/books/harness-engineering-ai-coding-agents"
+  },
+  {
     id: "ia-mcp",
     title: "Agentes de IA MCP",
     category: "ia",

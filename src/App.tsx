@@ -84,7 +84,7 @@ export default function App() {
             <Hero isDark={isDark} language={language} />
             <About isDark={isDark} language={language} />
             <Ecosystem isDark={isDark} language={language} onNavigate={navigate} />
-            <Books isDark={isDark} language={language} />
+            <Books isDark={isDark} language={language} onNavigate={navigate} />
             <Articles isDark={isDark} language={language} />
             <Timeline isDark={isDark} language={language} />
             <Honors isDark={isDark} language={language} />

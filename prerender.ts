@@ -306,6 +306,56 @@ const routes = [
         </div>
       </section>
     `
+  },
+  {
+    path: "/books/harness-engineering-ai-coding-agents",
+    title: "Harness Engineering for AI Coding Agents – Build Safe AI Coding Workflows with Tests, CI, and Guardrails",
+    description: "Learn how to build production-safe AI coding workflows with harness engineering. This book shows you AGENTS.md rules, task specs, tests, security checks, and CI gates for Claude Code, Codex, and Python agents.",
+    canonical: "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents",
+    schemaType: "Books",
+    htmlContent: `
+      <section class="py-20 px-6 max-w-4xl mx-auto">
+        <span class="text-[#F27D26] uppercase font-bold text-xs tracking-widest font-mono">NEW RELEASE TECHNICAL MANUAL</span>
+        <h1 class="text-4xl sm:text-5xl font-light italic mt-3 mb-6 font-serif text-white leading-tight">Harness Engineering for <br>AI Coding Agents</h1>
+        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+          Build production-safe Claude Code, Codex, and Python agent workflows with guardrails, tests, CI gates, and controls that refuse to ship bad AI-generated code.
+        </p>
+        <div class="flex gap-4">
+          <a href="https://www.amazon.com.br/dp/B0GYG3WG4Q" target="_blank" rel="noopener noreferrer" class="px-6 py-4 bg-[#F27D26] text-white text-xs font-mono uppercase tracking-widest font-bold">Get the Book on Amazon Kindle</a>
+        </div>
+      </section>
+
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto">
+        <h2 class="text-2xl font-light italic font-serif text-white mb-6">Vibe coding works in prototypes. It breaks in production.</h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          AI coding agents make it feel easy to refactor modules, wire new endpoints, or patch bugs in minutes. The diffs look clean, the code compiles, and tests might even pass—until a race condition, a missing security check, or a silently deleted guard shows up weeks later.
+        </p>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          This is the structural problem with vibe coding: it optimizes for the appearance of correctness, not verified correctness, and your team pays for it with hidden security issues, on-call duty, and painful cleanup deployments.
+        </p>
+      </section>
+
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto">
+        <h2 class="text-2xl font-light italic font-serif text-white mb-6">You don’t trust the AI. You control it with systems.</h2>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          This book introduces harness engineering: treating AI coding agents like powerful but context-free contractors operating inside a strict system of constraints, checks, and gates.
+        </p>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          Instead of arguing with prompts, you surround the agent with AGENTS.md rules, task specs, plan-verify-execute loops, tests, static analysis, security scans, and CI gates that automatically reject unsafe output.
+        </p>
+      </section>
+
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto">
+        <h2 class="text-2xl font-light italic font-serif text-white mb-6">By the end of the book, you will have a complete harness system</h2>
+        <ul class="space-y-4 text-sm text-gray-300">
+          <li><strong>AGENTS.md Constitution:</strong> Define allowed folders, prohibited operations, and required structures.</li>
+          <li><strong>Task Spec YAML contracts:</strong> Turn vague prompts into strict contracts prior to running agents.</li>
+          <li><strong>Plan-Verify-Execute loops:</strong> Verify lines of change proposed prior to actual filesystem write.</li>
+          <li><strong>Validators & Gates:</strong> Bandit security regex scans, Mypy, Ruff, and Coverage differential gates.</li>
+          <li><strong>CI Gating & PR Reviews:</strong> Automated Actions block merge attempts if checks fail.</li>
+        </ul>
+      </section>
+    `
   }
 ];
 

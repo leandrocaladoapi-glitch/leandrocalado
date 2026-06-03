@@ -7,9 +7,10 @@ import { Language, translations } from "../translations";
 interface BooksProps {
   isDark: boolean;
   language: Language;
+  onNavigate?: (path: string) => void;
 }
 
-export default function Books({ isDark, language }: BooksProps) {
+export default function Books({ isDark, language, onNavigate }: BooksProps) {
   const [selectedTab, setSelectedTab] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -187,15 +188,30 @@ export default function Books({ isDark, language }: BooksProps) {
                       {language === "ja" ? "対応言語: " : "Language: "}<span className="font-sans font-semibold">{displayBookLang(book.lang)}</span>
                     </span>
 
-                    <a
-                      href={book.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[10px] uppercase tracking-wider font-bold text-[#F27D26] flex items-center gap-1 hover:opacity-80 font-mono transition-opacity"
-                    >
-                      KDP Amazon
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+                    {book.link.startsWith("/") ? (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (onNavigate) {
+                            onNavigate(book.link);
+                          }
+                        }}
+                        className="text-[10px] uppercase tracking-wider font-bold text-[#F27D26] flex items-center gap-1 hover:opacity-80 font-mono transition-opacity cursor-pointer bg-transparent border-0 focus:outline-none"
+                      >
+                        {language === "ja" ? "詳細を見る" : language === "pt" ? "Detalhes" : "Details"}
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    ) : (
+                      <a
+                        href={book.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] uppercase tracking-wider font-bold text-[#F27D26] flex items-center gap-1 hover:opacity-80 font-mono transition-opacity"
+                      >
+                        KDP Amazon
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               ))
