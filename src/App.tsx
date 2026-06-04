@@ -14,15 +14,11 @@ import { ExternalLink } from "lucide-react";
 
 export default function App() {
   const [isDark, setIsDark] = useState<boolean>(true);
-  const [language, setLanguage] = useState<Language>("pt");
+  const [language, setLanguage] = useState<Language>("en");
   const [currentPath, setCurrentPath] = useState<string>("/");
 
-  // Monitor prefers-color-scheme on mount and listen to window path
+  // Sync path status on mount and listen to window path
   useEffect(() => {
-    const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setIsDark(isSystemDark);
-
-    // Sync path status
     const updatePath = () => {
       setCurrentPath(window.location.pathname);
       window.scrollTo({ top: 0, behavior: "smooth" });
