@@ -5,7 +5,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FWK7WG2SB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag()){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-0FWK7WG2SB');
@@ -42,64 +42,260 @@
     <meta name="twitter:description" content="Read Harness Engineering for AI Coding Agents by Leandro Calado, a practical harness engineering book about Claude Code, Cursor, Codex, multi-agent coding workflows, guardrails, tests, CI gates, memory control, tool permissions, and production-ready AI agent systems." />
 
     <!-- Favicon: Monogram logo 'LC' styled inside beautiful vector box -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230A0A0A'/%3E%3Crect x='10' y='10' width='80' height='80' rx='8' fill='none' stroke='%23F27D26' stroke-width='2' stroke-opacity='0.2'/%3E%3Ctext x='50' y='64' font-family='Georgia, serif' font-size='44' font-weight='900' fill='%23F27D26' text-anchor='middle' letter-spacing='-1'%3ELC%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23000000'/%3E%3Crect x='10' y='10' width='80' height='80' rx='8' fill='none' stroke='%2339ff14' stroke-width='2' stroke-opacity='0.5'/%3E%3Ctext x='50' y='64' font-family='Courier New, monospace' font-size='44' font-weight='900' fill='%2339ff14' text-anchor='middle' letter-spacing='-1'%3ELC%3C/text%3E%3C/svg%3E" />
 
-    <!-- Google Fonts connection -->
+    <!-- Google Fonts connection for pure monospace look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Custom styling to ensure the terminal aesthetic looks jaw-dropping -->
+    <!-- Custom styling to ensure the true 80s Green Phosphor terminal aesthetic looks jaw-dropping -->
     <style>
       :root {
-        --color-background: #020202;
-        --color-terminal-bg: #070708;
-        --color-neon-orange: #ff7700;
-        --color-neon-green: #39ff14;
-        --color-terminal-text: #e2e8f0;
-        --color-terminal-dim: #71717a;
+        --color-bg: #000000;
+        --color-terminal-bg: #020402;
+        --color-primary: #39ff14;
+        --color-secondary: #8cff8c;
+        --color-muted: #4fae4f;
+        --color-glow: rgba(57, 255, 20, 0.35);
       }
 
-      /* Subtle CRT retro scanline overlay */
-      .vintage-crt::before {
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "IBM Plex Mono", "JetBrains Mono", "Courier New", monospace !important;
+      }
+
+      html, body {
+        background-color: var(--color-bg) !important;
+        color: var(--color-primary) !important;
+        font-size: 16px;
+        line-height: 1.65 !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Subtle scanline overlay (opacity < 0.08) */
+      body::before {
         content: " ";
         display: block;
         position: fixed;
         top: 0; left: 0; bottom: 0; right: 0;
-        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background: linear-gradient(
+          rgba(18, 16, 16, 0) 50%, 
+          rgba(0, 0, 0, 0.15) 50%
+        );
+        background-size: 100% 4px;
+        z-index: 10000;
+        pointer-events: none;
+        opacity: 0.06;
+      }
+
+      /* CRT soft green phosphor glow around page */
+      body::after {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0; left: 0; bottom: 0; right: 0;
+        box-shadow: inset 0 0 80px rgba(57, 255, 20, 0.05);
         z-index: 9999;
-        background-size: 100% 4px, 6px 100%;
         pointer-events: none;
       }
 
       .terminal-glow {
-        text-shadow: 0 0 12px rgba(242, 125, 38, 0.3);
+        text-shadow: 0 0 8px var(--color-glow);
       }
 
-      .terminal-glow-green {
-        text-shadow: 0 0 12px rgba(57, 255, 20, 0.2);
+      .terminal-glow-strong {
+        text-shadow: 0 0 12px var(--color-primary), 0 0 3px var(--color-primary);
       }
 
       /* Monospace cursor blink effect */
       .terminal-cursor::after {
         content: "▋";
         animation: cursor-blink 1s step-end infinite;
-        font-family: inherit;
+        color: var(--color-primary);
+        font-weight: bold;
       }
 
       @keyframes cursor-blink {
-        from, to { color: transparent }
-        50% { color: var(--color-neon-orange) }
+        from, to { opacity: 0; }
+        50% { opacity: 1; }
       }
 
-      .border-terminal-double {
-        border-style: double;
-        border-width: 3px;
-        border-color: rgba(242, 125, 38, 0.4);
+      /* Old Monitor Frame Border style */
+      .monitor-frame {
+        border: 2px solid var(--color-muted);
+        box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+        padding: 20px;
+        background-color: var(--color-terminal-bg);
+        border-radius: 4px;
       }
 
-      .border-terminal-single {
-        border: 1px dashed rgba(57, 255, 20, 0.3);
+      .border-dashed-green {
+        border: 1px dashed var(--color-muted);
+      }
+
+      .section-label {
+        font-weight: 700;
+        color: var(--color-bg) !important;
+        background-color: var(--color-primary) !important;
+        padding: 2px 10px;
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      /* Headings & Texts */
+      h1, h2, h3, h4 {
+        color: var(--color-primary) !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+      }
+
+      h1 {
+        font-size: 2.2rem !important;
+        margin-bottom: 16px !important;
+        line-height: 1.3 !important;
+        letter-spacing: -0.5px;
+      }
+
+      h2 {
+        font-size: 1.35rem !important;
+        margin-bottom: 12px !important;
+        letter-spacing: -0.2px;
+      }
+
+      h3 {
+        font-size: 1.1rem !important;
+      }
+
+      p {
+        color: var(--color-secondary) !important;
+        margin-bottom: 16px !important;
+      }
+
+      strong {
+        color: var(--color-primary) !important;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      /* Styling terminal link commands & CTAs */
+      a {
+        color: var(--color-primary) !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease;
+      }
+
+      a:hover {
+        color: #ffffff !important;
+        text-shadow: 0 0 8px var(--color-primary);
+      }
+
+      /* Main purchase command line CTA button style */
+      .cta-terminal-button {
+        display: inline-block;
+        background-color: #000000 !important;
+        color: var(--color-primary) !important;
+        border: 2px solid var(--color-primary) !important;
+        padding: 12px 24px !important;
+        font-weight: bold !important;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 0 10px rgba(57, 255, 20, 0.15);
+        cursor: pointer;
+        width: 100%;
+        max-width: 100%;
+        transition: all 0.2s ease;
+      }
+
+      @media (min-width: 640px) {
+         .cta-terminal-button {
+            width: auto;
+         }
+      }
+
+      .cta-terminal-button:hover {
+        background-color: var(--color-primary) !important;
+        color: #000000 !important;
+        box-shadow: 0 0 18px var(--color-primary) !important;
+      }
+
+      /* Custom layout structure for readable pages */
+      .layout-container {
+        max-width: 980px !important;
+        margin: 0 auto !important;
+        padding: 32px 16px !important;
+      }
+
+      @media (min-width: 640px) {
+        .layout-container {
+          padding: 48px 32px !important;
+        }
+      }
+
+      /* Terminal upper informational headers */
+      .terminal-session-header {
+        border-bottom: 1px solid var(--color-muted);
+        padding-bottom: 18px;
+        margin-bottom: 30px;
+        font-size: 13px;
+        color: var(--color-muted);
+      }
+
+      .terminal-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-top: 32px;
+      }
+
+      @media (min-width: 768px) {
+        .terminal-grid {
+          grid-template-columns: 2.1fr 0.9fr;
+        }
+      }
+
+      /* Phosphor Lists styling */
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin-bottom: 12px;
+        color: var(--color-secondary) !important;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      li::before {
+        content: "> ";
+        position: absolute;
+        left: 0;
+        color: var(--color-primary);
+        font-weight: bold;
+      }
+
+      /* Webkit Custom scrollbars */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-muted);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary);
       }
     </style>
 
@@ -219,94 +415,83 @@
     <script type="module" crossorigin src="/assets/index-D3A01iyq.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BguTkzjM.css">
   </head>
-  <body class="bg-[#020202] text-[#e2e8f0] font-mono selection:bg-[#F27D26]/30 selection:text-white antialiased vintage-crt">
+  <body class="bg-[#000000] text-[#39ff14] font-mono antialiased">
     <div id="root">
-      <div class="min-h-screen bg-[#020202] text-[#e2e8f0] flex flex-col justify-between">
+      
+      <!-- Centralized Layout Container (max-width: 980px, margin: 0 auto, padding: 32px) -->
+      <div class="layout-container">
         
-        <!-- Retro Header -->
-        <header class="border-b border-[#222] bg-[#070708]/90 backdrop-blur-md sticky top-0 z-50">
-          <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3 font-mono">
-              <span class="text-[#F27D26] font-bold">[LC-SYS]</span>
-              <span class="text-[11px] tracking-wider uppercase text-gray-400 hidden sm:inline-block">L. Calado Ferreira <span class="text-[#39ff14] font-medium">v1.9.98</span></span>
-            </a>
-            
-            <nav class="hidden md:flex items-center gap-6 text-xs text-gray-400">
-              <a href="/about" class="hover:text-[#F27D26] transition-colors">[ABOUT.EXE]</a>
-              <a href="/start-here" class="hover:text-[#F27D26] transition-colors">[SYSTEM.SYS]</a>
-              <a href="/books" class="text-white hover:text-[#F27D26] transition-colors">[BOOKS.LOG]</a>
-              <a href="/articles" class="hover:text-[#F27D26] transition-colors">[ARTICLES.TXT]</a>
-              <a href="/consulting" class="hover:text-[#F27D26] transition-colors">[CONSULT.COM]</a>
-            </nav>
+        <!-- Navigation Terminal Header Session -->
+        <div class="flex justify-between items-center text-xs border-b border-[#4fae4f]/30 pb-4 mb-6">
+          <a href="/" class="text-[#39ff14] hover:underline font-bold">[ BACK TO MAIN_INDEX.SYS ]</a>
+          <div class="flex gap-4">
+            <a href="/about" class="text-xs hover:underline">[ABOUT.EXE]</a>
+            <a href="/books" class="text-xs hover:underline font-bold">[BOOKS.LOG]</a>
+            <a href="/consulting" class="text-xs hover:underline">[CONSULT.EXE]</a>
+          </div>
+        </div>
 
+        <!-- Terminal Header Section -->
+        <header class="terminal-session-header">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border border-dashed border-[#4fae4f] p-4 bg-[#020402]">
             <div>
-              <a href="/consulting" class="px-4 py-1.5 border border-[#F27D26] text-[#F27D26] hover:bg-[#F27D26] hover:text-black transition-all text-xs font-bold uppercase tracking-wider rounded-sm shadow-[0_0_10px_rgba(242,125,38,0.15)]">
-                Connect API
-              </a>
+              <div class="text-[#39ff14] font-bold terminal-glow">LC-SYS v1.9.98</div>
+              <div>STATUS: <span class="text-[#39ff14] font-bold animate-pulse">SECURE TLS GATES ACTIVE</span></div>
             </div>
+            <div class="sm:text-right">
+              <div>MODULE: HARNESS ENGINEERING BOOK</div>
+              <div>AUTHOR: LEANDRO CALADO</div>
+            </div>
+          </div>
+          <div class="text-[#4fae4f] text-[11px] mt-2 flex justify-between px-1">
+            <span>SESSION: guest@lc-net:~/manual-store$ cat core_meta.info</span>
+            <span>BAUD_RATE: 115200</span>
           </div>
         </header>
 
-        <!-- Main Terminal Panel -->
-        <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-8 lg:py-12">
+        <!-- Main Terminal Panel (Old Monitor Frame Frame) -->
+        <main class="monitor-frame">
           
-          <!-- Terminal Header Bar / System Metas -->
-          <div class="border-terminal-double bg-[#070708] p-4 sm:p-6 mb-8 rounded-sm overflow-hidden relative shadow-[0_0_30px_rgba(242,125,38,0.06)]">
-            <div class="absolute top-0 right-0 p-3 text-[9px] text-[#39ff14]/40 font-mono text-right hidden md:block">
-              PORT: 3000 // BAUD: 115200<br/>
-              SECURE_TLS_GATES: ACTIVE<br/>
-              ENCRYPT: SHA-256
-            </div>
-            
-            <div class="flex items-center gap-2 text-xs text-gray-500 mb-4 border-b border-[#222] pb-3">
-              <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-600"></span>
-              <span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-600"></span>
-              <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-600"></span>
-              <span class="ml-2 font-mono text-[#39ff14]">guest@lc-net:~/manual-store$ cat core_meta.info</span>
-            </div>
-
-            <!-- Pre-Header Identity info -->
-            <div class="mb-4">
-              <span class="bg-[#F27D26]/10 text-[#F27D26] border border-[#F27D26]/40 px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase inline-block">
-                SYS.MODULE.019 // AUTHORIZED HARD COPY MANUAL
-              </span>
-            </div>
-
-            <!-- Page Title Area (Main H1 inside styled terminal console block) -->
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-white tracking-tight leading-tight mt-1 mb-4 terminal-glow">
-              Harness Engineering Book for AI Coding Agents
-            </h1>
-
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-mono border-l-2 border-[#F27D26] pl-4">
-              Harness Engineering for AI Coding Agents is a practical harness engineering book by Leandro Calado for developers building reliable Claude Code, Cursor, Codex, and multi-agent coding workflows with guardrails, automated tests, CI gates, memory control, tool permissions, and production-ready software delivery.
-            </p>
-
-            <!-- Command Line Purchase CTA Box -->
-            <div class="bg-black/80 border border-[#39ff14]/30 p-4 rounded-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
-              <div class="font-mono text-xs text-white">
-                <span class="text-[#39ff14] font-bold">C:\HARNESS&gt;</span> <span class="terminal-cursor">amazon-kdp --volume=harness-engineering-agent.epub</span>
-              </div>
-              <a href="https://www.amazon.com.br/dp/B0GYG3WG4Q" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-5 py-2.5 bg-[#F27D26] text-black text-xs font-bold uppercase tracking-widest text-center hover:bg-[#ff8824] hover:shadow-[0_0_15px_rgba(242,125,38,0.4)] transition-all rounded-sm">
-                Get Book on Amazon Kindle
-              </a>
-            </div>
+          <!-- Metadata Tag box -->
+          <div class="mb-4">
+            <span class="bg-[#39ff14]/15 text-[#39ff14] border border-[#39ff14]/50 px-2.5 py-1 text-[11px] font-bold tracking-widest uppercase inline-block">
+              SYS.MODULE.019 // AUTHORIZED HARD COPY MANUAL
+            </span>
           </div>
 
-          <!-- Main Layout Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Hero H1 Section (Styled Phosphor headline, strictly monospace, no serif) -->
+          <h1 class="terminal-glow-strong">
+            Harness Engineering Book for AI Coding Agents
+          </h1>
+
+          <!-- Intro Paragraph -->
+          <p class="text-base sm:text-lg leading-relaxed mb-6 border-l-2 border-[#39ff14] pl-4">
+            Harness Engineering for AI Coding Agents is a practical harness engineering book by Leandro Calado for developers building reliable Claude Code, Cursor, Codex, and multi-agent coding workflows with guardrails, automated tests, CI gates, memory control, tool permissions, and production-ready software delivery.
+          </p>
+
+          <!-- Command Line Purchase CTA Box -->
+          <div class="bg-black border border-[#39ff14]/40 p-4 rounded-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6 mb-8">
+            <div class="text-xs text-white">
+              <span class="text-[#39ff14] font-bold">C:\HARNESS&gt;</span> <span class="terminal-cursor">amazon-kdp --volume=harness-engineering-agent.epub</span>
+            </div>
+            <a href="https://www.amazon.com.br/dp/B0GYG3WG4Q" target="_blank" rel="noopener noreferrer" class="cta-terminal-button">
+              [ EXECUTE: GET KINDLE MANUAL ]
+            </a>
+          </div>
+
+          <!-- Main Layout Grid (Divided cleanly like systems directory charts) -->
+          <div class="terminal-grid">
             
-            <!-- Left & Center: Body Content Documents -->
-            <div class="lg:col-span-2 space-y-8">
+            <!-- Body content logs -->
+            <div class="space-y-8">
               
-              <!-- Segment 01 -->
-              <div class="border border-[#222] bg-[#070708] p-6 rounded-sm relative">
-                <span class="absolute -top-3 left-4 bg-[#020202] px-2 text-[10px] text-[#39ff14] font-bold font-mono tracking-widest uppercase">
-                  [MAN.SEC.01] THE PROTOTYPE GAP
-                </span>
-                <h2 class="text-lg sm:text-xl font-bold italic font-serif text-white mb-4 border-b border-[#1f1f1f] pb-2 text-shadow">
+              <!-- [MAN.SEC.01] THE PROTOTYPE GAP -->
+              <div class="border border-[#4fae4f]/40 p-5 rounded-sm relative bg-[#020402]">
+                <span class="section-label">[MAN.SEC.01] THE PROTOTYPE GAP</span>
+                <h2 class="terminal-glow">
                   Vibe coding works in prototypes. It breaks in production.
                 </h2>
-                <div class="text-gray-400 text-xs sm:text-sm leading-relaxed space-y-4">
+                <div class="text-[#8cff8c] text-[15px] leading-relaxed space-y-4 mt-3">
                   <p>
                     AI coding agents make it feel easy to refactor modules, wire new endpoints, or patch bugs in minutes. The diffs look clean, the code compiles, and tests might even pass—until a race condition, a missing security check, or a silently deleted guard shows up weeks later.
                   </p>
@@ -316,15 +501,13 @@
                 </div>
               </div>
 
-              <!-- Segment 02 -->
-              <div class="border border-[#222] bg-[#070708] p-6 rounded-sm relative">
-                <span class="absolute -top-3 left-4 bg-[#020202] px-2 text-[10px] text-[#39ff14] font-bold font-mono tracking-widest uppercase">
-                  [MAN.SEC.02] SYSTEM DETERMINISM
-                </span>
-                <h2 class="text-lg sm:text-xl font-bold italic font-serif text-white mb-4 border-b border-[#1f1f1f] pb-2 text-shadow">
+              <!-- [MAN.SEC.02] SYSTEM DETERMINISM -->
+              <div class="border border-[#4fae4f]/40 p-5 rounded-sm relative bg-[#020402]">
+                <span class="section-label">[MAN.SEC.02] SYSTEM DETERMINISM</span>
+                <h2 class="terminal-glow">
                   You don’t trust the AI. You control it with systems.
                 </h2>
-                <div class="text-gray-400 text-xs sm:text-sm leading-relaxed space-y-4">
+                <div class="text-[#8cff8c] text-[15px] leading-relaxed space-y-4 mt-3">
                   <p>
                     This book introduces harness engineering: treating AI coding agents like powerful but context-free contractors operating inside a strict system of constraints, checks, and gates.
                   </p>
@@ -334,93 +517,74 @@
                 </div>
               </div>
 
-              <!-- Segment 03 -->
-              <div class="border border-[#222] bg-[#070708] p-6 rounded-sm relative">
-                <span class="absolute -top-3 left-4 bg-[#020202] px-2 text-[10px] text-[#39ff14] font-bold font-mono tracking-widest uppercase">
-                  [MAN.SEC.03] SPECIFICATIONS
-                </span>
-                <h2 class="text-lg sm:text-xl font-bold italic font-serif text-white mb-4 border-b border-[#1f1f1f] pb-2 text-shadow">
+              <!-- [MAN.SEC.03] SPECIFICATIONS -->
+              <div class="border border-[#4fae4f]/40 p-5 rounded-sm relative bg-[#020402]">
+                <span class="section-label">[MAN.SEC.03] SPECIFICATIONS</span>
+                <h2 class="terminal-glow">
                   By the end of the book, you will have a complete harness system
                 </h2>
                 
-                <div class="bg-black/60 p-4 border-terminal-single rounded-sm mt-3">
-                  <ul class="space-y-4 text-xs sm:text-sm text-gray-300">
-                    <li class="flex items-start gap-2">
-                      <span class="text-[#F27D26] font-bold">[*]</span>
-                      <span><strong>AGENTS.md Constitution:</strong> Define allowed folders, prohibited operations, and required structures.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                      <span class="text-[#F27D26] font-bold">[*]</span>
-                      <span><strong>Task Spec YAML contracts:</strong> Turn vague prompts into strict contracts prior to running agents.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                      <span class="text-[#F27D26] font-bold">[*]</span>
-                      <span><strong>Plan-Verify-Execute loops:</strong> Verify lines of change proposed prior to actual filesystem write.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                      <span class="text-[#F27D26] font-bold">[*]</span>
-                      <span><strong>Validators & Gates:</strong> Bandit security regex scans, Mypy, Ruff, and Coverage differential gates.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                      <span class="text-[#F27D26] font-bold">[*]</span>
-                      <span><strong>CI Gating & PR Reviews:</strong> Automated Actions block merge attempts if checks fail.</span>
-                    </li>
+                <div class="bg-black/90 p-4 border border-dashed border-[#4fae4f]/45 rounded-sm mt-3">
+                  <ul class="space-y-4 text-[14px]">
+                    <li><strong>AGENTS.md Constitution:</strong> Define allowed folders, prohibited operations, and required structures.</li>
+                    <li><strong>Task Spec YAML contracts:</strong> Turn vague prompts into strict contracts prior to running agents.</li>
+                    <li><strong>Plan-Verify-Execute loops:</strong> Verify lines of change proposed prior to actual filesystem write.</li>
+                    <li><strong>Validators & Gates:</strong> Bandit security regex scans, Mypy, Ruff, and Coverage differential gates.</li>
+                    <li><strong>CI Gating & PR Reviews:</strong> Automated Actions block merge attempts if checks fail.</li>
                   </ul>
                 </div>
               </div>
 
-              <!-- Segment 04: Structured FAQ Console Display -->
-              <div class="border border-[#222] bg-[#070708] p-6 rounded-sm relative">
-                <span class="absolute -top-3 left-4 bg-[#020202] px-2 text-[10px] text-[#39ff14] font-bold font-mono tracking-widest uppercase">
-                  [MAN.SEC.04] FREQUENTLY ASKED QUESTIONS
-                </span>
-                <h2 class="text-xl font-bold font-serif text-white mb-6 border-b border-[#1f1f1f] pb-2 text-shadow">
+              <!-- [MAN.SEC.04] FREQUENTLY ASKED QUESTIONS -->
+              <div class="border border-[#4fae4f]/40 p-5 rounded-sm relative bg-[#020402]">
+                <span class="section-label">[MAN.SEC.04] FREQUENTLY ASKED QUESTIONS</span>
+                <h2 class="terminal-glow">
                   Frequently Asked Questions
                 </h2>
                 
-                <div class="space-y-6">
+                <div class="space-y-6 mt-3 text-[14px]">
                   
-                  <div class="bg-black/40 border-l-2 border-[#39ff14] p-4 rounded-sm">
-                    <h3 class="text-xs sm:text-sm font-bold text-[#F27D26] mb-2 uppercase tracking-wide font-mono">
+                  <div class="bg-black border-l-2 border-[#39ff14] p-4 rounded-sm">
+                    <h3 class="text-xs sm:text-sm font-bold text-[#39ff14] mb-2 uppercase tracking-wide">
                       &gt; What is a harness engineering book?
                     </h3>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    <p class="text-[#8cff8c] leading-relaxed">
                       A harness engineering book explains how to design the control layer around AI agents, including prompts, tools, permissions, memory, tests, CI gates, observability, and production guardrails.
                     </p>
                   </div>
                   
-                  <div class="bg-black/40 border-l-2 border-[#39ff14] p-4 rounded-sm">
-                    <h3 class="text-xs sm:text-sm font-bold text-[#F27D26] mb-2 uppercase tracking-wide font-mono">
+                  <div class="bg-black border-l-2 border-[#39ff14] p-4 rounded-sm">
+                    <h3 class="text-xs sm:text-sm font-bold text-[#39ff14] mb-2 uppercase tracking-wide">
                       &gt; Is this book about AI coding agents?
                     </h3>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    <p class="text-[#8cff8c] leading-relaxed">
                       Yes. This book is fully dedicated to designing, building, and deploying reliable AI coding agents. It covers the shift from simple prompt-based solutions to robust multi-agent setups that operate securely inside commercial environments.
                     </p>
                   </div>
                   
-                  <div class="bg-black/40 border-l-2 border-[#39ff14] p-4 rounded-sm">
-                    <h3 class="text-xs sm:text-sm font-bold text-[#F27D26] mb-2 uppercase tracking-wide font-mono">
+                  <div class="bg-black border-l-2 border-[#39ff14] p-4 rounded-sm">
+                    <h3 class="text-xs sm:text-sm font-bold text-[#39ff14] mb-2 uppercase tracking-wide">
                       &gt; Does the book cover Claude Code and Cursor AI?
                     </h3>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    <p class="text-[#8cff8c] leading-relaxed">
                       Absolutely. The book addresses modern AI coding tools like Claude Code, Cursor AI, and other LLM interfaces, showing how to build automated gates, prompt harnesses, and verification routines to keep their output 100% stable.
                     </p>
                   </div>
                   
-                  <div class="bg-black/40 border-l-2 border-[#39ff14] p-4 rounded-sm">
-                    <h3 class="text-xs sm:text-sm font-bold text-[#F27D26] mb-2 uppercase tracking-wide font-mono">
+                  <div class="bg-black border-l-2 border-[#39ff14] p-4 rounded-sm">
+                    <h3 class="text-xs sm:text-sm font-bold text-[#39ff14] mb-2 uppercase tracking-wide">
                       &gt; Who is Leandro Calado?
                     </h3>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    <p class="text-[#8cff8c] leading-relaxed">
                       Leandro Calado is a Senior Data Engineer, AI Systems Architect, and international author of 116 technical books on Amazon KDP. He specializes in designing robust cloud pipelines (AWS/Azure) and building secure multi-agent systems.
                     </p>
                   </div>
                   
-                  <div class="bg-black/40 border-l-2 border-[#39ff14] p-4 rounded-sm">
-                    <h3 class="text-xs sm:text-sm font-bold text-[#F27D26] mb-2 uppercase tracking-wide font-mono">
+                  <div class="bg-black border-l-2 border-[#39ff14] p-4 rounded-sm">
+                    <h3 class="text-xs sm:text-sm font-bold text-[#39ff14] mb-2 uppercase tracking-wide">
                       &gt; Is this book for production-ready AI agent workflows?
                     </h3>
-                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    <p class="text-[#8cff8c] leading-relaxed">
                       Yes. It moves beyond simple prototypes and 'vibe coding' to explain production guardrails, validation loops, code differential gates, and sandboxing architectures that make AI code delivery safe for real-world companies.
                     </p>
                   </div>
@@ -430,19 +594,19 @@
 
             </div>
 
-            <!-- Right Column: System Sidebar / Directories -->
-            <div class="space-y-8">
+            <!-- Terminal Sidebar (Directories & Meta details mapped in terminal formats) -->
+            <div class="space-y-6">
               
-              <!-- Book Package Details Panel -->
-              <div class="border border-[#222] bg-[#070708] p-6 rounded-sm relative">
-                <span class="absolute -top-3 left-4 bg-[#020202] px-2 text-[10px] text-[#F27D26] font-bold font-mono tracking-widest uppercase">
+              <!-- [SYS.INF.01] Integrity log details -->
+              <div class="border border-[#4fae4f]/40 p-5 rounded-sm relative bg-[#020402]">
+                <span class="absolute -top-3 left-4 bg-black px-2 text-[10px] text-[#39ff14] font-bold tracking-widest uppercase">
                   [SYS.INF.01]
                 </span>
-                <h3 class="text-xs tracking-widest uppercase text-white font-mono font-bold border-b border-[#222] pb-2 mb-4">
+                <h3 class="text-[11px] tracking-widest uppercase text-white font-bold border-b border-[#4fae4f]/25 pb-2 mb-4">
                   MANUAL_INTEGRITY.LOG
                 </h3>
                 
-                <div class="space-y-3 font-mono text-[11px] text-gray-400">
+                <div class="space-y-3 text-[11px] text-[#8cff8c]">
                   <div class="flex justify-between">
                     <span>FORMAT:</span>
                     <span class="text-white">EPUB / KINDLE</span>
@@ -452,61 +616,61 @@
                     <span class="text-white">ENGLISH / PORT.</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>SECURITY CLEARANCE:</span>
-                    <span class="text-[#39ff14]">100% UNRESTRICTED</span>
+                    <span>CLEARANCE:</span>
+                    <span class="text-[#39ff14] font-bold">100% SECURE</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>PUBLISHER ID:</span>
+                    <span>PUBLISHER:</span>
                     <span class="text-white">LCF CONSULTING</span>
                   </div>
-                  <div class="flex justify-between">
+                  <div class="flex justify-between font-mono">
                     <span>CHECKSUM:</span>
-                    <span class="text-yellow-600">8f2c7a91 // OK</span>
+                    <span class="text-[#39ff14]">8f2c7a91 // OK</span>
                   </div>
                 </div>
 
-                <!-- Small schematic vector grid drawing standard for a book cover -->
-                <div class="mt-6 border border-[#222] bg-black p-4 rounded-sm flex flex-col items-center">
-                  <div class="w-24 h-32 border-2 border-dashed border-[#F27D26]/60 rounded-sm relative flex flex-col justify-between p-2">
-                    <div class="text-[7px] text-[#F27D26] tracking-tight font-mono text-center">
+                <!-- Schematic vector design cover block in green phosphor -->
+                <div class="mt-6 border border-[#4fae4f]/35 bg-black p-4 rounded-sm flex flex-col items-center">
+                  <div class="w-24 h-32 border border-[#39ff14]/70 rounded-sm relative flex flex-col justify-between p-2">
+                    <div class="text-[7px] text-[#39ff14] text-center font-bold tracking-tight">
                       HARNESS ENG
                     </div>
-                    <!-- Small vector graphical design -->
+                    <!-- Small vectors graphical display -->
                     <div class="w-full flex justify-center py-2">
                       <svg width="40" height="40" viewBox="0 0 100 100" class="text-[#39ff14]">
                         <rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" stroke-dasharray="2 2" stroke-width="2"/>
-                        <circle cx="50" cy="50" r="15" fill="none" stroke="#F27D26" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
                         <line x1="10" y1="50" x2="90" y2="50" stroke="currentColor" stroke-dasharray="1 1" />
                         <line x1="50" y1="10" x2="50" y2="90" stroke="currentColor" stroke-dasharray="1 1" />
                       </svg>
                     </div>
-                    <div class="text-[6px] text-gray-500 font-mono text-center">
+                    <div class="text-[6px] text-[#4fae4f] text-center font-bold">
                       v1.0 // L. CALADO
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Directory Structure module map representation -->
-              <div class="border border-[#222] bg-[#070708] p-6 rounded-sm relative">
-                <span class="absolute -top-3 left-4 bg-[#020202] px-2 text-[10px] text-[#F27D26] font-bold font-mono tracking-widest uppercase">
+              <!-- [SYS.DIR.EXP] Structure schema -->
+              <div class="border border-[#4fae4f]/40 p-5 rounded-sm relative bg-[#020402]">
+                <span class="absolute -top-3 left-4 bg-black px-2 text-[10px] text-[#39ff14] font-bold tracking-widest uppercase">
                   [SYS.DIR.EXP]
                 </span>
-                <h3 class="text-xs tracking-widest uppercase text-white font-mono font-bold border-b border-[#222] pb-2 mb-4">
+                <h3 class="text-[11px] tracking-widest uppercase text-white font-bold border-b border-[#4fae4f]/25 pb-2 mb-4">
                   CHAPTER_STRUCTURE.SYS
                 </h3>
                 
-                <div class="font-mono text-xs text-gray-400 space-y-1.5 leading-snug">
+                <div class="text-[11px] text-[#8cff8c] space-y-1.5 leading-snug">
                   <div>C:\HARNESS_ENG\</div>
                   <div class="text-[#39ff14] pl-2">├── AGENTS.md</div>
                   <div class="pl-2">├── TASK_CONTRACTS/</div>
-                  <div class="text-gray-500 pl-4">├── spec_yaml_schema.json</div>
-                  <div class="text-gray-500 pl-4">└── validator_engine.py</div>
+                  <div class="text-[#4fae4f] pl-4">├── spec_schema.json</div>
+                  <div class="text-[#4fae4f] pl-4">└── validator.py</div>
                   <div class="pl-2">├── PLAN_VERIFY_EXEC/</div>
-                  <div class="text-gray-500 pl-4">└── fs_diff_checker.ts</div>
+                  <div class="text-[#4fae4f] pl-4">└── diff_checker.ts</div>
                   <div class="pl-2">├── DIFFERENTIAL_GATES/</div>
-                  <div class="text-gray-500 pl-4">├── bandit_security.sh</div>
-                  <div class="text-gray-500 pl-4">└── build_coverage_gate.yaml</div>
+                  <div class="text-[#4fae4f] pl-4">├── bandit_security.sh</div>
+                  <div class="text-[#4fae4f] pl-4">└── coverage_gate.yaml</div>
                   <div class="text-[#39ff14] pl-2">└── README.txt</div>
                 </div>
               </div>
@@ -517,32 +681,36 @@
 
         </main>
 
-        <!-- Footer -->
-        <footer class="border-t border-[#222] bg-[#070708] py-8 mt-12 text-xs">
-          <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-6 border-b border-[#222] text-gray-400">
-              <div>
-                <p class="text-[#F27D26] font-bold font-serif text-lg leading-none mb-1">Leandro Calado Ferreira</p>
-                <p class="text-[9px] uppercase tracking-wider opacity-60 font-mono">Engenheiro de Dados • Autor Técnico Internacional • Harness Engineering</p>
-              </div>
-              <nav class="flex flex-wrap gap-x-6 gap-y-2 uppercase tracking-widest font-mono text-[9px] font-bold text-gray-500">
-                <a href="/about" class="hover:text-white">SOBRE</a>
-                <a href="/start-here" class="hover:text-white">ECOSSISTEMA</a>
-                <a href="/books" class="hover:text-white">LIVROS</a>
-                <a href="/articles" class="hover:text-white">ARTIGOS</a>
-                <a href="/consulting" class="hover:text-white">CONSULTORIA</a>
-              </nav>
+        <!-- Dynamic terminal command shell back to buy -->
+        <div class="mt-8 border border-dashed border-[#4fae4f]/35 p-4 rounded-sm text-center bg-[#020402]">
+          <span class="text-xs text-white">READY FOR HARD MANUAL EXECUTION PROTOCOL? </span>
+          <a href="https://www.amazon.com.br/dp/B0GYG3WG4Q" target="_blank" rel="noopener noreferrer" class="text-xs text-[#39ff14] underline hover:text-white ml-2 font-bold">[ RUN: PURCHASE_MANUAL_AMAZON ]</a>
+        </div>
+
+        <!-- Monospace Phosphor styled system footer -->
+        <footer class="border-t border-[#4fae4f]/30 mt-12 py-8 text-xs">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-6 border-b border-[#4fae4f]/15">
+            <div>
+              <p class="text-[#39ff14] font-bold text-base leading-none mb-1.5 terminal-glow">Leandro Calado Ferreira</p>
+              <p class="text-[10px] uppercase tracking-wider text-[#4fae4f]">Engenheiro de Dados • Autor Técnico Internacional • Harness Engineering</p>
             </div>
-            
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 text-[10px] text-gray-600 font-mono">
-              <span>© 2026 Leandro Calado Ferreira. Todos os direitos reservados.</span>
-              <div class="flex flex-wrap items-center gap-4 text-[#F27D26] font-bold">
-                <a href="https://github.com/lcaladoferreira" target="_blank" rel="noopener noreferrer">[GITHUB]</a>
-                <a href="https://www.linkedin.com/in/lcaladoferreira/" target="_blank" rel="noopener noreferrer">[LINKEDIN]</a>
-                <a href="https://leandrocalado.jusbrasil.com.br/" target="_blank" rel="noopener noreferrer">[JUSBRASIL]</a>
-                <a href="https://leandrocaladoferreira.medium.com/" target="_blank" rel="noopener noreferrer">[MEDIUM]</a>
-                <a href="http://lattes.cnpq.br/0050162670485497" target="_blank" rel="noopener noreferrer">[LATTES]</a>
-              </div>
+            <nav class="flex flex-wrap gap-x-6 gap-y-2 uppercase tracking-widest text-[10px] font-bold">
+              <a href="/about" class="hover:text-white text-[#4fae4f]">[SOBRE]</a>
+              <a href="/start-here" class="hover:text-white text-[#4fae4f]">[SISTEMA]</a>
+              <a href="/books" class="hover:text-white text-[#4fae4f]">[LIVROS]</a>
+              <a href="/articles" class="hover:text-white text-[#4fae4f]">[ARTIGOS]</a>
+              <a href="/consulting" class="hover:text-white text-[#4fae4f]">[CONSULTORIA]</a>
+            </nav>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 text-[10px] text-[#4fae4f]">
+            <span>© 2026 Leandro Calado Ferreira. Todos os direitos reservados.</span>
+            <div class="flex flex-wrap items-center gap-4 font-bold text-[#39ff14]">
+              <a href="https://github.com/lcaladoferreira" target="_blank" rel="noopener noreferrer">[GITHUB]</a>
+              <a href="https://www.linkedin.com/in/lcaladoferreira/" target="_blank" rel="noopener noreferrer">[LINKEDIN]</a>
+              <a href="https://leandrocalado.jusbrasil.com.br/" target="_blank" rel="noopener noreferrer">[JUSBRASIL]</a>
+              <a href="https://leandrocaladoferreira.medium.com/" target="_blank" rel="noopener noreferrer">[MEDIUM]</a>
+              <a href="http://lattes.cnpq.br/0050162670485497" target="_blank" rel="noopener noreferrer">[LATTES]</a>
             </div>
           </div>
         </footer>
