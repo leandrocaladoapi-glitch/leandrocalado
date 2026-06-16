@@ -4,75 +4,8 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/books/harness-engineering-ai-coding-agents",
-      "destination": "/books/harness-engineering-ai-coding-agents.html"
-    },
-    {
-      "source": "/books/harness-engineering-ai-coding-agents/",
-      "destination": "/books/harness-engineering-ai-coding-agents.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    },
-    {
-      "source": "/start-here",
-      "destination": "/start-here.html"
-    },
-    {
-      "source": "/books",
-      "destination": "/books.html"
-    },
-    {
-      "source": "/articles",
-      "destination": "/articles.html"
-    },
-    {
-      "source": "/consulting",
-      "destination": "/consulting.html"
-    },
-    {
-      "source": "/ai-agents",
-      "destination": "/ai-agents.html"
-    },
-    {
-      "source": "/data-engineering",
-      "destination": "/data-engineering.html"
-    },
-    {
-      "source": "/safe-ai",
-      "destination": "/safe-ai.html"
-    },
-    {
-      "source": "/automation",
-      "destination": "/automation.html"
-    },
-    {
       "source": "/:path*",
       "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "no-referrer"
-        }
-      ]
     }
   ]
 }
