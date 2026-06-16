@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/books/harness-engineering-ai-coding-agents",
+      "destination": "/books/harness-engineering-ai-coding-agents.html"
+    },
+    {
+      "source": "/books/harness-engineering-ai-coding-agents/",
+      "destination": "/books/harness-engineering-ai-coding-agents.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
