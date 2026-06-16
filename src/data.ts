@@ -499,9 +499,9 @@ export const themeDomains: ThemeDomain[] = [
     desc: "Investigação emergente de riscos ligados a Prompt Injection (injeção indireta de prompts), engenharia de harnesses e construção de guardrails preventivos contra vazamentos de dados."
   },
   {
-    id: "legaltech",
-    title: "Legaltech, LGPD & Compliance",
-    desc: "A união perfeita de competência jurídica formal com Engenharia de Dados para auditar conformidades algorítmicas, consentimento de cookies, biometria e privacidade de dados."
+    id: "automation",
+    title: "Automação & Orquestração de Processos",
+    desc: "Construção de fluxos corporativos hiperconectados usando n8n, conexões robustas com Webhooks, APIs REST, e integração com Stripe ou faturamentos complexos."
   },
   {
     id: "prod-escala",

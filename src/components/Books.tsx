@@ -189,18 +189,21 @@ export default function Books({ isDark, language, onNavigate }: BooksProps) {
                     </span>
 
                     {book.link.startsWith("/") ? (
-                      <button
+                      <a
+                        href={book.link}
                         onClick={(e) => {
                           e.preventDefault();
                           if (onNavigate) {
                             onNavigate(book.link);
                           }
                         }}
-                        className="text-[10px] uppercase tracking-wider font-bold text-[#F27D26] flex items-center gap-1 hover:opacity-80 font-mono transition-opacity cursor-pointer bg-transparent border-0 focus:outline-none"
+                        className="text-[10px] uppercase tracking-wider font-bold text-[#F27D26] flex items-center gap-1 hover:opacity-80 font-mono transition-opacity cursor-pointer"
                       >
-                        {language === "ja" ? "詳細を見る" : language === "pt" ? "Detalhes" : "Details"}
+                        {book.id === "harness-engineering-ai-coding-agents" 
+                          ? "Harness Engineering Book"
+                          : (language === "ja" ? "詳細を見る" : language === "pt" ? "Detalhes" : "Details")}
                         <ArrowUpRight className="w-3.5 h-3.5" />
-                      </button>
+                      </a>
                     ) : (
                       <a
                         href={book.link}

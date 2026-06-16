@@ -49,6 +49,37 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
     return articlesData.filter(a => a.category === category);
   };
 
+  const renderBookItemLink = (book: typeof booksData[0]) => {
+    if (book.link.startsWith("/")) {
+      return (
+        <a 
+          href={book.link}
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigate(book.link);
+          }}
+          className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline"
+        >
+          {book.id === "harness-engineering-ai-coding-agents" 
+            ? "Harness Engineering Book"
+            : (language === "pt" ? "Ver Detalhes" : "View Details")}
+          <ChevronRight className="w-3 h-3" />
+        </a>
+      );
+    }
+    return (
+      <a 
+        href={book.link} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline"
+      >
+        {language === "pt" ? "Ver Livro na Amazon" : "View on Amazon"} 
+        <ExternalLink className="w-3 h-3" />
+      </a>
+    );
+  };
+
   // Structured Social/Authority Links with Semantic Context
   const semanticLinks = {
     professional: [
@@ -329,9 +360,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                   <h3 className="font-mono text-[11px] font-bold tracking-tight uppercase mt-2">{book.title}</h3>
                   <p className={`text-[10px] leading-relaxed mt-1 ${textMutedClass}`}>{book.description}</p>
                 </div>
-                <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline">
-                  Ver livro <ExternalLink className="w-3 h-3" />
-                </a>
+                {renderBookItemLink(book)}
               </div>
             ))}
           </div>
@@ -466,9 +495,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                   <h3 className="font-mono text-[11px] font-bold tracking-tight uppercase mt-2">{book.title}</h3>
                   <p className={`text-[10px] leading-relaxed mt-1 ${textMutedClass}`}>{book.description}</p>
                 </div>
-                <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline">
-                  Ver livro <ExternalLink className="w-3 h-3" />
-                </a>
+                {renderBookItemLink(book)}
               </div>
             ))}
           </div>
@@ -603,9 +630,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                   <h3 className="font-mono text-[11px] font-bold tracking-tight uppercase mt-2">{book.title}</h3>
                   <p className={`text-[10px] leading-relaxed mt-1 ${textMutedClass}`}>{book.description}</p>
                 </div>
-                <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline">
-                  Ver livro <ExternalLink className="w-3 h-3" />
-                </a>
+                {renderBookItemLink(book)}
               </div>
             ))}
           </div>
@@ -740,9 +765,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                   <h3 className="font-mono text-[11px] font-bold tracking-tight uppercase mt-2">{book.title}</h3>
                   <p className={`text-[10px] leading-relaxed mt-1 ${textMutedClass}`}>{book.description}</p>
                 </div>
-                <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline">
-                  Ver livro <ExternalLink className="w-3 h-3" />
-                </a>
+                {renderBookItemLink(book)}
               </div>
             ))}
           </div>
@@ -788,7 +811,9 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
     );
   };
 
-  const renderLegaltechHub = () => {
+  const renderLegaltechHub = () => null;
+
+  const _disabled_renderLegaltechHub = () => {
     const hubBooks = filterBooksByHub("direito").slice(0, 3);
     const hubArticles = filterArticlesByCategory("IA & Direito").slice(0, 3);
 
@@ -877,9 +902,7 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
                   <h3 className="font-mono text-[11px] font-bold tracking-tight uppercase mt-2">{book.title}</h3>
                   <p className={`text-[10px] leading-relaxed mt-1 ${textMutedClass}`}>{book.description}</p>
                 </div>
-                <a href={book.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#F27D26] uppercase font-mono tracking-wider mt-4 flex items-center gap-1 hover:underline">
-                  Ver livro <ExternalLink className="w-3 h-3" />
-                </a>
+                {renderBookItemLink(book)}
               </div>
             ))}
           </div>
@@ -1030,7 +1053,6 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
       { path: "/data-engineering", name: language === "pt" ? "Pilar: Engenharia de Dados" : "Pillar: Data Engineering", desc: language === "pt" ? "Computação Spark paralela distribuída, pipelines AWS Glue e Azure lakes." : "Distributed Spark environments, AWS Glue pipelines, Azure Databricks.", icon: <Database className="w-5 h-5" /> },
       { path: "/ai-agents", name: language === "pt" ? "Pilar: Agentes de IA" : "Pillar: AI Agents", desc: language === "pt" ? "Sistemas auto-orquestrados, APIs estruturadas e protocolo MCP." : "Autonomous agents, Pydantic AI systems, and MCP connections.", icon: <Cpu className="w-5 h-5" /> },
       { path: "/automation", name: language === "pt" ? "Pilar: Automação Inteligente" : "Pillar: n8n Automation", desc: language === "pt" ? "Criação de fluxos complexos, integração analítica de webhooks em n8n." : "Recursive n8n enterprise workflows, visual rules, and webhooks.", icon: <Zap className="w-5 h-5" /> },
-      { path: "/legaltech", name: language === "pt" ? "Pilar: Legaltech & LGPD" : "Pillar: Legaltech & LGPD", desc: language === "pt" ? "Auditoria de algoritmos, privacidade de consentimento e conformidade física." : "Checking algorithm biases, managing cookie consent structures.", icon: <Scale className="w-5 h-5" /> },
       { path: "/consulting", name: language === "pt" ? "Serviços & Consultoria" : "LCF Consulting Services", desc: language === "pt" ? "Trabalhe conosco na modelagem de soluções de segurança e lagos de dados." : "Consulting engagements for pipeline tuning and LLM compliance.", icon: <Briefcase className="w-5 h-5" /> }
     ];
 
@@ -1468,9 +1490,8 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
       case "/ai-agents":
         return renderAIAgentsHub();
       case "/automation":
-        return renderAutomationHub();
       case "/legaltech":
-        return renderLegaltechHub();
+        return renderAutomationHub();
       case "/consulting":
         return renderConsultingHub();
       case "/start-here":

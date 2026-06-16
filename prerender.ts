@@ -7,21 +7,21 @@ import { articlesData } from "./src/articlesData";
 const routes = [
   {
     path: "/",
-    title: "Leandro Calado Ferreira — Engenheiro de Dados, IA Aplicada & Direito Digital",
-    description: "Portfolio de Leandro Calado Ferreira: Engenheiro de Dados, Bacharel em Direito, MBA pela USP e Autor Técnico com 116 livros de Inteligência Artificial e Data Engineering publicados na Amazon KDP.",
+    title: "Leandro Calado Ferreira — Engenheiro de Dados, IA Aplicada & Harness Engineering",
+    description: "Portfolio de Leandro Calado Ferreira: Engenheiro de Dados, AI Systems Architect e Autor Técnico Internacional com mais de 116 livros publicados, incluindo temas como Harness Engineering, IA e Data Engineering.",
     canonical: "https://leandrocaladoferreira.com/",
     schemaType: "Home",
     htmlContent: `
       <!-- Hero Section -->
       <section class="min-h-[85vh] flex flex-col justify-center py-20 px-6">
         <div class="max-w-7xl mx-auto w-full">
-          <span class="text-[#F27D26] font-bold text-xs uppercase tracking-widest block mb-4">Engenheiro de Dados • Autor Técnico Internacional • Direito Digital</span>
+          <span class="text-[#F27D26] font-bold text-xs uppercase tracking-widest block mb-4">Engenheiro de Dados • Autor Técnico Internacional • Harness Engineering</span>
           <h1 class="text-4xl sm:text-6xl md:text-7xl font-light italic mb-6 leading-tight font-serif text-white">
             Preenchendo a lacuna entre<br>
-            <span class="text-[#F27D26]">Engenharia de Dados</span> e <span class="text-gray-400">Direito Digital</span>
+            <span class="text-[#F27D26]">Engenharia de Dados</span> e <span class="text-gray-400">Harness Engineering</span>
           </h1>
           <p class="text-gray-400 text-lg max-w-2xl mb-12 leading-relaxed">
-            Especialista em Model Context Protocol (MCP), orquestrações de IA com n8n, segurança analítica de LLMs e conformação com a LGPD. Autor de 116 livros técnicos publicados na Amazon KDP em quatro idiomas.
+            Especialista em Model Context Protocol (MCP), orquestrações de IA com n8n, segurança analítica de LLMs e robustez de decisões. Autor de 116 livros técnicos publicados na Amazon KDP em quatro idiomas.
           </p>
           <div class="flex flex-wrap gap-4">
             <a href="/start-here" class="px-6 py-4 border border-[#F5F5F0] text-[#F5F5F0] hover:bg-white hover:text-black font-semibold uppercase tracking-widest text-xs transition-colors rounded-sm">Comece por aqui</a>
@@ -34,7 +34,7 @@ const routes = [
   {
     path: "/about",
     title: "Sobre Leandro Calado Ferreira — Trajetória Profissional & Acadêmica",
-    description: "Conheça Leandro Calado Ferreira, engenheiro de dados e bacharel em Direito. Pós-graduado pela USP, com foco em modelagem de dados distribuídos, conformidade com a LGPD, regulamentações aeroespaciais e liderança em projetos analíticos.",
+    description: "Conheça Leandro Calado Ferreira, Engenheiro de Dados, AI Systems Architect e Autor Técnico Internacional. Pós-graduado pela USP, com foco em modelagem de dados distribuídos, Harness Engineering, regulamentações aeroespaciais e liderança em projetos analíticos.",
     canonical: "https://leandrocaladoferreira.com/about",
     schemaType: "About",
     htmlContent: `
@@ -43,8 +43,8 @@ const routes = [
           <span class="text-[#F27D26] uppercase font-bold text-[10px] tracking-widest">Trajetória e Propósito</span>
           <h1 class="text-4xl sm:text-5xl font-light italic mt-3 mb-8 font-serif">Leandro Calado Ferreira</h1>
           <div class="space-y-6 text-gray-400 text-sm leading-relaxed">
-            <p><strong>Liderança Interdisciplinar:</strong> Bacharel em Direito, Engenheiro de Dados e pós-graduado de MBA de Data Science pela USP e Software Development pelo IGTI. Estudando no pós-graduado da Johns Hopkins em IA Agente e Model Context Protocol (MCP).</p>
-            <p>Especialista consagrado no tráfego de dados massivos, otimização de clusters Databricks, desenvolvimento de esteiras PySpark de altíssimo volume no Itaú Unibanco, automação integrada comercial usando IA e conformação estrita com a LGPD e a segurança contra Prompt Injections.</p>
+            <p><strong>Liderança Interdisciplinar:</strong> Engenheiro de Dados, AI Systems Architect e pós-graduado de MBA de Data Science pela USP e Software Development pelo IGTI. Estudando no pós-graduado da Johns Hopkins em IA Agente e Model Context Protocol (MCP).</p>
+            <p>Especialista consagrado no tráfego de dados massivos, otimização de clusters Databricks, desenvolvimento de esteiras PySpark de altíssimo volume no Itaú Unibanco, automação integrada comercial usando IA e conformação estrita com Harness Engineering e a segurança contra Prompt Injections.</p>
             <p>Como autor internacional de mais de 116 livros, consolidou resultados factuais na difusão de metodologias práticas de automação, cloud computing e governança de tecnologia.</p>
           </div>
           <div class="mt-12 text-left">
@@ -265,28 +265,6 @@ const routes = [
     `
   },
   {
-    path: "/legaltech",
-    title: "Legaltech, LGPD & Conformidade — Hub Semântico — Leandro Calado Ferreira",
-    description: "União entre Ciência de Dados e Direito Digital para auditorias algorítmicas, políticas de privacidade, consentimento de rastreadores e cookies, e conformação estrita com a Lei Geral de Proteção de Dados.",
-    canonical: "https://leandrocaladoferreira.com/legaltech",
-    schemaType: "SemanticHub",
-    htmlContent: `
-      <section class="py-24 px-6 text-[#F5F5F0]">
-        <div class="max-w-3xl mx-auto">
-          <span class="text-[#F27D26] uppercase font-bold text-[10px] tracking-widest">Hub Semântico de Compliance</span>
-          <h1 class="text-4xl font-light italic mt-3 mb-6 font-serif">Legaltech, LGPD & Compliance</h1>
-          <div class="prose prose-invert text-gray-300 text-sm leading-relaxed space-y-6">
-            <p>A auditoria e o mapeamento do tráfego das informações de uma companhia tornam-se imperativos sob o crivo regulatório da <strong>Lei Geral de Proteção de Dados (LGPD)</strong>.</p>
-            <p>Por meio da união de premissas processuais jurídicas com rotas automatizadas de engenharia de bases, conseguimos mapear consentimentos e desenhar políticas de cookies funcionais que resguardam as empresas de multas administrativas severas junto à ANPD.</p>
-          </div>
-          <div class="mt-12 text-left">
-            <a href="/start-here" class="text-[10px] uppercase font-bold font-mono tracking-widest text-[#F27D26] hover:underline">&larr; Voltar ao Começo</a>
-          </div>
-        </div>
-      </section>
-    `
-  },
-  {
     path: "/automation",
     title: "Automação Industrial de Processos & N8N — Leandro Calado Ferreira",
     description: "Explore como otimizar workflows corporativos e monetizar tarefas online conectando faturamentos do Stripe e rotinas webhooks usando lógica de automação n8n sem código excessivo.",
@@ -309,23 +287,23 @@ const routes = [
   },
   {
     path: "/books/harness-engineering-ai-coding-agents",
-    title: "Harness Engineering for AI Coding Agents – Build Safe AI Coding Workflows with Tests, CI, and Guardrails",
-    description: "Learn how to build production-safe AI coding workflows with harness engineering. This book shows you AGENTS.md rules, task specs, tests, security checks, and CI gates for Claude Code, Codex, and Python agents.",
+    title: "Harness Engineering Book by Leandro Calado | AI Coding Agents, Claude Code, Cursor & Guardrails",
+    description: "Read Harness Engineering for AI Coding Agents by Leandro Calado, a practical harness engineering book about Claude Code, Cursor, Codex, multi-agent coding workflows, guardrails, tests, CI gates, memory control, tool permissions, and production-ready AI agent systems.",
     canonical: "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents",
-    schemaType: "Books",
+    schemaType: "HarnessBook",
     htmlContent: `
-      <section class="py-20 px-6 max-w-4xl mx-auto">
+      <section class="py-20 px-6 max-w-4xl mx-auto text-left">
         <span class="text-[#F27D26] uppercase font-bold text-xs tracking-widest font-mono">NEW RELEASE TECHNICAL MANUAL</span>
-        <h1 class="text-4xl sm:text-5xl font-light italic mt-3 mb-6 font-serif text-white leading-tight">Harness Engineering for <br>AI Coding Agents</h1>
-        <p class="text-gray-400 text-lg leading-relaxed mb-8">
-          Build production-safe Claude Code, Codex, and Python agent workflows with guardrails, tests, CI gates, and controls that refuse to ship bad AI-generated code.
+        <h1 class="text-4xl sm:text-5xl font-light italic mt-3 mb-6 font-serif text-white leading-tight">Harness Engineering Book for AI Coding Agents</h1>
+        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+          Harness Engineering for AI Coding Agents is a practical harness engineering book by Leandro Calado for developers building reliable Claude Code, Cursor, Codex, and multi-agent coding workflows with guardrails, automated tests, CI gates, memory control, tool permissions, and production-ready software delivery.
         </p>
         <div class="flex gap-4">
-          <a href="https://www.amazon.com.br/dp/B0GYG3WG4Q" target="_blank" rel="noopener noreferrer" class="px-6 py-4 bg-[#F27D26] text-white text-xs font-mono uppercase tracking-widest font-bold">Get the Book on Amazon Kindle</a>
+          <a href="https://www.amazon.com.br/dp/B0GYG3WG4Q" target="_blank" rel="noopener noreferrer" class="px-6 py-4 bg-[#F27D26] text-white text-xs font-mono uppercase tracking-widest font-bold hover:bg-[#d96613] transition-colors rounded-sm">Harness Engineering Book on Amazon Kindle</a>
         </div>
       </section>
 
-      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto">
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto text-left">
         <h2 class="text-2xl font-light italic font-serif text-white mb-6">Vibe coding works in prototypes. It breaks in production.</h2>
         <p class="text-gray-400 text-sm leading-relaxed mb-4">
           AI coding agents make it feel easy to refactor modules, wire new endpoints, or patch bugs in minutes. The diffs look clean, the code compiles, and tests might even pass—until a race condition, a missing security check, or a silently deleted guard shows up weeks later.
@@ -335,7 +313,7 @@ const routes = [
         </p>
       </section>
 
-      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto">
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto text-left">
         <h2 class="text-2xl font-light italic font-serif text-white mb-6">You don’t trust the AI. You control it with systems.</h2>
         <p class="text-gray-400 text-sm leading-relaxed mb-4">
           This book introduces harness engineering: treating AI coding agents like powerful but context-free contractors operating inside a strict system of constraints, checks, and gates.
@@ -345,7 +323,7 @@ const routes = [
         </p>
       </section>
 
-      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto">
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto text-left">
         <h2 class="text-2xl font-light italic font-serif text-white mb-6">By the end of the book, you will have a complete harness system</h2>
         <ul class="space-y-4 text-sm text-gray-300">
           <li><strong>AGENTS.md Constitution:</strong> Define allowed folders, prohibited operations, and required structures.</li>
@@ -354,6 +332,42 @@ const routes = [
           <li><strong>Validators & Gates:</strong> Bandit security regex scans, Mypy, Ruff, and Coverage differential gates.</li>
           <li><strong>CI Gating & PR Reviews:</strong> Automated Actions block merge attempts if checks fail.</li>
         </ul>
+      </section>
+
+      <section class="py-16 border-t border-white/5 px-6 max-w-4xl mx-auto text-left">
+        <h2 class="text-3xl font-light italic font-serif text-white mb-8">Frequently Asked Questions</h2>
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-lg font-bold text-[#F27D26] mb-2 font-mono">What is a harness engineering book?</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              A harness engineering book explains how to design the control layer around AI agents, including prompts, tools, permissions, memory, tests, CI gates, observability, and production guardrails.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[#F27D26] mb-2 font-mono">Is this book about AI coding agents?</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Yes. This book is fully dedicated to designing, building, and deploying reliable AI coding agents. It covers the shift from simple prompt-based solutions to robust multi-agent setups that operate securely inside commercial environments.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[#F27D26] mb-2 font-mono">Does the book cover Claude Code and Cursor AI?</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Absolutely. The book addresses modern AI coding tools like Claude Code, Cursor AI, and other LLM interfaces, showing how to build automated gates, prompt harnesses, and verification routines to keep their output 100% stable.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[#F27D26] mb-2 font-mono">Who is Leandro Calado?</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Leandro Calado is a Senior Data Engineer, AI Systems Architect, and international author of 116 technical books on Amazon KDP. He specializes in designing robust cloud pipelines (AWS/Azure) and building secure multi-agent systems.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[#F27D26] mb-2 font-mono">Is this book for production-ready AI agent workflows?</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Yes. It moves beyond simple prototypes and 'vibe coding' to explain production guardrails, validation loops, code differential gates, and sandboxing architectures that make AI code delivery safe for real-world companies.
+            </p>
+          </div>
+        </div>
       </section>
     `
   }
@@ -386,18 +400,18 @@ function generatePersonSchema() {
       }
     ],
     "knowsAbout": [
+      "Harness Engineering Book",
       "Model Context Protocol (MCP)",
+      "AI Systems Architect",
       "AI Agents",
       "n8n Workflow Automation",
       "AWS Glue PySpark ETL",
       "Databricks Lakehouse Big Data",
       "Apache Spark",
-      "General Data Protection Law (LGPD) Compliance",
       "Prompt Injection & LLM Safety",
-      "Legaltech & Digital Law",
       "Geopolitics & Air Transportation Regulation"
     ],
-    "description": "Leandro Calado Ferreira é um conceituado Engenheiro de Dados, Bacharel em Direito, pós-graduando em MBA de Data Science pela USP e Autor Técnico Internacional com mais de 116 manuais de Inteligência Artificial e Big Data publicados na Amazon Kindle KDP.",
+    "description": "Leandro Calado Ferreira é um conceituado Engenheiro de Dados, AI Systems Architect, pós-graduando em MBA de Data Science pela USP e Autor Técnico Internacional com mais de 116 manuais de Inteligência Artificial, Big Data e Engenharia publicados na Amazon Kindle KDP.",
     "sameAs": [
       "https://www.linkedin.com/in/lcaladoferreira/",
       "https://github.com/lcaladoferreira",
@@ -479,6 +493,73 @@ function generateArticlesSchema() {
 
 function generateSchemaForRoute(schemaType: string) {
   const person = generatePersonSchema();
+  if (schemaType === "HarnessBook") {
+    return JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        person,
+        {
+          "@type": "Book",
+          "@id": "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents/#book",
+          "name": "Harness Engineering for AI Coding Agents",
+          "alternateName": "Harness Engineering Book",
+          "author": {
+            "@type": "Person",
+            "name": "Leandro Calado",
+            "url": "https://leandrocaladoferreira.com"
+          },
+          "description": "Read Harness Engineering for AI Coding Agents by Leandro Calado, a practical harness engineering book about Claude Code, Cursor, Codex, multi-agent coding workflows, guardrails, tests, CI gates, memory control, tool permissions, and production-ready AI agent systems.",
+          "inLanguage": "en",
+          "bookFormat": "EBook",
+          "publisher": {
+            "@type": "Organization",
+            "name": "LCF Consulting",
+            "url": "https://leandrocaladoferreira.com"
+          },
+          "url": "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents",
+          "keywords": [
+            "Harness Engineering Book",
+            "AI Coding Agents",
+            "Claude Code",
+            "Cursor AI",
+            "Codex",
+            "Vibe Coding",
+            "Multi-Agent Coding Workflows",
+            "Guardrails",
+            "Tests",
+            "CI Gates",
+            "Memory Control",
+            "Tool Permissions",
+            "Production-Ready Software Delivery"
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://leandrocaladoferreira.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Books",
+              "item": "https://leandrocaladoferreira.com/books"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Harness Engineering Book",
+              "item": "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents"
+            }
+          ]
+        }
+      ]
+    }, null, 2);
+  }
   if (schemaType === "Books") {
     return JSON.stringify(generateBooksSchema(), null, 2);
   }
@@ -547,6 +628,10 @@ function run() {
       /<meta property="og:description" content=".*?" \/>/,
       `<meta property="og:description" content="${route.description}" />`
     );
+    rewrittenHtml = rewrittenHtml.replace(
+      /<meta property="og:url" content=".*?" \/>/,
+      `<meta property="og:url" content="${route.canonical}" />`
+    );
 
     // 5. Update Twitter Card values
     rewrittenHtml = rewrittenHtml.replace(
@@ -593,7 +678,7 @@ function run() {
           <div class="flex flex-col md:flex-row justify-between items-start gap-6 pb-10 border-b border-white/5">
             <div>
               <p class="text-2xl font-light italic leading-none mb-1 text-[#F27D26] font-serif">Leandro Calado Ferreira</p>
-              <p class="text-[10px] uppercase tracking-wider opacity-60 mt-1 font-mono">Engenheiro de Dados • Autor Técnico Internacional • Direito Digital</p>
+              <p class="text-[10px] uppercase tracking-wider opacity-60 mt-1 font-mono">Engenheiro de Dados • Autor Técnico Internacional • Harness Engineering</p>
             </div>
             <nav class="flex flex-wrap gap-x-6 gap-y-2 text-[10px] uppercase tracking-widest font-mono font-bold text-gray-400">
               <a href="/about" class="hover:text-white">SOBRE</a>

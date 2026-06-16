@@ -1,4 +1,4 @@
-import { Database, ShieldCheck, ShieldAlert, BookOpen, Briefcase, Compass } from "lucide-react";
+import { Database, ShieldCheck, ShieldAlert, BookOpen, Briefcase, Compass, Cpu } from "lucide-react";
 import { Language, translations } from "../translations";
 
 interface EcosystemProps {
@@ -60,20 +60,20 @@ export default function Ecosystem({ isDark, language, onNavigate }: EcosystemPro
             "間接的プロンプトインジェクション(Indirect Prompt Injection)対策、防御策の開発、データ漏洩防止ガードレールの設計。",
     },
     {
-      id: "legaltech",
-      path: "/legaltech",
-      title: language === "pt" ? "Legaltech, LGPD & Compliance" : 
-             language === "en" ? "Legaltech, LGPD & Compliance" :
-             language === "es" ? "Legaltech, LGPD & Compliance" :
-             language === "fr" ? "Legaltech, RGPD & Conformité" :
-             language === "it" ? "Legaltech, Privacy & Compliance" :
-             "リーガルテック・情報保護法制",
-      desc: language === "pt" ? "A união perfeita de competência jurídica formal com Engenharia de Dados para auditar conformidades algorítmicas, consentimento de cookies, biometria e privacidade de dados." :
-            language === "en" ? "The strategic alignment of formal legal expertise with Data Engineering to audit algorithm compliance, cookies consent policies, biometric safety, and data privacy." :
-            language === "es" ? "Sinergia entre experiencia legal formal e Ingeniería de Datos para auditar algoritmos, consentimiento de cookies, biometría y políticas de privacidad." :
-            language === "fr" ? "Alliance de l'expertise juridique et de l'Ingénierie de Données pour auditer la conformité algorithmique, les consentements cookies, la biométrie et la vie privée." :
-            language === "it" ? "La perfeita unione tra giurisprudenza teorica e ingegneria dei dati per analizzare la rispondenza algoritmica, l'uso dei cookie e la tutela da privacidade corporativa." :
-            "高度なデータパイプライン技術 e 法学解釈を高度に融合し、アルゴリズム判定監査、クッキーポリシー、生物測定処理、個人情報保護法、GDPR適合監査を実施。",
+      id: "automation",
+      path: "/automation",
+      title: language === "pt" ? "Automação & Orquestração de Processos" : 
+             language === "en" ? "Automation & Process Orchestration" :
+             language === "es" ? "Automatización y Orquestación de Flujos" :
+             language === "fr" ? "Automatisation & Orchestration de Processus" :
+             language === "it" ? "Automazione ed Orchestrazione" :
+             "自律型ワークフロー自動化開発",
+      desc: language === "pt" ? "Construção de fluxos corporativos hiperconectados usando n8n, conexões robustas com Webhooks, APIs REST, e integração com Stripe ou faturamentos complexos." :
+            language === "en" ? "Building hyper-connected enterprise workflows using n8n, robust Webhook connections, REST APIs, and Stripe integrations for advanced custom business processing." :
+            language === "es" ? "Diseño de flujos automatizados de alto nivel con n8n, arquitecturas Webhooks, llamadas REST API, e integraciones con Stripe y pasarelas de pago." :
+            language === "fr" ? "Conception de flux d'automatisation d'entreprise via n8n, intégrations robustes de Webhooks, d'APIs REST et d'architectures financiers Stripe." :
+            language === "it" ? "Creazione di flussi gestionali complessi su n8n, connessioni Webhook, integrazione API REST avanzate e configurazione sistemi di pagamento Stripe." :
+            "n8n による自律型ビジネスロジックの組込、決済API (Stripe) や Webhook 接続による完全なプロセス自律運行設計。",
     },
     {
       id: "prod-escala",
@@ -118,8 +118,8 @@ export default function Ecosystem({ isDark, language, onNavigate }: EcosystemPro
         return <Database className="w-4 h-4 text-[#F27D26]" />;
       case "seguranca-ia":
         return <ShieldAlert className="w-4 h-4 text-[#F27D26]" />;
-      case "legaltech":
-        return <ShieldCheck className="w-4 h-4 text-[#F27D26]" />;
+      case "automation":
+        return <Cpu className="w-4 h-4 text-[#F27D26]" />;
       case "prod-escala":
         return <BookOpen className="w-4 h-4 text-[#F27D26]" />;
       case "geopolitica":

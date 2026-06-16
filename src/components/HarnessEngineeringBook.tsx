@@ -32,7 +32,7 @@ export default function HarnessEngineeringBook({ isDark, language, onNavigate }:
   // Update page title, meta description, and open graph tags on mount
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = "Harness Engineering for AI Coding Agents – leandrocaladoferreira.com";
+    document.title = "Harness Engineering Book by Leandro Calado | AI Coding Agents, Claude Code, Cursor & Guardrails";
 
     const updateOrCreateMeta = (nameOrProperty: string, value: string, isProperty = false) => {
       const selector = isProperty ? `meta[property="${nameOrProperty}"]` : `meta[name="${nameOrProperty}"]`;
@@ -49,13 +49,31 @@ export default function HarnessEngineeringBook({ isDark, language, onNavigate }:
       element.content = value;
     };
 
-    updateOrCreateMeta("description", "Learn how to build production-safe AI coding workflows with harness engineering. This book shows you AGENTS.md rules, task specs, tests, security checks, and CI gates.");
-    updateOrCreateMeta("og:title", "Harness Engineering for AI Coding Agents – leandrocaladoferreira.com", true);
-    updateOrCreateMeta("og:description", "Discover a complete system for harnessing AI coding agents with AGENTS.md rules, task specs, tests, security checks, and CI gates, so your team can ship AI-generated code safely.", true);
-    updateOrCreateMeta("og:url", window.location.href, true);
+    updateOrCreateMeta("description", "Read Harness Engineering for AI Coding Agents by Leandro Calado, a practical harness engineering book about Claude Code, Cursor, Codex, multi-agent coding workflows, guardrails, tests, CI gates, memory control, tool permissions, and production-ready AI agent systems.");
+    updateOrCreateMeta("og:title", "Harness Engineering Book by Leandro Calado", true);
+    updateOrCreateMeta("og:description", "A practical harness engineering book for AI coding agents, Claude Code, Cursor, Codex, multi-agent workflows, guardrails, tests, CI gates, and production-ready AI systems.", true);
+    updateOrCreateMeta("og:type", "book", true);
+    updateOrCreateMeta("og:url", "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents", true);
+    updateOrCreateMeta("twitter:card", "summary_large_image");
+    updateOrCreateMeta("twitter:title", "Harness Engineering Book by Leandro Calado");
+    updateOrCreateMeta("twitter:description", "A practical harness engineering book for AI coding agents, Claude Code, Cursor, Codex, guardrails, CI gates, and production-ready multi-agent workflows.");
+
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    const originalCanonical = canonical.getAttribute("href");
+    canonical.setAttribute("href", "https://leandrocaladoferreira.com/books/harness-engineering-ai-coding-agents");
 
     return () => {
       document.title = originalTitle;
+      if (originalCanonical) {
+        canonical.setAttribute("href", originalCanonical);
+      } else {
+        canonical.removeAttribute("href");
+      }
     };
   }, []);
 
@@ -73,11 +91,11 @@ export default function HarnessEngineeringBook({ isDark, language, onNavigate }:
   const isPt = language === "pt";
   const t = {
     badge: isPt ? "★ NOVO LANÇAMENTO: MANUAL TÉCNICO" : "★ NEW RELEASE TECHNICAL MANUAL",
-    titleHarness: "Harness Engineering",
-    titleFor: isPt ? "para Agentes de IA" : "for AI Coding Agents",
+    titleHarness: "Harness Engineering Book",
+    titleFor: "for AI Coding Agents",
     subtitle: isPt 
-      ? "Construa fluxos de trabalho de agentes de IA extremamente seguros em produção com Claude Code, Codex e Python, utilizando firewalls de código, testes sistêmicos, gates de CI/CD e travas contra vazamentos ou refatorações indesejadas."
-      : "Build production-safe Claude Code, Codex, and Python agent workflows with guardrails, tests, CI gates, and controls that refuse to ship bad AI-generated code.",
+      ? "Harness Engineering for AI Coding Agents is a practical harness engineering book by Leandro Calado for developers building reliable Claude Code, Cursor, Codex, and multi-agent coding workflows with guardrails, automated tests, CI gates, memory control, tool permissions, and production-ready software delivery."
+      : "Harness Engineering for AI Coding Agents is a practical harness engineering book by Leandro Calado for developers building reliable Claude Code, Cursor, Codex, and multi-agent coding workflows with guardrails, automated tests, CI gates, memory control, tool permissions, and production-ready software delivery.",
     ctaHero: isPt ? "Comprar na Amazon Kindle" : "Get the book on Amazon Kindle",
     microcopy: isPt 
       ? "Pare com o vibe coding. Comece a entregar alterações reais que sua CI realmente confia."
@@ -363,59 +381,43 @@ export default function HarnessEngineeringBook({ isDark, language, onNavigate }:
   const faqItems = [
     {
       q: isPt 
-        ? "Preciso já estar usando agentes de codificação de IA para me beneficiar deste livro?" 
-        : "Do I need to already be using AI coding agents to benefit from this book?",
+        ? "What is a harness engineering book?" 
+        : "What is a harness engineering book?",
       a: isPt 
-        ? "Não. O livro é fácil de aplicar se você já usa Claude Code, assistentes parecidos com o Codex ou ferramentas semelhantes, mas também serve como guia para equipes que estão se preparando para adotar codificação assistida por IA de forma segura." 
-        : "No. The book is easiest to apply if you are already using Claude Code, Codex-style agents, or similar tools, but it also functions as a blueprint for teams preparing to adopt AI coding safely."
+        ? "A harness engineering book explains how to design the control layer around AI agents, including prompts, tools, permissions, memory, tests, CI gates, observability, and production guardrails." 
+        : "A harness engineering book explains how to design the control layer around AI agents, including prompts, tools, permissions, memory, tests, CI gates, observability, and production guardrails."
     },
     {
       q: isPt 
-        ? "O conteúdo é exclusivo para Python e FastAPI?" 
-        : "Is this only for Python and FastAPI?",
+        ? "Is this book about AI coding agents?" 
+        : "Is this book about AI coding agents?",
       a: isPt 
-        ? "A implementação de referência completa usa Python e FastAPI (VaultAPI), mas os conceitos do harness — como AGENTS.md, especificações de tarefas, limites de arquivos, testes e CI — aplicam-se a qualquer linguagem e framework web. Você pode replicar os mesmos padrões no TypeScript, Java, Go ou qualquer stack com testes automatizados e integração contínua." 
-        : "The full reference implementation uses Python and FastAPI (VaultAPI), but the harness concepts—AGENTS.md, specs, boundaries, tests, CI—apply to any language and web framework. You can mirror the same patterns in TypeScript, Java, Go, or any stack with automated tests and CI."
+        ? "Yes. This book is fully dedicated to designing, building, and deploying reliable AI coding agents. It covers the shift from simple prompt-based solutions to robust multi-agent setups that operate securely inside commercial environments." 
+        : "Yes. This book is fully dedicated to designing, building, and deploying reliable AI coding agents. It covers the shift from simple prompt-based solutions to robust multi-agent setups that operate securely inside commercial environments."
     },
     {
       q: isPt 
-        ? "Quanto tempo leva para implementar o harness ensinado no livro?" 
-        : "How much time does it take to implement the harness from this book?",
+        ? "Does the book cover Claude Code and Cursor AI?" 
+        : "Does the book cover Claude Code and Cursor AI?",
       a: isPt 
-        ? "Você pode implementar um harness básico (AGENTS.md + gates fundamentais de CI) em um único fim de semana, adicionando gradualmente especificações de tarefas, limites e verificações de segurança conforme obtém resultados. Capítulos finais também ensinam como empacotar seu harness em modelos reutilizáveis e ofertas de serviços para alavancar seu investimento de tempo." 
-        : "You can implement a minimal harness (AGENTS.md + basic CI gates) in a weekend, then gradually add task specs, boundaries, tests, and security checks as you see results. Later chapters also show how to package your harness into reusable templates and service offers, so the time you invest compounds."
+        ? "Absolutely. The book addresses modern AI coding tools like Claude Code, Cursor AI, and other LLM interfaces, showing how to build automated gates, prompt harnesses, and verification routines to keep their output 100% stable." 
+        : "Absolutely. The book addresses modern AI coding tools like Claude Code, Cursor AI, and other LLM interfaces, showing how to build automated gates, prompt harnesses, and verification routines to keep their output 100% stable."
     },
     {
       q: isPt 
-        ? "Isso vai desacelerar meu time?" 
-        : "Will this slow my team down?",
+        ? "Who is Leandro Calado?" 
+        : "Who is Leandro Calado?",
       a: isPt 
-        ? "No começo, sim — adicionar fluxos de validação sempre gera alguma fricção inicial. Mas em poucas semanas, as equipes reportam muito menos regressões pós-merge, revisões de Pull Requests mais rápidas e menos desgaste com incidentes. A engenharia de harness é como um seguro de velocidade: você troca uma pequena fricção inicial por uma enorme redução de incidentes caros em produção." 
-        : "At first, yes—adding validation always feels feeling friction. But over a few weeks, teams typically see fewer post-merge defects, faster reviews, and less firefighting. Harness engineering is velocity insurance: you trade a small upfront slowdown for a big reduction in expensive production incidents."
+        ? "Leandro Calado is a Senior Data Engineer, AI Systems Architect, and international author of 116 technical books on Amazon KDP. He specializes in designing robust cloud pipelines (AWS/Azure) and building secure multi-agent systems." 
+        : "Leandro Calado is a Senior Data Engineer, AI Systems Architect, and international author of 116 technical books on Amazon KDP. He specializes in designing robust cloud pipelines (AWS/Azure) and building secure multi-agent systems."
     },
     {
       q: isPt 
-        ? "O livro aborda segurança para códigos gerados por IA?" 
-        : "Does the book cover security for AI-generated code?",
+        ? "Is this book for production-ready AI agent workflows?" 
+        : "Is this book for production-ready AI agent workflows?",
       a: isPt 
-        ? "Sim. Há uma seção inteira dedicada a validações de segurança em códigos gerados automatizadamente, incluindo o uso de Bandit, escâneres regex customizados para detecção de padrões perigosos, detecção de segredos/chaves de API e testes de cobertura de autorizações." 
-        : "Yes. There is an entire section on security checks for AI-generated code, including Bandit, custom regex scanners for dangerous patterns, secrets detection, and authorization coverage checks."
-    },
-    {
-      q: isPt 
-        ? "Como isso ajuda consultores ou freelancers?" 
-        : "How does this help consultants or freelancers?",
-      a: isPt 
-        ? "O livro dedica vários tópicos à monetização: estruturação e venda de templates de harness, prestação de serviços de setup de fluxos de IA de alta confiabilidade para empresas e desenho de um modelo de MicroSaaS para empacotagem e instalação de harnesses." 
-        : "The book dedicates multiple chapters to monetization: selling harness templates, offering AI coding workflow setup as a service, and designing a MicroSaaS that installs harnesses for other teams."
-    },
-    {
-      q: isPt 
-        ? "A leitura é muito teórica?" 
-        : "Is this book theoretical?",
-      a: isPt 
-        ? "Não. Praticamente todos os capítulos incluem trechos reais de código, configurações, arquivos YAML e scripts práticos extraídos de um sistema funcional de referência. Você é incentivado a copiar, adaptar e implantar esses padrões em seus próprios repositórios." 
-        : "No. Almost every chapter contains concrete code snippets, scripts, configs, and examples drawn from a working reference system. You are encouraged to copy, adapt, and extend these patterns on your own repositories."
+        ? "Yes. It moves beyond simple prototypes and 'vibe coding' to explain production guardrails, validation loops, code differential gates, and sandboxing architectures that make AI code delivery safe for real-world companies." 
+        : "Yes. It moves beyond simple prototypes and 'vibe coding' to explain production guardrails, validation loops, code differential gates, and sandboxing architectures that make AI code delivery safe for real-world companies."
     }
   ];
 
@@ -433,11 +435,8 @@ export default function HarnessEngineeringBook({ isDark, language, onNavigate }:
             <span id="hero-badge" className="text-[#F27D26] font-bold text-xs uppercase tracking-widest block font-mono">
               {t.badge}
             </span>
-            <h1 id="hero-h1" className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight leading-tight italic font-serif">
-              {t.titleHarness} <br />
-              <span className="text-[#2563EB] not-italic font-sans font-extrabold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
-                {t.titleFor}
-              </span>
+            <h1 id="hero-h1" className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight leading-tight italic font-serif text-white">
+              Harness Engineering Book for AI Coding Agents
             </h1>
             <p id="hero-subheadline" className="text-lg md:text-xl leading-relaxed opacity-90 max-w-2xl font-light">
               {t.subtitle}
