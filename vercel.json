@@ -3,7 +3,47 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!about|start-here|books|articles|consulting|ai-agents|data-engineering|safe-ai|automation|assets|favicon.*|sitemap.*|robots.*).*)",
+      "source": "/books/harness-engineering-ai-coding-agents",
+      "destination": "/books/harness-engineering-ai-coding-agents/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/start-here",
+      "destination": "/start-here/index.html"
+    },
+    {
+      "source": "/books",
+      "destination": "/books/index.html"
+    },
+    {
+      "source": "/articles",
+      "destination": "/articles/index.html"
+    },
+    {
+      "source": "/consulting",
+      "destination": "/consulting/index.html"
+    },
+    {
+      "source": "/ai-agents",
+      "destination": "/ai-agents/index.html"
+    },
+    {
+      "source": "/data-engineering",
+      "destination": "/data-engineering/index.html"
+    },
+    {
+      "source": "/safe-ai",
+      "destination": "/safe-ai/index.html"
+    },
+    {
+      "source": "/automation",
+      "destination": "/automation/index.html"
+    },
+    {
+      "source": "/((?!assets|favicon.*|sitemap.*|robots.*).*)",
       "destination": "/index.html"
     }
   ],
