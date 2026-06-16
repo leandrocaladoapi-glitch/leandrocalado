@@ -729,7 +729,16 @@ function run() {
         fs.mkdirSync(targetDir, { recursive: true });
       }
       fs.writeFileSync(path.join(targetDir, "index.html"), rewrittenHtml, "utf-8");
-      console.log(`Pre-rendered route: ${route.path}`);
+
+      // Also write flat HTML output at dist/[route].html for flat clean-URL static routing platforms (like Vercel)
+      const flatFilePath = path.join(distDir, `${route.path}.html`);
+      const parentDir = path.dirname(flatFilePath);
+      if (!fs.existsSync(parentDir)) {
+        fs.mkdirSync(parentDir, { recursive: true });
+      }
+      fs.writeFileSync(flatFilePath, rewrittenHtml, "utf-8");
+
+      console.log(`Pre-rendered route: ${route.path} (written to nested index.html and flat html file)`);
     }
   });
 

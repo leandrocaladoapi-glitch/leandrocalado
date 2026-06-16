@@ -1,49 +1,54 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     {
       "source": "/books/harness-engineering-ai-coding-agents",
-      "destination": "/books/harness-engineering-ai-coding-agents/index.html"
+      "destination": "/books/harness-engineering-ai-coding-agents.html"
+    },
+    {
+      "source": "/books/harness-engineering-ai-coding-agents/",
+      "destination": "/books/harness-engineering-ai-coding-agents.html"
     },
     {
       "source": "/about",
-      "destination": "/about/index.html"
+      "destination": "/about.html"
     },
     {
       "source": "/start-here",
-      "destination": "/start-here/index.html"
+      "destination": "/start-here.html"
     },
     {
       "source": "/books",
-      "destination": "/books/index.html"
+      "destination": "/books.html"
     },
     {
       "source": "/articles",
-      "destination": "/articles/index.html"
+      "destination": "/articles.html"
     },
     {
       "source": "/consulting",
-      "destination": "/consulting/index.html"
+      "destination": "/consulting.html"
     },
     {
       "source": "/ai-agents",
-      "destination": "/ai-agents/index.html"
+      "destination": "/ai-agents.html"
     },
     {
       "source": "/data-engineering",
-      "destination": "/data-engineering/index.html"
+      "destination": "/data-engineering.html"
     },
     {
       "source": "/safe-ai",
-      "destination": "/safe-ai/index.html"
+      "destination": "/safe-ai.html"
     },
     {
       "source": "/automation",
-      "destination": "/automation/index.html"
+      "destination": "/automation.html"
     },
     {
-      "source": "/((?!assets|favicon.*|sitemap.*|robots.*).*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
