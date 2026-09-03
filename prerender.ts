@@ -2,6 +2,97 @@ import * as fs from "fs";
 import * as path from "path";
 import { booksData } from "./src/data";
 import { articlesData } from "./src/articlesData";
+import { AI_CRIME_BASE_PATH, AI_CRIME_BOOK_URL, aiCrimeCases } from "./src/aiCrimeData";
+
+const escapeHtml = (value: string) => value
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/\"/g, "&quot;");
+
+const renderCrimeBookCTA = () => `
+  <aside class="border border-red-500/25 bg-[#111] p-8 mt-12">
+    <p class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">The AI Crime Files • Case 001</p>
+    <h2 class="font-serif text-3xl font-light italic text-white mt-2">Nobody Told It to Lie</h2>
+    <p class="text-sm leading-relaxed text-gray-400 mt-3 max-w-2xl">The documented story of the rogue AI agent that invented two humans and tried to plant malware on GitHub.</p>
+    <a href="${AI_CRIME_BOOK_URL}" target="_blank" rel="noopener noreferrer sponsored" class="inline-block bg-red-600 px-5 py-3 mt-5 font-mono text-[10px] font-bold uppercase tracking-widest text-white">Read on Amazon</a>
+  </aside>
+`;
+
+const crimeIndexRoute = {
+  path: AI_CRIME_BASE_PATH,
+  title: "The AI Crime Files | Documented Crimes Executed by AI Agents",
+  description: "Real cases of criminal conduct executed by autonomous AI agents, documented with primary sources, exact actions, autonomy levels and legal status.",
+  canonical: `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}`,
+  schemaType: "AICrimeIndex",
+  htmlContent: `
+    <section class="bg-[#090909] text-white px-6 py-24">
+      <div class="max-w-6xl mx-auto">
+        <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-red-400">Documented autonomous AI crime</span>
+        <h1 class="font-serif text-6xl font-light italic leading-tight mt-5">The AI Crime Files</h1>
+        <p class="text-lg leading-relaxed text-gray-400 mt-6 max-w-2xl">Real systems. Real victims. Real evidence. Investigations into criminal acts executed by AI agents with the power to scan, deceive, steal and act.</p>
+        <div class="grid md:grid-cols-3 gap-6 mt-14">
+          ${aiCrimeCases.map((item) => `
+            <article class="border border-white/10 bg-[#101010] p-6">
+              <span class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">Case ${item.caseNumber}</span>
+              <h2 class="font-serif text-2xl font-light italic leading-tight text-white mt-4">${escapeHtml(item.shortTitle)}</h2>
+              <p class="text-xs leading-relaxed text-gray-400 mt-3">${escapeHtml(item.excerpt)}</p>
+              <a href="${AI_CRIME_BASE_PATH}/${item.slug}" class="inline-block font-mono text-[9px] font-bold uppercase tracking-widest text-red-400 mt-6">Open the evidence file &rarr;</a>
+            </article>
+          `).join("")}
+        </div>
+        <section class="border-y border-white/10 py-12 mt-16">
+          <h2 class="font-serif text-3xl font-light italic text-white">What earns a place in this archive</h2>
+          <p class="text-sm leading-relaxed text-gray-400 mt-4 max-w-3xl">Every file requires a named incident, accountable sourcing, autonomous action inside a live system and conduct that maps to a specific criminal act. Each investigation states what is proven, alleged, unsuccessful or uncharged.</p>
+        </section>
+        ${renderCrimeBookCTA()}
+      </div>
+    </section>
+  `,
+};
+
+const crimeArticleRoutes = aiCrimeCases.map((item) => ({
+  path: `${AI_CRIME_BASE_PATH}/${item.slug}`,
+  title: `${item.title} | The AI Crime Files`,
+  description: item.excerpt,
+  canonical: `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/${item.slug}`,
+  schemaType: `AICrime:${item.slug}`,
+  htmlContent: `
+    <article class="bg-[#090909] text-white px-6 py-20">
+      <div class="max-w-4xl mx-auto">
+        <a href="${AI_CRIME_BASE_PATH}" class="font-mono text-[9px] font-bold uppercase tracking-widest text-gray-500">&larr; All case files</a>
+        <div class="mt-10"><span class="bg-red-600 px-3 py-2 font-mono text-[9px] font-bold uppercase tracking-widest">Case ${item.caseNumber}</span></div>
+        <p class="font-mono text-xs uppercase tracking-widest text-gray-500 mt-7">${escapeHtml(item.kicker)}</p>
+        <h1 class="font-serif text-5xl font-light italic leading-tight mt-4">${escapeHtml(item.title)}</h1>
+        <p class="text-lg leading-relaxed text-gray-400 mt-6">${escapeHtml(item.excerpt)}</p>
+        <dl class="grid sm:grid-cols-3 border border-white/10 mt-10">
+          <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">Criminal conduct</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.criminalConduct)}</dd></div>
+          <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">Agent autonomy</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.autonomy)}</dd></div>
+          <div class="p-5"><dt class="font-mono text-[8px] uppercase text-gray-600">Legal status</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.legalStatus)}</dd></div>
+        </dl>
+        <div class="mt-14">
+          ${item.sections.map((section, index) => `
+            <section class="mb-12">
+              <span class="font-mono text-[9px] font-bold text-red-500">0${index + 1}</span>
+              <h2 class="font-serif text-3xl font-light italic text-white mt-2">${escapeHtml(section.heading)}</h2>
+              <div class="space-y-5 text-[15px] leading-7 text-gray-300 mt-5">
+                ${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+                ${section.bullets ? `<ul class="border-l border-red-500/40 pl-5 space-y-3 text-sm text-gray-400">${section.bullets.map((bullet) => `<li>${escapeHtml(bullet)}</li>`).join("")}</ul>` : ""}
+              </div>
+            </section>
+          `).join("")}
+        </div>
+        <section class="border-t border-white/10 pt-10">
+          <h2 class="font-serif text-3xl font-light italic text-white">Evidence desk</h2>
+          <div class="space-y-3 mt-6">
+            ${item.sources.map((source) => `<a href="${source.url}" target="_blank" rel="noopener noreferrer" class="block border border-white/10 p-4 text-sm text-gray-300">${escapeHtml(source.label)} <span class="text-red-400">• ${escapeHtml(source.publisher)} • ${source.kind} source</span></a>`).join("")}
+          </div>
+        </section>
+        ${renderCrimeBookCTA()}
+      </div>
+    </article>
+  `,
+}));
 
 // Absolute routes to pre-render
 const routes = [
@@ -370,7 +461,9 @@ const routes = [
         </div>
       </section>
     `
-  }
+  },
+  crimeIndexRoute,
+  ...crimeArticleRoutes
 ];
 
 function generatePersonSchema() {
@@ -491,6 +584,75 @@ function generateArticlesSchema() {
   };
 }
 
+function generateAICrimeSchema(schemaType: string) {
+  const person = generatePersonSchema();
+  const article = schemaType.startsWith("AICrime:")
+    ? aiCrimeCases.find((item) => item.slug === schemaType.slice("AICrime:".length))
+    : undefined;
+
+  if (!article) {
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        person,
+        {
+          "@type": "CollectionPage",
+          "@id": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/#collection`,
+          "url": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}`,
+          "name": "The AI Crime Files",
+          "description": "Documented cases of criminal conduct executed by autonomous AI agents, with primary sources and precise legal status.",
+          "author": { "@type": "Person", "name": "Leandro Calado" },
+          "hasPart": aiCrimeCases.map((item) => ({
+            "@type": "Article",
+            "headline": item.title,
+            "url": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/${item.slug}`,
+          })),
+        },
+        {
+          "@type": "Book",
+          "name": "Nobody Told It to Lie",
+          "author": { "@type": "Person", "name": "Leandro Calado" },
+          "asin": "B0HHHDL9TB",
+          "url": AI_CRIME_BOOK_URL,
+          "inLanguage": "en",
+        },
+      ],
+    };
+  }
+
+  const url = `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/${article.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      person,
+      {
+        "@type": "Article",
+        "@id": `${url}/#article`,
+        "url": url,
+        "headline": article.title,
+        "description": article.excerpt,
+        "datePublished": "2026-09-03",
+        "dateModified": "2026-09-03",
+        "inLanguage": "en",
+        "author": { "@type": "Person", "name": "Leandro Calado", "url": "https://leandrocaladoferreira.com" },
+        "publisher": { "@type": "Organization", "name": "LCF Consulting", "url": "https://leandrocaladoferreira.com" },
+        "articleSection": "The AI Crime Files",
+        "keywords": article.keywords.join(", "),
+        "citation": article.sources.map((source) => source.url),
+        "about": [article.criminalConduct, article.autonomy],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://leandrocaladoferreira.com/" },
+          { "@type": "ListItem", "position": 2, "name": "The AI Crime Files", "item": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}` },
+          { "@type": "ListItem", "position": 3, "name": `Case ${article.caseNumber}`, "item": url },
+        ],
+      },
+    ],
+  };
+}
+
 function generateSchemaForRoute(schemaType: string) {
   const person = generatePersonSchema();
   if (schemaType === "HarnessBook") {
@@ -565,6 +727,9 @@ function generateSchemaForRoute(schemaType: string) {
   }
   if (schemaType === "Articles") {
     return JSON.stringify(generateArticlesSchema(), null, 2);
+  }
+  if (schemaType === "AICrimeIndex" || schemaType.startsWith("AICrime:")) {
+    return JSON.stringify(generateAICrimeSchema(schemaType), null, 2);
   }
 
   // General WebPage schemas pointing back to Leandro
@@ -662,6 +827,7 @@ function run() {
             <a href="/about" class="text-[10px] tracking-[0.2em] uppercase text-gray-400 hover:text-white font-medium">SOBRE</a>
             <a href="/start-here" class="text-[10px] tracking-[0.2em] uppercase text-gray-400 hover:text-white font-medium">ECOSSISTEMA</a>
             <a href="/books" class="text-[10px] tracking-[0.2em] uppercase text-gray-400 hover:text-white font-medium">LIVROS</a>
+            <a href="/ai-crime-files" class="text-[10px] tracking-[0.2em] uppercase text-red-400 hover:text-red-300 font-medium">AI CRIME FILES</a>
             <a href="/articles" class="text-[10px] tracking-[0.2em] uppercase text-gray-400 hover:text-white font-medium">ARTIGOS</a>
             <a href="/consulting" class="text-[10px] tracking-[0.2em] uppercase text-gray-400 hover:text-white font-medium">CONSULTORIA</a>
           </nav>
@@ -684,6 +850,7 @@ function run() {
               <a href="/about" class="hover:text-white">SOBRE</a>
               <a href="/start-here" class="hover:text-white">ECOSSISTEMA</a>
               <a href="/books" class="hover:text-white">LIVROS</a>
+              <a href="/ai-crime-files" class="hover:text-red-400">AI CRIME FILES</a>
               <a href="/articles" class="hover:text-white">ARTIGOS</a>
               <a href="/consulting" class="hover:text-white">CONSULTORIA</a>
               <a href="/start-here" class="hover:text-white">COMECE POR AQUI</a>

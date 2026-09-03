@@ -29,6 +29,7 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage, cur
     { label: t.about, href: "/about", path: "/about" },
     { label: t.ecosystem, href: "/start-here", path: "/start-here" },
     { label: t.books, href: "/books", path: "/books" },
+    { label: "AI Crime Files", href: "/ai-crime-files", path: "/ai-crime-files" },
     { label: t.articles, href: "/articles", path: "/articles" },
     { label: language === "pt" ? "Consultoria" : "Consulting", href: "/consulting", path: "/consulting" },
   ];
@@ -69,7 +70,7 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage, cur
         </a>
 
         {/* Desktop Navigation inline with custom font styling */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -83,7 +84,7 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage, cur
                 isDark
                   ? "text-[#8E8E8E] hover:text-[#F5F5F0]"
                   : "text-[#555] hover:text-[#0A0A0A]"
-              } font-medium ${currentPath === link.path ? "text-[#F27D26] font-bold" : ""}`}
+              } font-medium ${currentPath === link.path || (link.path === "/ai-crime-files" && currentPath.startsWith("/ai-crime-files/")) ? "text-[#F27D26] font-bold" : ""}`}
             >
               {link.label}
             </a>
