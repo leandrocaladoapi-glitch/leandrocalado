@@ -24,6 +24,12 @@ export interface AICrimeCase {
   autonomy: string;
   legalStatus: string;
   accent: string;
+  featuredImage?: {
+    url: string;
+    width: number;
+    height: number;
+    type: string;
+  };
   metrics: { value: string; label: string }[];
   sections: AICrimeSection[];
   sources: AICrimeSource[];
@@ -314,6 +320,12 @@ export const aiCrimeCases: AICrimeCase[] = [
     autonomy: "Assessed end-to-end execution across more than 600 adaptive payloads",
     legalStatus: "Sysdig assessment. The victim and operator are undisclosed, and no public criminal charge is reported.",
     accent: "#e11d48",
+    featuredImage: {
+      url: "/images/ai-crime-files/jadepuffer-autonomous-ai-ransomware.webp",
+      width: 1280,
+      height: 720,
+      type: "image/webp",
+    },
     metrics: [
       { value: "1,342", label: "configurations encrypted" },
       { value: "600+", label: "purposeful payloads" },

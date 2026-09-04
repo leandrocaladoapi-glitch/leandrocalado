@@ -198,6 +198,18 @@ function CrimeArticle({ item, language, onNavigate }: { item: AICrimeCase; langu
             <span>{t.published} {item.published}</span>
             <span>{t.incident} {item.eventDate}</span>
           </div>
+          {item.featuredImage && (
+            <figure className="mt-10 overflow-hidden border border-white/10 bg-[#101010]">
+              <img
+                src={item.featuredImage.url}
+                alt={item.title}
+                width={item.featuredImage.width}
+                height={item.featuredImage.height}
+                className="aspect-video w-full object-cover"
+                fetchPriority="high"
+              />
+            </figure>
+          )}
         </div>
       </header>
 

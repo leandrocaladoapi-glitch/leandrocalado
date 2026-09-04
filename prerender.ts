@@ -82,6 +82,14 @@ const crimeArticleRoutes = crimeLanguages.flatMap((language) => aiCrimeCases.map
   description: item.excerpt,
   canonical: `https://leandrocaladoferreira.com${routePath}`,
   schemaType: `AICrime:${language}:${item.slug}`,
+  ogType: "article",
+  image: item.featuredImage ? {
+    url: `https://leandrocaladoferreira.com${item.featuredImage.url}`,
+    width: item.featuredImage.width,
+    height: item.featuredImage.height,
+    type: item.featuredImage.type,
+    alt: item.title,
+  } : undefined,
   language,
   alternates: crimeAlternates(basePath),
   htmlContent: `
@@ -92,6 +100,7 @@ const crimeArticleRoutes = crimeLanguages.flatMap((language) => aiCrimeCases.map
         <p class="font-mono text-xs uppercase tracking-widest text-gray-500 mt-7">${escapeHtml(item.kicker)}</p>
         <h1 class="font-serif text-5xl font-light italic leading-tight mt-4">${escapeHtml(item.title)}</h1>
         <p class="text-lg leading-relaxed text-gray-400 mt-6">${escapeHtml(item.excerpt)}</p>
+        ${item.featuredImage ? `<figure class="mt-10 overflow-hidden border border-white/10 bg-[#101010]"><img src="${item.featuredImage.url}" alt="${escapeHtml(item.title)}" width="${item.featuredImage.width}" height="${item.featuredImage.height}" fetchpriority="high" class="aspect-video w-full object-cover" /></figure>` : ""}
         <dl class="grid sm:grid-cols-3 border border-white/10 mt-10">
           <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">${escapeHtml(t.criminalConduct)}</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.criminalConduct)}</dd></div>
           <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">${escapeHtml(t.autonomy)}</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.autonomy)}</dd></div>
@@ -671,11 +680,19 @@ function generateAICrimeSchema(schemaType: string) {
     "@graph": [
       person,
       {
-        "@type": "Article",
+        "@type": "NewsArticle",
         "@id": `${url}/#article`,
         "url": url,
         "headline": article.title,
         "description": article.excerpt,
+        ...(article.featuredImage ? {
+          "image": {
+            "@type": "ImageObject",
+            "url": `https://leandrocaladoferreira.com${article.featuredImage.url}`,
+            "width": article.featuredImage.width,
+            "height": article.featuredImage.height,
+          },
+        } : {}),
         "datePublished": articlePublishedIso,
         "dateModified": articlePublishedIso,
         "inLanguage": language,
@@ -854,6 +871,32 @@ function run() {
       /<meta property="og:url" content=".*?" \/>/,
       `<meta property="og:url" content="${route.canonical}" />`
     );
+    if ("ogType" in route && route.ogType) {
+      rewrittenHtml = rewrittenHtml.replace(
+        /<meta property="og:type" content=".*?" \/>/,
+        `<meta property="og:type" content="${route.ogType}" />`
+      );
+    }
+    const routeImage = "image" in route
+      ? route.image as { url: string; width: number; height: number; type: string; alt: string } | undefined
+      : undefined;
+    if (routeImage) {
+      const imageMeta = [
+        `<meta property="og:image" content="${routeImage.url}" />`,
+        `<meta property="og:image:secure_url" content="${routeImage.url}" />`,
+        `<meta property="og:image:type" content="${routeImage.type}" />`,
+        `<meta property="og:image:width" content="${routeImage.width}" />`,
+        `<meta property="og:image:height" content="${routeImage.height}" />`,
+        `<meta property="og:image:alt" content="${escapeHtml(routeImage.alt)}" />`,
+        `<meta name="twitter:image" content="${routeImage.url}" />`,
+        `<meta name="twitter:image:alt" content="${escapeHtml(routeImage.alt)}" />`,
+      ].join("\n    ");
+      rewrittenHtml = rewrittenHtml.replace("</head>", `    ${imageMeta}\n  </head>`);
+      rewrittenHtml = rewrittenHtml.replace(
+        /<meta name="twitter:card" content=".*?" \/>/,
+        `<meta name="twitter:card" content="summary_large_image" />`
+      );
+    }
 
     // 5. Update Twitter Card values
     rewrittenHtml = rewrittenHtml.replace(
