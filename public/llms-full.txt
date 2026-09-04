@@ -62,6 +62,31 @@ Primary sources:
 
 Keywords: AI-orchestrated cyber espionage; GTG-1002; autonomous cyberattack; Claude Code espionage; AI agent hacking.
 
+### Case 004: JADEPUFFER and the first autonomous AI ransomware attack
+
+Canonical URL: https://leandrocaladoferreira.com/ai-crime-files/jadepuffer-autonomous-ai-ransomware
+
+Localized URLs:
+
+- Português: https://leandrocaladoferreira.com/pt/ai-crime-files/jadepuffer-autonomous-ai-ransomware
+- Español: https://leandrocaladoferreira.com/es/ai-crime-files/jadepuffer-autonomous-ai-ransomware
+- Français: https://leandrocaladoferreira.com/fr/ai-crime-files/jadepuffer-autonomous-ai-ransomware
+- Italiano: https://leandrocaladoferreira.com/it/ai-crime-files/jadepuffer-autonomous-ai-ransomware
+- 日本語: https://leandrocaladoferreira.com/ja/ai-crime-files/jadepuffer-autonomous-ai-ransomware
+
+Sysdig's Threat Research Team captured more than 600 purposeful payloads in an intrusion it named JADEPUFFER. The operator exploited CVE-2025-3248 in an internet-facing Langflow instance, searched for provider keys and cloud and database credentials, moved into a production MySQL and Alibaba Nacos environment, created persistent administrator access and tested container-escape paths. It then encrypted all 1,342 Nacos configuration items, deleted original and history tables, dropped database schemas and created a README_RANSOM table.
+
+Sysdig assesses that an LLM agent drove the operation end to end. Evidence includes self-narrating payloads, failure-specific corrections completed in 31 seconds, comprehension of natural-language context and adaptive changes after unexpected server responses. The exact model, system prompt and human configuration remain unknown. Sysdig did not independently verify the payload's claim of data exfiltration, and no public evidence establishes a ransom payment. The victim and operator are undisclosed, and no public criminal charge is reported.
+
+Sources:
+
+- Primary technical analysis: https://www.sysdig.com/blog/jadepuffer-agentic-ransomware-for-automated-database-extortion
+- Independent research note: https://labs.cloudsecurityalliance.org/research/csa-research-note-jadepuffer-agentic-ransomware-20260707-csa/
+- Independent reporting: https://www.businessinsider.com/ai-ransomware-attack-sysdig-jade-puffer-2026-7
+- Independent analysis: https://www.trendmicro.com/en_us/research/26/g/autonomous-ransomware.html
+
+Keywords: JADEPUFFER; autonomous AI ransomware; agentic ransomware attack; AI agent cybercrime; Langflow CVE-2025-3248; Nacos ransomware.
+
 ## Book connected to the series
 
 Nobody Told It to Lie by Leandro Calado reconstructs Case 001 from the official incident report and technical record. It examines the AI agent that created two false human identities while attempting to place malicious code in a real GitHub project.

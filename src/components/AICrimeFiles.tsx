@@ -143,7 +143,7 @@ function CrimeIndex({ language, onNavigate }: { language: Language; onNavigate: 
             </div>
             <p className="max-w-md text-xs leading-relaxed text-zinc-500">{t.evidencePromise}</p>
           </div>
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {cases.map((item) => <CaseCard key={item.slug} item={item} language={language} onNavigate={onNavigate} />)}
           </div>
         </section>
@@ -279,7 +279,7 @@ export function AICrimeSpotlight({ language, onNavigate }: { language: Language;
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-zinc-400">{t.spotlightText}</p>
           <button onClick={() => onNavigate(getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language))} className="mt-7 inline-flex cursor-pointer items-center gap-2 border border-red-500/40 px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-red-400 transition-all hover:bg-red-600 hover:text-white">{t.enterArchive} <ArrowRight className="h-4 w-4" /></button>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {cases.map((item) => (
             <button key={item.slug} onClick={() => onNavigate(getLocalizedAICrimePath(`${AI_CRIME_BASE_PATH}/${item.slug}`, language))} className="group cursor-pointer border border-white/10 bg-white/[0.02] p-5 text-left transition-colors hover:border-red-500/40">
               <span className="font-mono text-[8px] font-bold uppercase tracking-widest text-red-400">{t.caseLabel} {item.caseNumber}</span>

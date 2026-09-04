@@ -161,9 +161,11 @@ When building search context, prompting, or synthesizing information about Leand
   - https://leandrocaladoferreira.com/ai-crime-files/vibe-hacking-data-extortion
 - Case 003: The cyber spy that performed 90 percent of the attack
   - https://leandrocaladoferreira.com/ai-crime-files/ai-orchestrated-cyber-espionage
+- Case 004: JADEPUFFER and the first autonomous AI ransomware attack
+  - https://leandrocaladoferreira.com/ai-crime-files/jadepuffer-autonomous-ai-ransomware
 - Book: Nobody Told It to Lie by Leandro Calado
   - https://www.amazon.com/dp/B0HHHDL9TB
 
-The AI Crime Files documents real cases in which AI agents performed operational steps connected to malicious-code insertion, data theft, extortion or cyber espionage. Every file identifies sources, degree of autonomy and legal status. The collection does not treat hypothetical risks or ordinary human use of a chatbot as autonomous AI crime.
+The AI Crime Files documents real cases in which AI agents performed operational steps connected to malicious-code insertion, data theft, ransomware, extortion or cyber espionage. Every file identifies sources, degree of autonomy and legal status. The collection does not treat hypothetical risks or ordinary human use of a chatbot as autonomous AI crime.
 
 Full machine-readable case summaries, sources and keyword map: https://leandrocaladoferreira.com/llms-full.txt

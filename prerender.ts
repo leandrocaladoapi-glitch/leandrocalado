@@ -48,7 +48,7 @@ const crimeIndexRoutes = crimeLanguages.map((language) => {
         <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-red-400">${escapeHtml(t.heroEyebrow)}</span>
         <h1 class="font-serif text-6xl font-light italic leading-tight mt-5">${escapeHtml(t.archiveName)}</h1>
         <p class="text-lg leading-relaxed text-gray-400 mt-6 max-w-2xl">${escapeHtml(t.heroDescription)}</p>
-        <div class="grid md:grid-cols-3 gap-6 mt-14">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-14">
           ${cases.map((item) => `
             <article class="border border-white/10 bg-[#101010] p-6">
               <span class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">${escapeHtml(t.caseLabel)} ${item.caseNumber}</span>
@@ -620,6 +620,9 @@ function generateAICrimeSchema(schemaType: string) {
     ? aiCrimeCases.find((item) => item.slug === parts[2])
     : undefined;
   const article = baseArticle ? localizeAICrimeCase(baseArticle, language) : undefined;
+  const articlePublishedIso = baseArticle
+    ? new Date(`${baseArticle.published} UTC`).toISOString().slice(0, 10)
+    : "2026-09-03";
   const t = aiCrimeUi[language];
   const archivePath = getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language);
 
@@ -673,8 +676,8 @@ function generateAICrimeSchema(schemaType: string) {
         "url": url,
         "headline": article.title,
         "description": article.excerpt,
-        "datePublished": "2026-09-03",
-        "dateModified": "2026-09-03",
+        "datePublished": articlePublishedIso,
+        "dateModified": articlePublishedIso,
         "inLanguage": language,
         "author": { "@type": "Person", "name": "Leandro Calado", "url": "https://leandrocaladoferreira.com" },
         "publisher": { "@type": "Organization", "name": "LCF Consulting", "url": "https://leandrocaladoferreira.com" },
