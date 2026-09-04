@@ -31,6 +31,8 @@ export interface AICrimeCase {
 }
 
 export const AI_CRIME_BASE_PATH = "/ai-crime-files";
+export const AI_CRIME_LANGUAGES = ["en", "pt", "es", "fr", "it", "ja"] as const;
+export type AICrimeLanguage = (typeof AI_CRIME_LANGUAGES)[number];
 export const AI_CRIME_BOOK_URL = "https://www.amazon.com/dp/B0HHHDL9TB";
 export const AI_CRIME_BOOK_COVER = "https://m.media-amazon.com/images/I/71LI6dsbecL._SY466_.jpg";
 
@@ -301,6 +303,23 @@ export const aiCrimeCases: AICrimeCase[] = [
 ];
 
 export function getAICrimeCase(path: string) {
-  const normalized = path.toLowerCase().replace(/\/$/, "");
+  const normalized = normalizeAICrimePath(path);
   return aiCrimeCases.find((item) => `${AI_CRIME_BASE_PATH}/${item.slug}` === normalized);
+}
+
+export function getAICrimeLanguageFromPath(path: string): AICrimeLanguage | undefined {
+  const firstSegment = path.toLowerCase().split("/").filter(Boolean)[0];
+  return AI_CRIME_LANGUAGES.find((language) => language !== "en" && language === firstSegment);
+}
+
+export function normalizeAICrimePath(path: string) {
+  const cleanPath = path.toLowerCase().replace(/\/$/, "") || "/";
+  const language = getAICrimeLanguageFromPath(cleanPath);
+  return language ? cleanPath.replace(new RegExp(`^/${language}(?=/|$)`), "") || "/" : cleanPath;
+}
+
+export function getLocalizedAICrimePath(path: string, language: AICrimeLanguage) {
+  const normalized = normalizeAICrimePath(path);
+  if (!normalized.startsWith(AI_CRIME_BASE_PATH)) return path;
+  return language === "en" ? normalized : `/${language}${normalized}`;
 }

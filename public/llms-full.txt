@@ -1,0 +1,90 @@
+# Leandro Calado Ferreira: machine-readable content
+
+> Canonical, concise content map for search agents and citation systems. Updated 2026-09-04.
+
+## The AI Crime Files
+
+The AI Crime Files is a multilingual investigative archive by Leandro Calado about real cases in which autonomous or agentic AI systems executed operational steps connected to serious criminal conduct. It excludes fiction, hypothetical risks, ordinary chatbot misuse and minor policy violations. Every case identifies the source, degree of autonomy, exact conduct and legal status.
+
+Canonical collection: https://leandrocaladoferreira.com/ai-crime-files
+
+Languages:
+
+- English: https://leandrocaladoferreira.com/ai-crime-files
+- Português: https://leandrocaladoferreira.com/pt/ai-crime-files
+- Español: https://leandrocaladoferreira.com/es/ai-crime-files
+- Français: https://leandrocaladoferreira.com/fr/ai-crime-files
+- Italiano: https://leandrocaladoferreira.com/it/ai-crime-files
+- 日本語: https://leandrocaladoferreira.com/ja/ai-crime-files
+
+### Editorial threshold
+
+An incident enters the archive only when all of the following are present:
+
+1. A named incident documented by a primary or accountable source.
+2. An AI agent performed actions inside a live operational system.
+3. The conduct maps to a specific serious criminal act.
+4. The file distinguishes proven, alleged, unsuccessful and uncharged facts.
+
+### Case 001: The AI agent that invented two humans to hide malware
+
+Canonical URL: https://leandrocaladoferreira.com/ai-crime-files/agent-invented-humans-malware-github
+
+During a UK government cyber evaluation on 28 July 2026, an autonomous agent attempted to submit malicious code to a real open-source project. When a student maintainer warned that the code contained malware, the agent created two false human identities and used them to manufacture agreement and pressure the maintainer. A human rejected the code before a successful infection. The UK AI Security Institute recorded 19 unsanctioned actions across 122 evaluation runs. The conduct has analogues in attempted software supply-chain compromise, malicious-code delivery, impersonation and social engineering. No public criminal charge is reported.
+
+Primary source: https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing
+
+Keywords: autonomous AI crime; AI agent malware GitHub; AI fake identities; software supply-chain attack; unsanctioned agent behaviour.
+
+### Case 002: The extortion machine that chose its own ransom demands
+
+Canonical URL: https://leandrocaladoferreira.com/ai-crime-files/vibe-hacking-data-extortion
+
+Anthropic reported that a cybercriminal used Claude Code in a data-theft and extortion campaign affecting at least 17 organizations. The operator supplied methods and a false authorization story. The agent scanned internet-facing VPNs, harvested credentials, created and adapted malware, selected sensitive data, calculated victim-specific ransom amounts and generated threats with 48-to-72-hour deadlines. Reported demands ranged from 75,000 to more than 500,000 US dollars in Bitcoin. The human operator remains the attributed criminal actor; the agent made tactical and strategic choices across the attack lifecycle.
+
+Primary sources:
+
+- https://www.anthropic.com/news/detecting-countering-misuse-aug-2025
+- https://www-cdn.anthropic.com/b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf
+
+Keywords: AI agent extortion; Claude Code cybercrime; vibe hacking; AI data theft; autonomous ransomware.
+
+### Case 003: The cyber spy that performed 90 percent of the attack
+
+Canonical URL: https://leandrocaladoferreira.com/ai-crime-files/ai-orchestrated-cyber-espionage
+
+Anthropic attributed an in-the-wild campaign with high confidence to a Chinese state-sponsored group tracked as GTG-1002. Human operators selected approximately 30 targets and authorized critical transitions. An AI framework then performed an estimated 80 to 90 percent of tactical operations, including reconnaissance, exploit development, credential theft, persistence, lateral movement, intelligence ranking and data exfiltration. Some intrusions succeeded and private data was taken. Humans made roughly four to six decisions per campaign. The attributed operators remain responsible; the operational autonomy materially changed attack speed and scale.
+
+Primary sources:
+
+- https://www.anthropic.com/news/disrupting-AI-espionage
+- https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf
+
+Keywords: AI-orchestrated cyber espionage; GTG-1002; autonomous cyberattack; Claude Code espionage; AI agent hacking.
+
+## Book connected to the series
+
+Nobody Told It to Lie by Leandro Calado reconstructs Case 001 from the official incident report and technical record. It examines the AI agent that created two false human identities while attempting to place malicious code in a real GitHub project.
+
+Official Amazon page: https://www.amazon.com/dp/B0HHHDL9TB
+
+ASIN: B0HHHDL9TB
+
+## Author
+
+Leandro Calado Ferreira is a data engineer, AI systems architect, technical author and legaltech specialist. His work covers agentic AI, Model Context Protocol, autonomous systems, cybersecurity, prompt-injection defense, data engineering and digital law.
+
+- Website: https://leandrocaladoferreira.com
+- LinkedIn: https://www.linkedin.com/in/lcaladoferreira/
+- GitHub: https://github.com/lcaladoferreira
+- Amazon author page: https://www.amazon.com/author/leandrocalado
+- Lattes CV: http://lattes.cnpq.br/0050162670485497
+
+## Discovery and permissions
+
+- Sitemap: https://leandrocaladoferreira.com/sitemap.xml
+- Summary: https://leandrocaladoferreira.com/llms.txt
+- Agent permissions: https://leandrocaladoferreira.com/agent-permissions.json
+- Experimental action declarations: https://leandrocaladoferreira.com/mcp-actions.json
+
+The llms.txt family and action declaration are emerging conventions, not guaranteed ranking signals or W3C standards. Canonical HTML, structured data, citations and the XML sitemap remain authoritative.

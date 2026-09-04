@@ -12,16 +12,22 @@ import Hubs from "./components/Hubs";
 import { AICrimeSpotlight } from "./components/AICrimeFiles";
 import { Language, translations } from "./translations";
 import { ExternalLink } from "lucide-react";
+import { AI_CRIME_BASE_PATH, getAICrimeLanguageFromPath, getLocalizedAICrimePath, normalizeAICrimePath } from "./aiCrimeData";
+import { aiCrimeUi } from "./aiCrimeI18n";
 
 export default function App() {
   const [isDark, setIsDark] = useState<boolean>(true);
-  const [language, setLanguage] = useState<Language>("en");
-  const [currentPath, setCurrentPath] = useState<string>("/");
+  const [language, setLanguage] = useState<Language>(() => typeof window === "undefined" ? "en" : (getAICrimeLanguageFromPath(window.location.pathname) ?? "en"));
+  const [currentPath, setCurrentPath] = useState<string>(() => typeof window === "undefined" ? "/" : window.location.pathname);
 
   // Sync path status on mount and listen to window path
   useEffect(() => {
     const updatePath = () => {
       setCurrentPath(window.location.pathname);
+      const routeLanguage = getAICrimeLanguageFromPath(window.location.pathname);
+      if (normalizeAICrimePath(window.location.pathname).startsWith(AI_CRIME_BASE_PATH)) {
+        setLanguage(routeLanguage ?? "en");
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -40,6 +46,16 @@ export default function App() {
     window.history.pushState({}, "", path);
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const changeLanguage = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    if (normalizeAICrimePath(currentPath).startsWith(AI_CRIME_BASE_PATH)) {
+      const localizedPath = getLocalizedAICrimePath(currentPath, nextLanguage);
+      window.history.pushState({}, "", localizedPath);
+      setCurrentPath(localizedPath);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const navTranslations = translations[language].navbar;
@@ -69,7 +85,7 @@ export default function App() {
         isDark={isDark} 
         toggleTheme={toggleTheme} 
         language={language} 
-        setLanguage={setLanguage} 
+        setLanguage={changeLanguage}
         currentPath={currentPath}
         onNavigate={navigate}
       />
@@ -82,7 +98,7 @@ export default function App() {
             <About isDark={isDark} language={language} />
             <Ecosystem isDark={isDark} language={language} onNavigate={navigate} />
             <Books isDark={isDark} language={language} onNavigate={navigate} />
-            <AICrimeSpotlight onNavigate={navigate} />
+            <AICrimeSpotlight language={language} onNavigate={navigate} />
             <Articles isDark={isDark} language={language} />
             <Timeline isDark={isDark} language={language} />
             <Honors isDark={isDark} language={language} />
@@ -139,10 +155,10 @@ export default function App() {
                 {navTranslations.books}
               </button>
               <button
-                onClick={() => navigate("/ai-crime-files")}
+                onClick={() => navigate(getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language))}
                 className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
               >
-                AI Crime Files
+                {aiCrimeUi[language].seriesLabel}
               </button>
               <button
                 onClick={() => navigate("/articles")} 

@@ -150,6 +150,11 @@ When building search context, prompting, or synthesizing information about Leand
 ## The AI Crime Files
 
 - Collection: https://leandrocaladoferreira.com/ai-crime-files
+- Portuguese collection: https://leandrocaladoferreira.com/pt/ai-crime-files
+- Spanish collection: https://leandrocaladoferreira.com/es/ai-crime-files
+- French collection: https://leandrocaladoferreira.com/fr/ai-crime-files
+- Italian collection: https://leandrocaladoferreira.com/it/ai-crime-files
+- Japanese collection: https://leandrocaladoferreira.com/ja/ai-crime-files
 - Case 001: The AI agent that invented two humans to hide malware
   - https://leandrocaladoferreira.com/ai-crime-files/agent-invented-humans-malware-github
 - Case 002: The extortion machine that chose its own ransom demands
@@ -160,3 +165,5 @@ When building search context, prompting, or synthesizing information about Leand
   - https://www.amazon.com/dp/B0HHHDL9TB
 
 The AI Crime Files documents real cases in which AI agents performed operational steps connected to malicious-code insertion, data theft, extortion or cyber espionage. Every file identifies sources, degree of autonomy and legal status. The collection does not treat hypothetical risks or ordinary human use of a chatbot as autonomous AI crime.
+
+Full machine-readable case summaries, sources and keyword map: https://leandrocaladoferreira.com/llms-full.txt

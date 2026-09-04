@@ -2,7 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { booksData } from "./src/data";
 import { articlesData } from "./src/articlesData";
-import { AI_CRIME_BASE_PATH, AI_CRIME_BOOK_URL, aiCrimeCases } from "./src/aiCrimeData";
+import { AI_CRIME_BASE_PATH, AI_CRIME_BOOK_URL, AICrimeLanguage, aiCrimeCases, getLocalizedAICrimePath } from "./src/aiCrimeData";
+import { aiCrimeUi, localizeAICrimeCase, localizeAICrimeCases } from "./src/aiCrimeI18n";
 
 const escapeHtml = (value: string) => value
   .replace(/&/g, "&amp;")
@@ -10,65 +11,91 @@ const escapeHtml = (value: string) => value
   .replace(/>/g, "&gt;")
   .replace(/\"/g, "&quot;");
 
-const renderCrimeBookCTA = () => `
+const crimeLanguages: AICrimeLanguage[] = ["en", "pt", "es", "fr", "it", "ja"];
+
+const crimeAlternates = (path: string) => [
+  ...crimeLanguages.map((language) => ({ language, href: `https://leandrocaladoferreira.com${getLocalizedAICrimePath(path, language)}` })),
+  { language: "x-default", href: `https://leandrocaladoferreira.com${getLocalizedAICrimePath(path, "en")}` },
+];
+
+const renderCrimeBookCTA = (language: AICrimeLanguage) => {
+  const t = aiCrimeUi[language];
+  return `
   <aside class="border border-red-500/25 bg-[#111] p-8 mt-12">
-    <p class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">The AI Crime Files • Case 001</p>
+    <p class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">${escapeHtml(t.bookEyebrow)}</p>
     <h2 class="font-serif text-3xl font-light italic text-white mt-2">Nobody Told It to Lie</h2>
-    <p class="text-sm leading-relaxed text-gray-400 mt-3 max-w-2xl">The documented story of the rogue AI agent that invented two humans and tried to plant malware on GitHub.</p>
-    <a href="${AI_CRIME_BOOK_URL}" target="_blank" rel="noopener noreferrer sponsored" class="inline-block bg-red-600 px-5 py-3 mt-5 font-mono text-[10px] font-bold uppercase tracking-widest text-white">Read on Amazon</a>
+    <p class="text-sm leading-relaxed text-gray-400 mt-3 max-w-2xl">${escapeHtml(t.bookDescription)}</p>
+    <a href="${AI_CRIME_BOOK_URL}" target="_blank" rel="noopener noreferrer sponsored" data-mcp-action="buy-ai-crime-files-book" data-mcp-description="Open the official Amazon page for Nobody Told It to Lie by Leandro Calado" class="inline-block bg-red-600 px-5 py-3 mt-5 font-mono text-[10px] font-bold uppercase tracking-widest text-white">${escapeHtml(t.readAmazon)}</a>
   </aside>
 `;
+};
 
-const crimeIndexRoute = {
-  path: AI_CRIME_BASE_PATH,
-  title: "The AI Crime Files | Documented Crimes Executed by AI Agents",
-  description: "Real cases of criminal conduct executed by autonomous AI agents, documented with primary sources, exact actions, autonomy levels and legal status.",
-  canonical: `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}`,
-  schemaType: "AICrimeIndex",
-  htmlContent: `
+const crimeIndexRoutes = crimeLanguages.map((language) => {
+  const t = aiCrimeUi[language];
+  const cases = localizeAICrimeCases(aiCrimeCases, language);
+  const routePath = getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language);
+  return {
+    path: routePath,
+    title: `${t.archiveName} | ${language === "en" ? "Documented Autonomous AI Crime" : t.heroEyebrow}`,
+    description: t.heroDescription,
+    canonical: `https://leandrocaladoferreira.com${routePath}`,
+    schemaType: `AICrimeIndex:${language}`,
+    language,
+    alternates: crimeAlternates(AI_CRIME_BASE_PATH),
+    htmlContent: `
     <section class="bg-[#090909] text-white px-6 py-24">
       <div class="max-w-6xl mx-auto">
-        <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-red-400">Documented autonomous AI crime</span>
-        <h1 class="font-serif text-6xl font-light italic leading-tight mt-5">The AI Crime Files</h1>
-        <p class="text-lg leading-relaxed text-gray-400 mt-6 max-w-2xl">Real systems. Real victims. Real evidence. Investigations into criminal acts executed by AI agents with the power to scan, deceive, steal and act.</p>
+        <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-red-400">${escapeHtml(t.heroEyebrow)}</span>
+        <h1 class="font-serif text-6xl font-light italic leading-tight mt-5">${escapeHtml(t.archiveName)}</h1>
+        <p class="text-lg leading-relaxed text-gray-400 mt-6 max-w-2xl">${escapeHtml(t.heroDescription)}</p>
         <div class="grid md:grid-cols-3 gap-6 mt-14">
-          ${aiCrimeCases.map((item) => `
+          ${cases.map((item) => `
             <article class="border border-white/10 bg-[#101010] p-6">
-              <span class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">Case ${item.caseNumber}</span>
+              <span class="font-mono text-[9px] font-bold uppercase tracking-widest text-red-400">${escapeHtml(t.caseLabel)} ${item.caseNumber}</span>
               <h2 class="font-serif text-2xl font-light italic leading-tight text-white mt-4">${escapeHtml(item.shortTitle)}</h2>
               <p class="text-xs leading-relaxed text-gray-400 mt-3">${escapeHtml(item.excerpt)}</p>
-              <a href="${AI_CRIME_BASE_PATH}/${item.slug}" class="inline-block font-mono text-[9px] font-bold uppercase tracking-widest text-red-400 mt-6">Open the evidence file &rarr;</a>
+              <a href="${getLocalizedAICrimePath(`${AI_CRIME_BASE_PATH}/${item.slug}`, language)}" class="inline-block font-mono text-[9px] font-bold uppercase tracking-widest text-red-400 mt-6">${escapeHtml(t.openFile)} &rarr;</a>
             </article>
           `).join("")}
         </div>
         <section class="border-y border-white/10 py-12 mt-16">
-          <h2 class="font-serif text-3xl font-light italic text-white">What earns a place in this archive</h2>
-          <p class="text-sm leading-relaxed text-gray-400 mt-4 max-w-3xl">Every file requires a named incident, accountable sourcing, autonomous action inside a live system and conduct that maps to a specific criminal act. Each investigation states what is proven, alleged, unsuccessful or uncharged.</p>
+          <h2 class="font-serif text-3xl font-light italic text-white">${escapeHtml(t.archiveCriteria)}</h2>
+          <ol class="grid md:grid-cols-2 gap-4 mt-6">${t.criteria.map((criterion) => `<li class="border border-white/10 p-4 text-sm text-gray-400">${escapeHtml(criterion)}</li>`).join("")}</ol>
         </section>
-        ${renderCrimeBookCTA()}
+        <section class="mt-16"><h2 class="font-serif text-3xl font-light italic text-white">${escapeHtml(t.faqTitle)}</h2>${t.faq.map((item) => `<div class="mt-6"><h3 class="text-lg text-white">${escapeHtml(item.question)}</h3><p class="text-sm leading-relaxed text-gray-400 mt-2">${escapeHtml(item.answer)}</p></div>`).join("")}</section>
+        ${renderCrimeBookCTA(language)}
       </div>
     </section>
   `,
-};
+  };
+});
 
-const crimeArticleRoutes = aiCrimeCases.map((item) => ({
-  path: `${AI_CRIME_BASE_PATH}/${item.slug}`,
-  title: `${item.title} | The AI Crime Files`,
+const crimeArticleRoutes = crimeLanguages.flatMap((language) => aiCrimeCases.map((baseItem) => {
+  const item = localizeAICrimeCase(baseItem, language);
+  const t = aiCrimeUi[language];
+  const basePath = `${AI_CRIME_BASE_PATH}/${item.slug}`;
+  const routePath = getLocalizedAICrimePath(basePath, language);
+  const archivePath = getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language);
+  return {
+  path: routePath,
+  title: `${item.title} | ${t.archiveName}`,
   description: item.excerpt,
-  canonical: `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/${item.slug}`,
-  schemaType: `AICrime:${item.slug}`,
+  canonical: `https://leandrocaladoferreira.com${routePath}`,
+  schemaType: `AICrime:${language}:${item.slug}`,
+  language,
+  alternates: crimeAlternates(basePath),
   htmlContent: `
     <article class="bg-[#090909] text-white px-6 py-20">
       <div class="max-w-4xl mx-auto">
-        <a href="${AI_CRIME_BASE_PATH}" class="font-mono text-[9px] font-bold uppercase tracking-widest text-gray-500">&larr; All case files</a>
-        <div class="mt-10"><span class="bg-red-600 px-3 py-2 font-mono text-[9px] font-bold uppercase tracking-widest">Case ${item.caseNumber}</span></div>
+        <a href="${archivePath}" class="font-mono text-[9px] font-bold uppercase tracking-widest text-gray-500">&larr; ${escapeHtml(t.allFiles)}</a>
+        <div class="mt-10"><span class="bg-red-600 px-3 py-2 font-mono text-[9px] font-bold uppercase tracking-widest">${escapeHtml(t.caseLabel)} ${item.caseNumber}</span></div>
         <p class="font-mono text-xs uppercase tracking-widest text-gray-500 mt-7">${escapeHtml(item.kicker)}</p>
         <h1 class="font-serif text-5xl font-light italic leading-tight mt-4">${escapeHtml(item.title)}</h1>
         <p class="text-lg leading-relaxed text-gray-400 mt-6">${escapeHtml(item.excerpt)}</p>
         <dl class="grid sm:grid-cols-3 border border-white/10 mt-10">
-          <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">Criminal conduct</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.criminalConduct)}</dd></div>
-          <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">Agent autonomy</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.autonomy)}</dd></div>
-          <div class="p-5"><dt class="font-mono text-[8px] uppercase text-gray-600">Legal status</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.legalStatus)}</dd></div>
+          <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">${escapeHtml(t.criminalConduct)}</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.criminalConduct)}</dd></div>
+          <div class="p-5 border-r border-white/10"><dt class="font-mono text-[8px] uppercase text-gray-600">${escapeHtml(t.autonomy)}</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.autonomy)}</dd></div>
+          <div class="p-5"><dt class="font-mono text-[8px] uppercase text-gray-600">${escapeHtml(t.legalStatus)}</dt><dd class="text-xs text-gray-300 mt-2">${escapeHtml(item.legalStatus)}</dd></div>
         </dl>
         <div class="mt-14">
           ${item.sections.map((section, index) => `
@@ -83,15 +110,16 @@ const crimeArticleRoutes = aiCrimeCases.map((item) => ({
           `).join("")}
         </div>
         <section class="border-t border-white/10 pt-10">
-          <h2 class="font-serif text-3xl font-light italic text-white">Evidence desk</h2>
+          <h2 class="font-serif text-3xl font-light italic text-white">${escapeHtml(t.evidenceDesk)}</h2>
           <div class="space-y-3 mt-6">
             ${item.sources.map((source) => `<a href="${source.url}" target="_blank" rel="noopener noreferrer" class="block border border-white/10 p-4 text-sm text-gray-300">${escapeHtml(source.label)} <span class="text-red-400">• ${escapeHtml(source.publisher)} • ${source.kind} source</span></a>`).join("")}
           </div>
         </section>
-        ${renderCrimeBookCTA()}
+        ${renderCrimeBookCTA(language)}
       </div>
     </article>
   `,
+  };
 }));
 
 // Absolute routes to pre-render
@@ -462,7 +490,7 @@ const routes = [
       </section>
     `
   },
-  crimeIndexRoute,
+  ...crimeIndexRoutes,
   ...crimeArticleRoutes
 ];
 
@@ -586,9 +614,14 @@ function generateArticlesSchema() {
 
 function generateAICrimeSchema(schemaType: string) {
   const person = generatePersonSchema();
-  const article = schemaType.startsWith("AICrime:")
-    ? aiCrimeCases.find((item) => item.slug === schemaType.slice("AICrime:".length))
+  const parts = schemaType.split(":");
+  const language = (parts[1] || "en") as AICrimeLanguage;
+  const baseArticle = parts[0] === "AICrime" && parts[2]
+    ? aiCrimeCases.find((item) => item.slug === parts[2])
     : undefined;
+  const article = baseArticle ? localizeAICrimeCase(baseArticle, language) : undefined;
+  const t = aiCrimeUi[language];
+  const archivePath = getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language);
 
   if (!article) {
     return {
@@ -597,15 +630,24 @@ function generateAICrimeSchema(schemaType: string) {
         person,
         {
           "@type": "CollectionPage",
-          "@id": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/#collection`,
-          "url": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}`,
-          "name": "The AI Crime Files",
-          "description": "Documented cases of criminal conduct executed by autonomous AI agents, with primary sources and precise legal status.",
+          "@id": `https://leandrocaladoferreira.com${archivePath}/#collection`,
+          "url": `https://leandrocaladoferreira.com${archivePath}`,
+          "name": t.archiveName,
+          "description": t.heroDescription,
+          "inLanguage": language,
           "author": { "@type": "Person", "name": "Leandro Calado" },
           "hasPart": aiCrimeCases.map((item) => ({
             "@type": "Article",
-            "headline": item.title,
-            "url": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/${item.slug}`,
+            "headline": localizeAICrimeCase(item, language).title,
+            "url": `https://leandrocaladoferreira.com${getLocalizedAICrimePath(`${AI_CRIME_BASE_PATH}/${item.slug}`, language)}`,
+          })),
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": t.faq.map((entry) => ({
+            "@type": "Question",
+            "name": entry.question,
+            "acceptedAnswer": { "@type": "Answer", "text": entry.answer },
           })),
         },
         {
@@ -620,7 +662,7 @@ function generateAICrimeSchema(schemaType: string) {
     };
   }
 
-  const url = `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}/${article.slug}`;
+  const url = `https://leandrocaladoferreira.com${getLocalizedAICrimePath(`${AI_CRIME_BASE_PATH}/${article.slug}`, language)}`;
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -633,7 +675,7 @@ function generateAICrimeSchema(schemaType: string) {
         "description": article.excerpt,
         "datePublished": "2026-09-03",
         "dateModified": "2026-09-03",
-        "inLanguage": "en",
+        "inLanguage": language,
         "author": { "@type": "Person", "name": "Leandro Calado", "url": "https://leandrocaladoferreira.com" },
         "publisher": { "@type": "Organization", "name": "LCF Consulting", "url": "https://leandrocaladoferreira.com" },
         "articleSection": "The AI Crime Files",
@@ -645,7 +687,7 @@ function generateAICrimeSchema(schemaType: string) {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://leandrocaladoferreira.com/" },
-          { "@type": "ListItem", "position": 2, "name": "The AI Crime Files", "item": `https://leandrocaladoferreira.com${AI_CRIME_BASE_PATH}` },
+          { "@type": "ListItem", "position": 2, "name": t.archiveName, "item": `https://leandrocaladoferreira.com${archivePath}` },
           { "@type": "ListItem", "position": 3, "name": `Case ${article.caseNumber}`, "item": url },
         ],
       },
@@ -728,7 +770,7 @@ function generateSchemaForRoute(schemaType: string) {
   if (schemaType === "Articles") {
     return JSON.stringify(generateArticlesSchema(), null, 2);
   }
-  if (schemaType === "AICrimeIndex" || schemaType.startsWith("AICrime:")) {
+  if (schemaType.startsWith("AICrimeIndex:") || schemaType.startsWith("AICrime:")) {
     return JSON.stringify(generateAICrimeSchema(schemaType), null, 2);
   }
 
@@ -764,6 +806,11 @@ function run() {
   routes.forEach((route) => {
     let rewrittenHtml = baseHtml;
 
+    if ("language" in route && route.language) {
+      const htmlLanguage = route.language === "pt" ? "pt-BR" : route.language;
+      rewrittenHtml = rewrittenHtml.replace(/<html lang=".*?">/, `<html lang="${htmlLanguage}">`);
+    }
+
     // 1. Replace Title
     rewrittenHtml = rewrittenHtml.replace(
       /<title>.*?<\/title>/,
@@ -782,6 +829,13 @@ function run() {
       rewrittenHtml = rewrittenHtml.replace(/<link rel="canonical" href=".*?" \/>/, canonicalLink);
     } else {
       rewrittenHtml = rewrittenHtml.replace("</head>", `  ${canonicalLink}\n  </head>`);
+    }
+
+    if ("alternates" in route && route.alternates) {
+      const alternateLinks = route.alternates
+        .map((alternate) => `<link rel="alternate" hreflang="${alternate.language}" href="${alternate.href}" />`)
+        .join("\n  ");
+      rewrittenHtml = rewrittenHtml.replace("</head>", `  ${alternateLinks}\n  </head>`);
     }
 
     // 4. Update Open Graph values
