@@ -19,6 +19,7 @@ import { Language } from "../translations";
 import { booksData } from "../data";
 import { articlesData } from "../articlesData";
 import HarnessEngineeringBook from "./HarnessEngineeringBook";
+import AICrimeFiles from "./AICrimeFiles";
 
 interface HubsProps {
   isDark: boolean;
@@ -1465,6 +1466,17 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
 
   // ROUTER CONTROLLING VIEW DISPATCH
   const renderHubContent = () => {
+    if (path === "/ai-crime-files" || path.startsWith("/ai-crime-files/")) {
+      return (
+        <AICrimeFiles
+          isDark={isDark}
+          language={language}
+          currentPath={path}
+          onNavigate={onNavigate}
+        />
+      );
+    }
+
     switch (path) {
       case "/about":
       case "/sobre":

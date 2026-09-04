@@ -9,6 +9,7 @@ import Timeline from "./components/Timeline";
 import Honors from "./components/Honors";
 import Contact from "./components/Contact";
 import Hubs from "./components/Hubs";
+import { AICrimeSpotlight } from "./components/AICrimeFiles";
 import { Language, translations } from "./translations";
 import { ExternalLink } from "lucide-react";
 
@@ -81,6 +82,7 @@ export default function App() {
             <About isDark={isDark} language={language} />
             <Ecosystem isDark={isDark} language={language} onNavigate={navigate} />
             <Books isDark={isDark} language={language} onNavigate={navigate} />
+            <AICrimeSpotlight onNavigate={navigate} />
             <Articles isDark={isDark} language={language} />
             <Timeline isDark={isDark} language={language} />
             <Honors isDark={isDark} language={language} />
@@ -136,7 +138,13 @@ export default function App() {
               >
                 {navTranslations.books}
               </button>
-              <button 
+              <button
+                onClick={() => navigate("/ai-crime-files")}
+                className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
+              >
+                AI Crime Files
+              </button>
+              <button
                 onClick={() => navigate("/articles")} 
                 className="hover:text-[#F27D26] transition-colors cursor-pointer focus:outline-none"
               >
