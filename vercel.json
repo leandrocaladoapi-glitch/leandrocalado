@@ -1,13 +1,60 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/books/harness-engineering-ai-coding-agents",
       "destination": "/books/harness-engineering-ai-coding-agents.html"
     },
     {
-      "source": "/books/harness-engineering-ai-coding-agents/",
-      "destination": "/books/harness-engineering-ai-coding-agents.html"
+      "source": "/ai-crime-files",
+      "destination": "/ai-crime-files.html"
+    },
+    {
+      "source": "/ai-crime-files/:slug",
+      "destination": "/ai-crime-files/:slug.html"
+    },
+    {
+      "source": "/pt/ai-crime-files",
+      "destination": "/pt/ai-crime-files.html"
+    },
+    {
+      "source": "/pt/ai-crime-files/:slug",
+      "destination": "/pt/ai-crime-files/:slug.html"
+    },
+    {
+      "source": "/es/ai-crime-files",
+      "destination": "/es/ai-crime-files.html"
+    },
+    {
+      "source": "/es/ai-crime-files/:slug",
+      "destination": "/es/ai-crime-files/:slug.html"
+    },
+    {
+      "source": "/fr/ai-crime-files",
+      "destination": "/fr/ai-crime-files.html"
+    },
+    {
+      "source": "/fr/ai-crime-files/:slug",
+      "destination": "/fr/ai-crime-files/:slug.html"
+    },
+    {
+      "source": "/it/ai-crime-files",
+      "destination": "/it/ai-crime-files.html"
+    },
+    {
+      "source": "/it/ai-crime-files/:slug",
+      "destination": "/it/ai-crime-files/:slug.html"
+    },
+    {
+      "source": "/ja/ai-crime-files",
+      "destination": "/ja/ai-crime-files.html"
+    },
+    {
+      "source": "/ja/ai-crime-files/:slug",
+      "destination": "/ja/ai-crime-files/:slug.html"
     },
     {
       "source": "/(.*)",
