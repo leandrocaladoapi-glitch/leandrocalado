@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Moon, Sun, Linkedin, Github } from "lucide-react";
 import { motion } from "motion/react";
 import { Language, translations } from "../translations";
+import { AI_CRIME_BASE_PATH, getLocalizedAICrimePath, normalizeAICrimePath } from "../aiCrimeData";
+import { aiCrimeUi } from "../aiCrimeI18n";
 
 interface NavbarProps {
   isDark: boolean;
@@ -29,7 +31,7 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage, cur
     { label: t.about, href: "/about", path: "/about" },
     { label: t.ecosystem, href: "/start-here", path: "/start-here" },
     { label: t.books, href: "/books", path: "/books" },
-    { label: "AI Crime Files", href: "/ai-crime-files", path: "/ai-crime-files" },
+    { label: aiCrimeUi[language].seriesLabel, href: getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language), path: getLocalizedAICrimePath(AI_CRIME_BASE_PATH, language) },
     { label: t.articles, href: "/articles", path: "/articles" },
     { label: language === "pt" ? "Consultoria" : "Consulting", href: "/consulting", path: "/consulting" },
   ];
@@ -84,7 +86,7 @@ export default function Navbar({ isDark, toggleTheme, language, setLanguage, cur
                 isDark
                   ? "text-[#8E8E8E] hover:text-[#F5F5F0]"
                   : "text-[#555] hover:text-[#0A0A0A]"
-              } font-medium ${currentPath === link.path || (link.path === "/ai-crime-files" && currentPath.startsWith("/ai-crime-files/")) ? "text-[#F27D26] font-bold" : ""}`}
+              } font-medium ${currentPath === link.path || (normalizeAICrimePath(link.path) === AI_CRIME_BASE_PATH && normalizeAICrimePath(currentPath).startsWith(`${AI_CRIME_BASE_PATH}/`)) ? "text-[#F27D26] font-bold" : ""}`}
             >
               {link.label}
             </a>

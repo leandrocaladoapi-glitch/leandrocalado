@@ -20,6 +20,7 @@ import { booksData } from "../data";
 import { articlesData } from "../articlesData";
 import HarnessEngineeringBook from "./HarnessEngineeringBook";
 import AICrimeFiles from "./AICrimeFiles";
+import { AI_CRIME_BASE_PATH, normalizeAICrimePath } from "../aiCrimeData";
 
 interface HubsProps {
   isDark: boolean;
@@ -30,7 +31,8 @@ interface HubsProps {
 
 export default function Hubs({ isDark, language, currentPath, onNavigate }: HubsProps) {
   // Normalize path to support slash-less or localized
-  const path = currentPath.toLowerCase().replace(/\/$/, "");
+  const rawPath = currentPath.toLowerCase().replace(/\/$/, "");
+  const path = normalizeAICrimePath(rawPath);
 
   // Common styles
   const cardBgClass = isDark ? "bg-[#0F0F0F] border-[#2A2A2A]" : "bg-white border-[#E5E5DF]";
@@ -1466,12 +1468,12 @@ export default function Hubs({ isDark, language, currentPath, onNavigate }: Hubs
 
   // ROUTER CONTROLLING VIEW DISPATCH
   const renderHubContent = () => {
-    if (path === "/ai-crime-files" || path.startsWith("/ai-crime-files/")) {
+    if (path === AI_CRIME_BASE_PATH || path.startsWith(`${AI_CRIME_BASE_PATH}/`)) {
       return (
         <AICrimeFiles
           isDark={isDark}
           language={language}
-          currentPath={path}
+          currentPath={rawPath}
           onNavigate={onNavigate}
         />
       );

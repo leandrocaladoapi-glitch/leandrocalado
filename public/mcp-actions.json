@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "site": "https://leandrocaladoferreira.com",
+  "status": "experimental",
+  "actions": [
+    {
+      "id": "read-ai-crime-files",
+      "name": "Read documented autonomous AI crime cases",
+      "description": "Open the multilingual archive of real, sourced cases involving autonomous or agentic AI systems.",
+      "method": "declarative",
+      "endpoint": "/ai-crime-files",
+      "parameters": {
+        "optional": ["language", "case"]
+      }
+    },
+    {
+      "id": "buy-ai-crime-files-book",
+      "name": "Read Nobody Told It to Lie",
+      "description": "Open the official Amazon product page for Nobody Told It to Lie by Leandro Calado.",
+      "method": "declarative",
+      "endpoint": "https://www.amazon.com/dp/B0HHHDL9TB",
+      "parameters": {
+        "required": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "site": "https://leandrocaladoferreira.com",
+  "policy": {
+    "read_public_content": "allowed",
+    "follow_public_citations": "allowed",
+    "open_external_book_page": "allowed_with_user_intent",
+    "submit_forms": "not_applicable",
+    "make_purchases": "requires_user_confirmation"
+  },
+  "discovery": {
+    "sitemap": "/sitemap.xml",
+    "summary": "/llms.txt",
+    "full_content": "/llms-full.txt",
+    "actions": "/mcp-actions.json"
+  }
+}
