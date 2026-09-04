@@ -180,6 +180,13 @@ const compactLanguageLabels = {
   },
 };
 
+const compactDates: Record<Exclude<AICrimeLanguage, "en" | "pt">, { published: string; events: Record<string, string> }> = {
+  es: { published: "3 de septiembre de 2026", events: { "agent-invented-humans-malware-github": "28 de julio de 2026", "vibe-hacking-data-extortion": "Junio a julio de 2025", "ai-orchestrated-cyber-espionage": "Septiembre de 2025" } },
+  fr: { published: "3 septembre 2026", events: { "agent-invented-humans-malware-github": "28 juillet 2026", "vibe-hacking-data-extortion": "Juin à juillet 2025", "ai-orchestrated-cyber-espionage": "Septembre 2025" } },
+  it: { published: "3 settembre 2026", events: { "agent-invented-humans-malware-github": "28 luglio 2026", "vibe-hacking-data-extortion": "Da giugno a luglio 2025", "ai-orchestrated-cyber-espionage": "Settembre 2025" } },
+  ja: { published: "2026年9月3日", events: { "agent-invented-humans-malware-github": "2026年7月28日", "vibe-hacking-data-extortion": "2025年6月から7月", "ai-orchestrated-cyber-espionage": "2025年9月" } },
+};
+
 for (const language of ["fr", "it", "ja"] as const) {
   const labels = compactLanguageLabels[language];
   const slugs = ["agent-invented-humans-malware-github", "vibe-hacking-data-extortion", "ai-orchestrated-cyber-espionage"];
@@ -202,6 +209,8 @@ export function localizeAICrimeCase(item: AICrimeCase, language: AICrimeLanguage
     shortTitle: compact.shortTitle,
     kicker: compact.kicker,
     excerpt: compact.excerpt,
+    published: compactDates[language as Exclude<AICrimeLanguage, "en" | "pt">].published,
+    eventDate: compactDates[language as Exclude<AICrimeLanguage, "en" | "pt">].events[item.slug],
     criminalConduct: compact.conduct,
     autonomy: compact.autonomy,
     legalStatus: compact.status,
