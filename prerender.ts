@@ -287,6 +287,7 @@ const routes = [
     canonical: "https://leandrocaladoferreira.com/",
     schemaType: "Home",
     htmlContent: `
+<section class="border-y border-[#F27D26]/30 bg-[#111] py-8 px-6"><div class="max-w-7xl mx-auto"><p class="text-[#F27D26] text-xs uppercase tracking-widest">New free Python incident lab</p><h2 class="text-2xl text-white mt-2">AI Agent Reliability Engineering</h2><p class="text-gray-400 mt-2">Reproduce duplicate actions after a timeout. Test contracts, restart recovery and concurrent delivery.</p><a href="/books/ai-agent-reliability-engineering" class="inline-block mt-4 text-[#F27D26] underline">Run the free lab and read the opening chapters →</a></div></section>
       <!-- Hero Section -->
       <section class="min-h-[85vh] flex flex-col justify-center py-20 px-6">
         <div class="max-w-7xl mx-auto w-full">
@@ -302,6 +303,10 @@ const routes = [
             <a href="/start-here" class="px-6 py-4 border border-[#F5F5F0] text-[#F5F5F0] hover:bg-white hover:text-black font-semibold uppercase tracking-widest text-xs transition-colors rounded-sm">Comece por aqui</a>
             <a href="/books" class="px-6 py-4 border border-rose-500/20 text-[#F27D26] hover:border-[#F27D26]/40 font-semibold uppercase tracking-widest text-xs transition-colors rounded-sm">Ver Biblioteca</a>
           </div>
+          <a href="/harness-engineering/openai-wikimedia-rogue-agents" class="block mt-7 max-w-2xl border-l-2 border-amber-500 pl-4 py-1">
+            <span class="block font-mono text-[9px] font-bold uppercase tracking-widest text-amber-400">Breaking analysis · Oct 5, 2026</span>
+            <strong class="block mt-1 text-sm text-white">OpenAI “rogue” agents on Wikimedia — what the incident reveals about Harness Engineering &rarr;</strong>
+          </a>
         </div>
       </section>
     `
